@@ -290,6 +290,20 @@
     .sb-ph{display:grid;place-items:center;min-height:300px;padding:28px;background:linear-gradient(180deg,#f8fafc,#eef2f7);color:#8a949d;font-size:13px;font-weight:750;text-align:center}
     .sb-tag{position:absolute;top:14px;left:14px;z-index:3;padding:6px 10px;border-radius:8px;background:rgba(11,26,39,.82);color:#fff;font-size:10px;font-weight:850;letter-spacing:.06em;text-transform:uppercase}
     @media(max-width:860px){.stepband .inner,.stepband:nth-child(even) .inner{grid-template-columns:1fr;gap:30px}.stepband:nth-child(even) .sb-copy{order:1}.stepband:nth-child(even) .sb-media{order:2}.stepband{padding:60px 0}}
+    .faq2{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:70px;align-items:start}
+    .faq2-left h2{margin:12px 0 16px;font-size:clamp(36px,4.6vw,62px);line-height:1;letter-spacing:-.055em}
+    .faq2-left p{margin:0;color:#5f6d7a;font-size:16px;line-height:1.6}
+    .faq2-left a{color:#3352ff;font-weight:750}
+    .faq2 details{border-top:1px solid #e2e6ea;padding:0}
+    .faq2 details:last-of-type{border-bottom:1px solid #e2e6ea}
+    .faq2 summary{display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;padding:22px 0;list-style:none;color:#0b1a27;font-size:18px;font-weight:700;letter-spacing:-.02em}
+    .faq2 summary::-webkit-details-marker{display:none}
+    .faq2 summary:hover{color:#3352ff}
+    .faq2 .chev{flex:0 0 auto;width:16px;height:16px;fill:none;stroke:#8a949d;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s ease}
+    .faq2 details[open] .chev{transform:rotate(180deg);stroke:#3352ff}
+    .faq2 .ans{margin:0 0 24px;padding-right:40px;color:#52616e;font-size:16px;line-height:1.66}
+    .faq2 .ans b{color:#0b1a27}
+    @media(max-width:860px){.faq2{grid-template-columns:1fr;gap:26px}.faq2 .ans{padding-right:0}}
   </style>
 </head>
 <body>
@@ -519,40 +533,6 @@
       </div>
     </section>
 
-    <section class="band dark" aria-labelledby="mcp-title">
-      <div class="wrap">
-        <div class="band-kicker rv">AI agent access</div>
-        <h2 id="mcp-title" class="rv d1">Your agent gets a login to the ad data it was locked out of.</h2>
-        <p class="band-lede rv d2">GetHookd connects over MCP, the open standard your AI tools already speak. Nothing to install, nothing to maintain, and no data leaves your account.</p>
-        <div class="mcp-grid">
-          <div class="mcp-card rv d1">
-            <div class="t">Angles</div>
-            <h4>What your market runs, and what it does not</h4>
-            <p>Every angle live in your niche right now, and the open space nobody is touching yet.</p>
-          </div>
-          <div class="mcp-card rv d1">
-            <div class="t">Copy</div>
-            <h4>The actual hooks, word for word</h4>
-            <p>Real ad copy from real brands, not a paraphrase and not a guess.</p>
-          </div>
-          <div class="mcp-card rv d1">
-            <div class="t">Numbers</div>
-            <h4>How long, how many, how often</h4>
-            <p>Days each ad has been running, how many a brand has live, and which creatives keep getting reused.</p>
-          </div>
-        </div>
-        <div class="mcp-say rv d2">
-          <div class="t">Things people actually type</div>
-          <ul>
-            <li>Show me trending wellness ads</li>
-            <li>What angles is my market running that I am not?</li>
-            <li>Which of these ads has been live the longest?</li>
-            <li>Turn this ad into 3 new statics</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <section class="band" id="pricing" aria-labelledby="pricing-title">
       <div class="wrap">
         <div class="band-kicker rv">Pricing</div>
@@ -612,20 +592,56 @@
     </section>
 
     <section class="band alt" aria-labelledby="faq-title">
-      <div class="wrap">
-        <div class="band-kicker rv">FAQ</div>
-        <h2 id="faq-title" class="rv d1">The questions people actually ask</h2>
-        <div class="faq rv d2">
-          <details open><summary>How fresh is the data?</summary><p class="vfy">The library refreshes every day and it tracks ads that are live right now, not an archive of things that stopped running two years ago. If a card says 90 days active, it has been running 90 days and it is still running today.</p></details>
-          <details><summary>Do I need to be technical to connect my AI?</summary><p>No. You paste one line into Claude, ChatGPT, Gemini, Cursor or Perplexity. No code, no developer, no API key to manage. AI agent access is on the Team and Agency plans.</p></details>
-          <details><summary>What can I actually ask it?</summary><p>Anything you would ask a very fast research assistant. Find products in my niche with ads running 30 or more days. Show me every angle my competitors use that I do not. Break down the hooks on the longest running ads in this market. Turn this ad into three new statics.</p></details>
-          <details><summary>Is this just the Facebook ad library?</summary><p>That is the starting point, not the product. The ad library shows you ads. It will not tell you which have run long enough to matter, which angles are crowded, which are wide open, or what to launch next. That is the part we do.</p></details>
-          <details><summary>What is Brand Spy?</summary><p>You point it at a competitor and it watches them for you, logging every ad they launch. Instead of checking on them, you get told when they move.</p></details>
-          <details><summary>Can I use it without an AI agent?</summary><p>Yes. Everything works inside the app on any plan. The AI connection makes it faster, it is not a requirement.</p></details>
-          <details><summary>What happens after the 7 day trial?</summary><p>Your plan begins at the price shown above. You can cancel any time before then and you will not be charged.</p></details>
+      <div class="wrap faq2">
+        <div class="faq2-left">
+          <div class="band-kicker rv">[ F.A.Q ]</div>
+          <h2 id="faq-title" class="rv d1">Frequently asked questions</h2>
+          <p class="rv d2">Can&#8217;t find the answer to your question?<br><a href="#trial">Get in touch and we&#8217;ll answer it.</a></p>
         </div>
-        <p style="margin-top:34px;color:#8a949d;font-size:12.5px;line-height:1.6"><b style="color:#a56300">Internal draft note, remove before publish.</b> Dotted underlines mark claims needing verification: the daily refresh cadence, and every credits and seats line in pricing. Plan prices are per the locked pricing table and were not changed.</p>
+        <div class="faq2-right rv d1">
+          <details>
+            <summary>Why pay for this when Meta&#8217;s ad library is free?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">Meta&#8217;s library is a search box. It cannot sort a niche, rank anything, tell you how long an ad has been running, or compare one brand against its competitors. It shows you ads. It will not tell you which ones have lasted long enough to matter, which angles are crowded, which are wide open, or what to launch next. That is the part we do.</p>
+          </details>
+          <details>
+            <summary>Do you actually have ads in my niche?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">We track <span class="vfy">over 10 million active ads</span> across every ecommerce category, and you can check before you commit. Start the trial, search your niche, and if the coverage is not there, cancel. That is the honest answer, and it is faster than us telling you a number.</p>
+          </details>
+          <details>
+            <summary>How current is the data?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">The library <span class="vfy">refreshes every day</span> and it tracks ads that are live right now, not an archive of things that stopped running two years ago. If a card says 90 days active, it has been running 90 days and it is still running today. Every result links back to the real ad so you can open it and check.</p>
+          </details>
+          <details>
+            <summary>How do I know the numbers are real?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">Everything we show is observable in the public ad library: which ads are live, how long each has been running, how many a brand has running, and the actual copy. We do not estimate a brand&#8217;s revenue or invent a spend figure, and we do not ask you to take our word for anything. Every answer comes back with the source ad attached.</p>
+          </details>
+          <details>
+            <summary>If I cancel, will I still get charged?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">Cancel before your 7 day trial ends and you are not charged, full stop. After that, cancelling stops the next renewal and you keep access through the period you already paid for. <span class="vfy">Refund handling after a renewal has already processed is set by our billing policy, confirm current terms before publishing.</span></p>
+          </details>
+          <details>
+            <summary>Do I need to be technical to connect my AI agent?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">No. You paste one line into Claude, ChatGPT, Gemini, Cursor or Perplexity. No code, no developer, no API key to manage, and nothing to install. It takes about thirty seconds. AI agent access is on the <b>Team and Agency</b> plans.</p>
+          </details>
+          <details>
+            <summary>What can I actually ask it?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">Anything you would ask a very fast research assistant who has read every ad in your market. Show me trending wellness ads. What angles is my market running that I am not? Which of these has been live the longest? Find brands scaling on Meta this week. Turn this ad into three new statics.</p>
+          </details>
+          <details>
+            <summary>I am just starting out. Is this useful for me?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">It is more useful the more you spend, because the whole point is deciding what to test next with real budget behind it. If you are not running ads yet, you will still learn faster by reading what is working than by guessing, but you will get the most out of this once you are shipping creatives every week.</p>
+          </details>
+          <details>
+            <summary>How is this different from Foreplay, AdSpy or TrendTrack?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">Those are libraries you scroll. This is a library your AI can read. The difference is not how many ads sit in the database, it is that you can ask a question in plain English and get back the angles your competitors own that you have never run, with the source ads attached.</p>
+          </details>
+          <details>
+            <summary>Can I use it without an AI agent?<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+            <p class="ans">Yes. Everything works inside the app on any plan. Explore the library by hand, put a competitor under Brand Spy, dig through Shops, and turn winners into new statics with Clone Ads. The AI connection makes it faster, it is not a requirement.</p>
+          </details>
+        </div>
       </div>
+      <div class="wrap"><p style="margin-top:40px;color:#8a949d;font-size:12.5px;line-height:1.6"><b style="color:#a56300">Internal draft note, remove before publish.</b> Dotted underlines mark claims needing verification before launch: the 10M figure, the daily refresh cadence, the refund terms, and every credits and seats line in pricing. Plan prices are per the locked pricing table and were not changed.</p></div>
     </section>
 
     <section class="report" id="report">

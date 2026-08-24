@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Onua CTO Audit</title><style>
+body{margin:0;background:#f4f6f9;color:#1b2230;font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:32px 18px 90px}
+.wrap{max-width:1020px;margin:0 auto;background:#fff;border:1px solid #e2e6ec;border-radius:12px;padding:30px 36px;box-shadow:0 1px 3px rgba(20,30,50,.06)}
+h1{font-size:24px;margin:0 0 10px}
+h2{font-size:17px;margin:32px 0 10px;background:#1a56c4;color:#fff;padding:9px 15px;border-radius:8px}
+h2 .n{opacity:.55;margin-right:9px}
+h3{font-size:14.5px;margin:18px 0 6px;color:#1a56c4}
+p{margin:8px 0}
+table{border-collapse:collapse;width:100%;font-size:12.8px;margin:10px 0}
+th,td{border:1px solid #e2e6ec;padding:6px 9px;text-align:left;vertical-align:top}th{background:#eef2f8;font-size:11.5px}
+ul{margin:6px 0;padding-left:22px}li{margin:5px 0}
+code{background:#f0f2f5;border-radius:4px;padding:1px 6px;font-family:ui-monospace,Menlo,monospace;font-size:12.3px}
+hr{border:0;border-top:1px solid #d5dae2;margin:26px 0}
+a{color:#1a56c4;word-break:break-all}
+@media print{body{background:#fff;padding:0}.wrap{border:0;box-shadow:none;padding:0;max-width:none}h1,h2,h3{break-after:avoid}tr,li{break-inside:avoid}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+</style></head><body><div class="wrap"><h1>Onua World — CTO Audit (Phase 0, read-only)</h1>
+<p>Audited: 24 August 2026 (rev. 2: 100k target decision incorporated) · Auditor: Vitaley's audit agent (Claude Code), per Matt's audit pack of 2026-08-23</p>
+<p>Repository: <code>onuhatech27-dotcom/Onuha-World</code> · Commit audited: <b>c91d184</b> ("Initial commit", 2026-08-22, sole commit, branch <code>main</code>)</p>
+<p>Live surface inspected: <b><a href="https://onuha-world.netlify.app/">https://onuha-world.netlify.app/</a></b> (title matches repo; runtime-vs-repo identity inferred, not build-verified — see Coverage)</p>
+<p>Safety: clone-only, <code>remote.origin.pushurl DISABLED</code>, nothing edited, no forms submitted, no logins performed, no dependencies installed.</p>
+<p>Evidence labels used: <code>raw_source</code> / <code>live_runtime</code> / <code>verified_fact</code> / <code>fallback_artifact</code> / <code>unproven</code> / <code>split_truth</code>.</p>
+<hr>
+<h2><span class="n">1</span>Executive Read</h2>
+<p><b>Readiness: 36/100</b> against a 1 October full paid launch. 28 working days remain (incl. today).</p>
+<ul>
+<li><b>Highest launch risk:</b> the money path does not exist in any form — no Whop account confirmed, no backend, no entitlement, no video platform — and everything launch-critical is greenfield with 28 working days left. The load target is now decided (100,000 simultaneous — see §7), which sets a high but explicit engineering bar.</li>
+<li><b>Strongest existing foundation:</b> the frontend is genuinely strong and further along than any document claims. Tiardt has already built demo surfaces for <b>sign-in/sign-up</b> (full UI with video panel), <b>shop + cart</b> (11-product placeholder catalog, localStorage cart), and a <b>/watch stub</b> — the exact seams a backend needs. There is even an internal event bus (<code>onuha-go-internal</code>, <code>onuha-navigate</code>, <code>golden-ticket-collected</code>) that can serve as the integration contract.</li>
+<li><b>What remains unproven:</b> Whop's existence and regional-recurring capability; the video platform choice; whether "3-hour videos" (job post) is real; whether the deployed site is built from this exact commit; the challenge decision.</li>
+<li><b>Meta-finding:</b> the codebase contradicts three separate documents (Tiardt's own access PDF understates what exists; the job post overstates the stack; the signed scope has been verbally expanded). The reconciliation table in §3 is the real deliverable of this audit.</li>
+</ul>
+<h2><span class="n">2</span>Current Product Walkthrough</h2>
+<p><b>What a visitor can actually do now</b> (<code>live_runtime</code> + <code>raw_source</code>, consistent):</p>
+<ul>
+<li>Land on a planet entry screen → EXPLORE → an authored world: <b>First Footfall</b> hub with six environments — IVORA (locked: "You need a golden ticket — go find it"), The Church (+ seat scene), AI Research Station (Science of Scaling, Human Lab, Methods, Leaderboard wall), Onuha Mansion (hallway, Hall of Fame, library, kitchen, bedroom, closet, office, Speaker Secrets), The Old Graveyard ("RIP to the old me" + Samuel memorial), Lions Gate (The Stage, Onuha Playlist). Deep-linkable path routes with history handling and legacy-path redirects.</li>
+<li><b>Find the golden ticket</b> (office scene) → stored in <code>localStorage['plutopia_golden_ticket']</code> → unlocks the IVORA "coming soon" stub. Pure client-side easter egg. <code>raw_source</code></li>
+<li><b>Explore-% tracker</b> — client-side only. The app makes <b>exactly two network calls in total</b> (both email-form posts); all state is localStorage. <code>verified_fact</code> (function inventory + full network-call audit of the bundle)</li>
+<li><b>Sign in / Sign up</b> (<code>/sign-in</code>, <code>/sign-up</code>, <code>/account</code>, <code>/login</code>, <code>/register</code>) — full designed auth UI with intro video and Google/Apple/Instagram buttons. <b>Entirely fake:</b> any email+password "succeeds", writes <code>localStorage['onuha_auth_demo_v1']</code>, redirects to shop. Social buttons fabricate <code>google@onuha.world</code>. <b>The password field collects input and sends it nowhere.</b> <code>raw_source: app/src/auth.js</code></li>
+<li><b>Shop</b> (<code>/collections/shop-all</code>, product pages) — 11 placeholder products with real-looking prices ($35–$420: caps, croc accessories, trench, varsity, 2 digital items incl. "Unbreakable" and the Music Player). Cart persists in <code>localStorage['onuha_shop_cart_v1']</code>. <b>Checkout = <code>alert('Checkout will connect to Shopify. Your cart is saved for now.')</code></b> <code>raw_source: app/src/shop.js L837</code></li>
+<li><b>/watch</b> — stub: "Video and live sessions — coming soon." <b>/ivora</b> — stub gated by the ticket.</li>
+<li><b>Email capture, twice:</b> the world's signup panel posts to <b>Webflow's form API</b> (hardcoded form <code>651fc019…</code>, page id, element id); the shop footer posts <b>Netlify Forms</b> <code>orbit-subscribe</code> (honeypot only). Two different lists in two different systems. <code>raw_source: main.js + shop.js + public/__forms.html</code></li>
+<li><b>Leaderboard wall</b> = a static gallery of 16 hardcoded result-screenshot images from the Webflow CDN. Not a dynamic feature. <code>raw_source: LBW_RESULTS</code></li>
+</ul>
+<p><b>Real / partial / mocked / missing:</b> world + navigation + easter egg = real (client-side). Auth, shop, cart = designed mocks. Watch, IVORA = stubs. Payments, identity, entitlement, media delivery, comments/wall, admin, analytics, email = <b>missing entirely</b>.</p>
+<h2><span class="n">3</span>Scope Reconciliation (split-truth register)</h2>
+<div style="overflow-x:auto"><table><tr><th>#</th><th>Item</th><th>Surface A</th><th>Surface B</th><th>Status / resolution</th></tr>
+<tr><td>ST-1</td><td><b>33 Savage Challenge</b></td><td>Samuel Q11: per-member day-by-day tracking "like 75HARD", room live Oct 1 (Q13)</td><td>Signed SoW + Matt's plan: challenge system <b>explicitly excluded</b> from Launch Core; job post lists it as "future"</td><td><code>split_truth</code> — biggest conflict on the project. Recommend: challenge <b>announcement</b> in the room Oct 1; tracking system ships November as the retention build (see §4 note). Decision: Vitaley+Samuel.</td></tr>
+<tr><td>ST-2</td><td><b>Freestyle Part 1 free or paid</b></td><td>19-Aug call: Part 1 free on YouTube, "Parts 2–4" exclusive</td><td>Samuel Q5: Parts 1 AND 2 (36+15 min) "launched on launch day"; Part 3 Nov 1; Part 4 does not exist</td><td><code>split_truth</code> — clarifier sent. Free content is the only cost that scales with traffic, not revenue. Matt's plan's "Parts 2 to 4" framing is stale either way.</td></tr>
+<tr><td>ST-3</td><td><b>Whop</b></td><td>Kickoff: "reach out to me" (Samuel knows the team)</td><td>Tiardt PDF + repo: <b>zero Whop anywhere</b>; Tiardt has no payment access</td><td><code>unproven</code> — it is not established that a Whop account exists. First unblock of the tracer.</td></tr>
+<tr><td>ST-4</td><td><b>What the frontend contains</b></td><td>Tiardt's PDF: static site, forms only</td><td>Repo: full demo <b>auth</b>, <b>shop/cart</b>, watch stub, ticket gate, event bus</td><td><code>raw_source</code> — the PDF <i>understates</i> the build. Good news: the integration seams already exist.</td></tr>
+<tr><td>ST-5</td><td><b>The 100,000</b></td><td>19-Aug: "you guys project 100,000 users"</td><td>Kickoff: "I don't want to estimate 2 million landing at once. I think 100,000 is just reasonable" — readable as 100k <i>simultaneous</i></td><td><b>RESOLVED 24 Aug by owner decision (Vitaley): the design and load-test target is 100,000 SIMULTANEOUS active users.</b> A deliberate over-provision: launch-day reality will be lower, and building to the simultaneous number gives the margin that makes the day boring. YouTube first-hour analytics still get pulled to model the real arrival curve for the test scenario.</td></tr>
+<tr><td>ST-6</td><td><b>Email capture</b></td><td>World form → Webflow API (Tiardt's Webflow account)</td><td>Shop footer → Netlify Forms</td><td><code>verified_fact</code> — the launch list is being split across two systems, one owned by a contractor's personal account. Consolidate to one owner + export both before launch marketing.</td></tr>
+<tr><td>ST-7</td><td><b>Job post vs reality</b></td><td>Job post: "Vite + <b>React</b>", <b>mobile apps</b>, "<b>3-hour videos</b>", "<b>VPN abuse</b> protection"</td><td>Repo: vanilla JS (no React); our signed scope defers the app ~4 months; content inventory says 51-min launch library; VPN protection never scoped</td><td><code>fallback_artifact</code> with material claims. Verify: is the job post historical (pre-engagement) and is anyone else being hired? Is any freestyle really 3 hours (3–6× the video cost model)?</td></tr>
+<tr><td>ST-8</td><td><b>Merch catalog</b></td><td>Samuel Q15: "probably 2 shirts… keeping it simple"</td><td>Repo demo catalog: 11 products, $48–$420</td><td>Placeholder vs plan — harmless, but nobody should build catalog sync against the demo data.</td></tr>
+<tr><td>ST-9</td><td><b>Runtime = repo?</b></td><td>Live title/bundle style matches repo</td><td>Only one commit; no CI; Netlify link not verified from console</td><td><code>unproven</code> (high confidence). Verify once in Netlify UI (manual login boundary).</td></tr>
+</table></div>
+<h2><span class="n">4</span>Launch Core Build Map</h2>
+<p><b>launch_core</b> (must exist Oct 1):</p>
+<p>identity + real auth (replace demo handlers behind the existing UI) · Whop subscription checkout with regional pricing + verified webhook → entitlement grant (idempotent, replay-safe) · period-end cancellation expiry (Samuel Q4) · gated video + audio playback behind <code>/watch</code> (platform chosen in tracer; signed URLs) · broadcast wall — Samuel posts text/images/voice notes, members reply (Q9/Q10/Q12; <b>note: no wall UI exists in the repo — new frontend surface, owner must be assigned</b>) · minimal admin (publish content, look up member, manually grant/revoke — the promised "backup to the backup") · transactional email (receipts, password reset) · event analytics on the money path · Shopify link-out for merch (separate new store, Q14; native cart integration is NOT launch-core — the demo cart either links out or hides) · load test to the defined tier + launch runbook + 72h cover.</p>
+<p><b>after_launch:</b> 33 Savage Challenge tracking system (November — see note) · leaderboard (already fake-static; dynamic version ships with challenge) · gravestone member-writes · unified cart / Shopify Hydrogen · scheduled releases (monthly drops are admin publishes) · one-click upsells (Whop capability check first) · attribution beyond UTM→subscribe · email marketing sequences.</p>
+<p><b>separate_scope:</b> native iOS/Android apps · full community platform · Maya's cookbook commerce (if it becomes real, it is a digital-product lane).</p>
+<p><b>delete (for Oct 1):</b> VPN-abuse defense beyond card-country checks · any "impossible to copy" security promise · React migration or framework rewrites · Kubernetes/microservices/queues beyond a managed Postgres + thin API + webhook worker.</p>
+<p><b>decision_required:</b> challenge Oct-1 shape (recommend announcement-only) · Part 1 free/paid (ST-2) · VIP tier at launch · golden ticket semantics (recommend: keep as client-side easter egg) · Maya e-book launch/tease · video platform (tracer output) · regional price bands (proposal sent) · moderator name · launch hour · 3-hour video truth (ST-7).</p>
+<p><b>Note on the challenge (the honest commercial frame):</b> month-2 content is Part 3 + the wall; month-3+ is one 2–4-minute track + the wall. <b>The wall and the challenge ARE the retention product.</b> Sequencing the challenge to November is not a refusal; it is protecting launch and giving the retention engine real build time. That is the conversation to have with Samuel this week, not in week 5.</p>
+<h2><span class="n">5</span>Architecture Map</h2>
+<p><b>Current (all <code>raw_source</code>):</b></p>
+<ul>
+<li><b>Frontend:</b> static Vite 6 app, vanilla JS (one devDependency: <code>vite</code>). No framework, no TypeScript, no tests, no lint, no CI. Netlify serves; SPA fallback rewrite <code>/* → /index.html</code>.</li>
+<li><b>⚠ Generated-code pipeline (the biggest integration landmine):</b> the Netlify build runs <code>python build-netlify-app.py</code> <b>before</b> <code>vite build</code>. That script <b>overwrites</b> <code>app/index.html</code>, <code>app/src/main.js</code>, <code>app/src/site-header.js</code>, <code>app/src/fallback.js</code>, <code>app/src/main.css</code> from templates whose real source of truth is <b><code>build-embed-one.py</code></b> (1,600 lines of Python holding the JS/CSS as strings, plus every Webflow CDN URL). <code>auth.js</code>, <code>shop.js</code>, <code>decrypt.js</code> + their CSS are authored directly and are safe to edit. <b>Any backend integration written into the generated files is silently destroyed on the next deploy.</b> Integration must go through the authored files + the existing CustomEvent bus, or the generator itself must be changed with Tiardt.</li>
+<li><b>Assets:</b> world imagery loads at runtime from <b>Tiardt's Webflow account CDN</b> (<code>651fc019…</code>). The build downloads local fallbacks into <code>app/public/images/</code>, then a Vite plugin <b>deletes <code>dist/images</code> at build close</b> — and the SPA rewrite makes <code>/images/*</code> return HTML. <b>Confirmed in production: the image fallback path is dead; Webflow is a single point of failure for every visual in the world.</b> <code>verified_fact</code> (vite.config + live probe: <code>/images/planet.avif</code> → 200, 63,839 bytes of HTML)</li>
+<li><b>State:</b> 100% client-side localStorage (<code>onuha_auth_demo_v1</code>, <code>onuha_shop_cart_v1</code>, <code>plutopia_golden_ticket</code>, explore state). <b>Exactly two network write paths in the whole app:</b> Webflow form POST + Netlify form POST.</li>
+<li><b>Backend / database / payments / media / webhooks / queues / monitoring / admin:</b> none. Not partial — absent.</li>
+<li><b>Naming:</b> internal codename "plutopia" (package names, ticket key). Cosmetic.</li>
+<li><b>Job posts</b> live in-repo (<code>job-posts/</code>), incl. the full backend-engineer spec. <code>fallback_artifact</code></li>
+</ul>
+<p><b>Recommended target (consistent with Matt's plan + the signed technical doc; not implemented in this phase):</b> Netlify keeps the front end · managed Postgres (e.g., Supabase) + thin API service for identity/entitlement/wall/admin · Whop hosted checkout + signed webhooks into an idempotent ingester · specialist video platform (Stream/Mux/Bunny — decide with the real file in the tracer) with signed playback · Shopify separate store link-out at launch · transactional email provider · uptime + webhook-failure + entitlement-mismatch alerts on a launch dashboard.</p>
+<h2><span class="n">6</span>Ownership and Interface Map</h2>
+<div style="overflow-x:auto"><table><tr><th>Owner</th><th>Owns</th><th>Notes</th></tr>
+<tr><td>Vitaley</td><td>Product decisions, backend, payments, entitlement, media, launch proof, final merges</td><td>Per pack law 8</td></tr>
+<tr><td>Matt</td><td>Audit/review/risk</td><td>Not merge/product owner</td></tr>
+<tr><td>Tiardt</td><td>Front end, the <b>generator pipeline</b>, Webflow account (imagery + one email list), Netlify deploy today</td><td>The generator makes him the de-facto owner of 5 files nobody else can safely edit. Interface contract needed this week.</td></tr>
+<tr><td>Camilo</td><td>Creative direction (per Matt's plan)</td><td>No contact yet</td></tr>
+<tr><td>"Backend engineer" (job post)</td><td>—</td><td>Verify historical; nobody else should be onboarding against this spec</td></tr>
+<tr><td>External</td><td>Netlify (shared login), Webflow (Tiardt's), GitHub org <code>onuhatech27-dotcom</code>, Gmail root identity, Whop (unproven), Shopify (new store, not created)</td><td>Gmail = root of GitHub + Netlify; rotate + 2FA before launch</td></tr>
+</table></div>
+<p><b>Proposed interface contract (recommendation only):</b> Tiardt keeps <code>build-embed-one.py</code> and everything it generates; all product/backend integration lives in authored modules (<code>auth.js</code>, <code>shop.js</code>, + new <code>api.js</code>/<code>wall.js</code>) communicating via the existing CustomEvent bus; the wall UI gets an explicit owner; no direct edits to generated files by anyone but Tiardt; PR review per pack law 9.</p>
+<h2><span class="n">7</span>Scale Assessment</h2>
+<ul>
+<li><b>Target: DECIDED (24 Aug, Vitaley): 100,000 simultaneous active users.</b> This is the design and load-test bar, chosen deliberately above the expected launch-day reality so the margin is engineered in rather than hoped for. YouTube first-hour analytics still get pulled to model the realistic arrival curve as the <i>scenario shape</i>; 100k concurrent is the <i>pass bar</i>.</li>
+<li><b>What 100k simultaneous actually stresses:</b> the video CDN is built for exactly this and delivery cost is driven by minutes watched, not concurrency — 100k concurrent watching the 51-minute library costs roughly the same to deliver as 100k spread across a day. The pressure lands on OUR layers: the checkout/webhook surge, auth session creation bursts, entitlement checks at playback start, and the wall. Design consequences: entitlement decisions cached into short-lived signed playback tokens (no DB hit per play), stateless API behind autoscaling, queue-and-drain on webhook ingest, static-first everything else, and the wall degrades gracefully (read-only) before anything touches payments, login, or playback.</li>
+<li><b>What we know:</b> launch library = <b>51 minutes</b> (36+15), audio "a few minutes", monthly drops after. The static front end on Netlify's CDN is effectively load-indifferent; the pressure concentrates in <b>auth burst, webhook ingest, entitlement checks at playback start, and the wall</b> — none of which exist yet, so the load model can be designed in, not retrofitted.</li>
+<li><b>Cost drivers (verified vendor rates, Aug 2026):</b> Cloudflare Stream $5/1k min stored, $1/1k min delivered → 51-min library ≈ $5 storage; 100k full-watches ≈ $5.1k delivery in launch month; Matt's 30/60-min bands remain the right frame. The <b>"3-hour videos"</b> job-post claim, if real, multiplies this 3–6× — verify (ST-7).</li>
+<li><b>Load-test plan:</b> tiers per Matt's plan (1 real → hundreds → thousands → agreed viral tier), each layer measured independently; test the arrival curve from YouTube analytics once access lands.</li>
+</ul>
+<h2><span class="n">8</span>Anti-Fragility Assessment</h2>
+<p>Today there is nothing to fail — and nothing to degrade to. The controls below are required in the build, not the audit:</p>
+<ul>
+<li>Webhook ingestion: signature verification, <b>idempotency on payment events</b> (replay must grant once), dead-letter visibility, bounded retries.</li>
+<li>Entitlement: single source of truth in Postgres; manual grant/revoke path (already promised as "backup to the backup"); deliberate, time-limited outage grace policy — a cancellation must never inherit fallback behavior (per Matt's plan).</li>
+<li><b>Deploy-time fragility that exists right now:</b> the build downloads ~28 assets from Webflow with a 120s urlopen each — a Webflow outage or URL change <b>breaks deploys</b>; and the deleted-fallback finding (§5) means a runtime Webflow failure blanks the world. Smallest fix: stop deleting <code>dist/images</code> (one plugin removal) and/or move assets to the app's own hosting before launch week.</li>
+<li>Rollback: Netlify deploy history gives instant rollback for the front; the backend needs migration discipline + a documented rollback per pack law.</li>
+<li>Observability: none exists; launch dashboard per Matt's plan is a Phase-2 deliverable.</li>
+</ul>
+<h2><span class="n">9</span>Security Assessment</h2>
+<ul>
+<li><b>P1 — the demo auth collects real passwords into a void.</b> Users type email+password; it "works"; nothing is transmitted or stored server-side, but people reuse real passwords and the surface is publicly deployed. Before any launch-adjacent traffic: disable the form or wire it to the real backend. Also ensure the demo localStorage "session" can never be mistaken for entitlement by later code. <code>raw_source</code></li>
+<li><b>Secrets:</b> repo is clean — no keys, no tokens (verified grep). The only hardcoded IDs are the public Webflow form/page IDs.</li>
+<li><b>Credential hygiene (outside the repo):</b> Netlify + <b>Gmail passwords were distributed in a PDF</b>; the Gmail is the root identity for GitHub and Netlify. Rotate both, enable 2FA, move to per-person access. (Passwords are not reproduced in this report.)</li>
+<li><b>Form abuse:</b> Netlify form has a honeypot; the Webflow form has nothing — bot signups will pollute the launch list. Consolidation (ST-6) is also the fix.</li>
+<li><b>Supply chain:</b> one devDependency (vite). About as small as an attack surface gets. <code>package-lock.json</code> integrity not audited.</li>
+<li><b>Headers:</b> <code>nosniff</code> + referrer policy present; no CSP (fine for a static site at this stage).</li>
+<li>No PII is stored anywhere server-side today except the two email lists.</li>
+</ul>
+<h2><span class="n">10</span>Readiness Scorecard</h2>
+<div style="overflow-x:auto"><table><tr><th>Area</th><th>Score</th><th>Evidence</th><th>Blocker</th><th>Move-to-100 proof</th></tr>
+<tr><td>Visual world / front end</td><td>75</td><td>Full authored world, deep-linking, demo seams</td><td>Generator pipeline; Webflow SPOF; placeholder catalog</td><td>Interface contract signed; assets self-hosted; real catalog</td></tr>
+<tr><td>Identity &amp; auth</td><td>5</td><td>Designed UI exists; zero backend</td><td>No provider decision</td><td>Real signup→session→entitled fetch, replayed safely</td></tr>
+<tr><td>Payments &amp; entitlement</td><td>0</td><td>Nothing exists; Whop unproven</td><td>ST-3</td><td>Tracer passes incl. webhook replay + revoke</td></tr>
+<tr><td>Media delivery</td><td>0</td><td>/watch stub only</td><td>Platform undecided; real file needed</td><td>Signed playback of a real file on mobile behind paywall</td></tr>
+<tr><td>Commerce</td><td>15</td><td>Demo cart; store decision made (new, separate)</td><td>Store not created</td><td>Link-out live; order visible in Shopify</td></tr>
+<tr><td>Wall / community</td><td>3</td><td>Nothing in repo; broadcast-wall spec confirmed</td><td>UI owner unassigned</td><td>Post + reply + moderate round-trip</td></tr>
+<tr><td>Admin &amp; ops</td><td>0</td><td>None</td><td>—</td><td>Manual grant + content publish + member lookup</td></tr>
+<tr><td>Analytics</td><td>0</td><td>None</td><td>—</td><td>Money-path events reconcile with Whop</td></tr>
+<tr><td>Security posture</td><td>20</td><td>Clean repo; demo-auth hazard; cred hygiene</td><td>P1s below</td><td>Rotations + 2FA + demo auth replaced</td></tr>
+<tr><td>Scope clarity</td><td>50</td><td>9 banked answers; ST-5 resolved (100k simultaneous); 8 split-truths open</td><td>ST-1/2/3</td><td>Signed Build Map</td></tr>
+<tr><td><b>Overall</b></td><td><b>36</b></td><td></td><td></td><td></td></tr>
+</table></div>
+<h2><span class="n">11</span>Risk Register</h2>
+<p><b>P0 (blocks 1 October):</b></p>
+<ul>
+<li>1. <b>Money path is greenfield with 28 working days left.</b> Owner: Vitaley. Correction: run the tracer (§12) the day Whop access exists; expansion frozen until it passes.</li>
+<li>2. <b>Whop unproven</b> — existence, regional recurring pricing, webhook quality, saved-card capability. Owner: Samuel (access), Vitaley (probe). Proof: a real regional-priced test subscription observed end-to-end.</li>
+<li>3. <b>Load target — RESOLVED by decision:</b> 100,000 simultaneous. Remaining work: model the arrival curve from YouTube analytics and execute the load test at the 100k-concurrent tier. Owner: Vitaley. Proof: the test report at that tier.</li>
+<li>4. <b>Challenge scope conflict</b> (ST-1). Owner: Vitaley+Samuel conversation. Proof: signed Build Map line.</li>
+</ul>
+<p><b>P1 (serious):</b></p>
+<ul>
+<li>5. Webflow single point of failure + dead image fallbacks in production + deploy-time download dependency. Owner: Tiardt (with Vitaley). Smallest fix: ship <code>dist/images</code>.</li>
+<li>6. Generated-code pipeline clobbers integration edits. Owner: Tiardt+Vitaley interface contract.</li>
+<li>7. Demo auth collecting real passwords on a public URL. Owner: Vitaley/Tiardt. Fix before launch marketing drives traffic.</li>
+<li>8. Email capture split across two providers, one personal. Owner: Vitaley. Consolidate + export.</li>
+<li>9. "3-hour videos" claim (ST-7) — cost model swing. Owner: Samuel to answer.</li>
+<li>10. Credential hygiene: shared Gmail root + passwords-in-PDF. Owner: Samuel's team, guided.</li>
+<li>11. Wall UI has no owner (new frontend surface). Owner: assign this week.</li>
+</ul>
+<p><b>P2 (quality/cost):</b></p>
+<ul>
+<li>12. No CI/tests/lint anywhere. 13. Placeholder catalog diverges from "2 shirts". 14. Dual naming (plutopia/onuha). 15. Stray <code>lp.millionaire-commerce.com</code> reference. 16. <code>samual</code>/<code>samuel</code> redirect debt. 17. Netlify-vs-Webflow forms duplicate the same honeypot-less signup in two codepaths.</li>
+</ul>
+<h2><span class="n">12</span>Recommended First Tracer</h2>
+<p><b>Riskiest assumption capable of invalidating the plan:</b> <i>"Whop can take a regional-priced recurring payment and reliably tell our backend about it."</i> Everything else assumes it.</p>
+<p><b>The tracer:</b> one real person → regional-priced Whop checkout (test mode) → signed webhook → idempotent entitlement grant in Postgres → real auth session behind Tiardt's existing sign-in UI → protected playback of a real video file inside the <code>/watch</code> stub on a phone → visible in a minimal admin view → then: cancel → entitlement expires at period end.</p>
+<ul>
+<li><b>Systems crossed:</b> Whop checkout + webhooks · database · identity/session · entitlement enforcement · video platform signed URL · the authored-file frontend seam · admin readout.</li>
+<li><b>Why not alternatives:</b> auth-first proves no money; comments-first isn't load-bearing; load-testing first has nothing to test; schema-first is a horizontal layer (forbidden by the pack).</li>
+<li><b>Machine proof:</b> webhook delivered twice grants once; out-of-order events converge; expired session → playback denied; revoked entitlement → denied within one minute; logs show each transition.</li>
+<li><b>Human proof:</b> pay on a phone with a non-US card, watch the stand-in Part 2, share the playback URL to a second logged-out device and watch it fail, cancel and confirm access survives to period end.</li>
+<li><b>Expansion threshold:</b> tracer passes → build Launch Core horizontally per the Build Map. <b>Stop condition:</b> if Whop cannot do per-country recurring pricing acceptably, stop and escalate the provider decision to Samuel the same day — that is a scope-level event, not an engineering detail.</li>
+</ul>
+<h2><span class="n">13</span>Seven-Day Plan</h2>
+<div style="overflow-x:auto"><table><tr><th>Day</th><th>Owner</th><th>Deliverable</th><th>Est.</th><th>Depends on</th><th>Proof / stop</th></tr>
+<tr><td>1 (Mon)</td><td>Samuel / Vitaley</td><td>Whop access or account created (Ryan bumped 24 Aug for Whop + Shopify); real video file received; interface-contract note to Tiardt</td><td>2h</td><td>—</td><td>Access works; file plays locally. Stop: no Whop by EOD Tue → escalate</td></tr>
+<tr><td>2</td><td>Vitaley</td><td>Whop capability probe: regional products, test checkout, webhook events observed</td><td>4h</td><td>D1</td><td>Event log of a test purchase. Stop: no regional recurring → provider decision</td></tr>
+<tr><td>3</td><td>Vitaley</td><td>DB + identity + entitlement skeleton; webhook ingester (idempotent)</td><td>6h</td><td>D2</td><td>Replay test green</td></tr>
+<tr><td>4</td><td>Vitaley</td><td>Video platform chosen w/ real file; signed playback wired into /watch behind auth</td><td>6h</td><td>D1,3</td><td>Phone playback behind paywall</td></tr>
+<tr><td>5</td><td>Vitaley</td><td>Tracer end-to-end runs incl. cancel→period-end expiry; record the demo video</td><td>4h</td><td>D3,4</td><td>The machine+human proofs above</td></tr>
+<tr><td>6</td><td>Vitaley + Samuel</td><td><b>Build Map written from evidence</b>; challenge + Part-1 + VIP decisions taken; regional bands approved</td><td>3h</td><td>D5 + answers</td><td>Signed Build Map</td></tr>
+<tr><td>7</td><td>Matt</td><td>Independent review of tracer + Build Map vs this audit</td><td>2h</td><td>D6</td><td>Matt's go/no-go on implementation order</td></tr>
+</table></div>
+<h2><span class="n">14</span>Access and Decision Requests (single checkpoint)</h2>
+<p><b>Access:</b> Whop + Shopify (Ryan bumped by Vitaley, 24 Aug) · the real video file (Samuel said "now already") · YouTube/IG analytics read-only · Figma link (promised 24 Aug) · Netlify per-person access (replace shared login) · confirmation the Netlify site builds from this repo (one console screenshot).</p>
+<p><b>Decisions:</b> challenge Oct-1 shape · Part 1 free/paid · VIP tier · regional bands (proposal sent) · moderator name · launch hour · Maya e-book · golden-ticket semantics · job post historical? · is any video really 3 hours?</p>
+<h2><span class="n">15</span>Coverage Manifest</h2>
+<ul>
+<li><b>Deep-read (<code>raw_source</code>):</b> README, netlify.toml, <code>_redirects</code>, <code>_headers</code>, <code>__forms.html</code>, both package.json, vite.config.js, <code>auth.js</code> (full), <code>decrypt.js</code> (full), <code>fallback.js</code> (full), <code>shop.js</code> (catalog, storage, checkout, form paths + targeted reads), <code>site-header.js</code> (stubs, routing, imports + targeted reads), <code>main.js</code> (structural: complete function inventory, all network calls, all storage keys, all route strings, key constants — not line-by-line; it is 76KB of generated output), <code>build-netlify-app.py</code> (structure + complete write-target list), <code>build-embed-one.py</code> (constants + role), job-post PDF (full text) + 2 variants (headers), dotfiles.</li>
+<li><b>Live runtime:</b> home + 15 route probes + headless screenshot + production probes of <code>/images/planet.avif</code> (dead fallback confirmed) and <code>/videos/auth-intro.mp4</code> (real).</li>
+<li><b>Sampled:</b> CSS files (presentation only), <code>build-embed-one.py</code> bulk strings, job-posts.zip (assumed duplicates).</li>
+<li><b>Not inspected:</b> 30 image binaries, auth-intro.mp4 content, <code>package-lock.json</code> integrity, Netlify console (login boundary — reported, not crossed), Gmail (same), the deployed bundle ≠ repo equivalence (would require an install+build; not run per pack rules).</li>
+<li><b>Load-bearing coverage claim:</b> every network call and every storage write in the application is accounted for. The app has exactly two outbound endpoints and four localStorage keys.</li>
+</ul>
+<h2><span class="n">16</span>CTO Verdict</h2>
+<p><b><code>blocked_on_product_decisions</code></b> — with the tracer already selected and fully specified. Source and repo access are no longer blockers; the code is understood and the integration seams are identified. What gates the first implementation slice is not engineering: it is Whop access/existence (ST-3) and the challenge + Part-1 decisions (ST-1/ST-2). The 100k question is closed: 100,000 simultaneous is the bar. The day those land, Day-2 of the seven-day plan starts.</p>
+<p><i>Stop condition honored: no files edited, nothing pushed, no logins, no payments, no deployments. Awaiting explicit authorization for the next phase.</i></p></div></body></html>

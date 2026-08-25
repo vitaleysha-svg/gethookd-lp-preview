@@ -151,32 +151,77 @@ EVERY BRANCH ENDS THE SAME WAY
 </article></div></section>
 <section><h2>The four most people start with</h2><div class="grid"><article class="card">
   <div class="ch"><h3>Find a product worth selling</h3><span class="tag">Find a product</span></div>
-  <p class="cs">You know your niche but not what to sell. Comes back with real products and the ads carrying them.</p>
+  <p class="cs">You know your niche but not what to sell. Comes back with real products, the product page, and the ad carrying each one.</p>
   <div class="pw"><header><span class="nm">prompt</span><button type="button">Copy</button></header><pre>You are a product researcher for a direct response e-commerce operator.
 
-I am looking for a product in the [NICHE] space. My constraints: [BUDGET / SHIPPING / MARKET / ANYTHING ELSE].
-I want products that are proven but not yet saturated.
+Find me a product in [NICHE] for [MARKET]. Lightweight, cheap to ship, easy to
+source, and already proven by ads that have survived a long time from brands
+spending real money.
 
-Use the GetHookd MCP. Run TWO searches with search_ads and compare them.
+HOW TO FIND THEM
+GetHookd indexes ads, not products, so find the ads first and read the product
+out of them. Don't apologise for that, just do it.
 
-Search A - the proven survivors:
-  query = "[NICHE]", performance_scores = "winning", status = "active",
-  run_time = 60, geo = "[MARKET]", limit = 25,
-  collapse_variants = true, ads_per_brand_limit = 1
+Call search_ads with:
+  query               = "[NICHE]"
+  status              = "active"
+  run_time            = 30
+  geo                 = "[MARKET]"
+  limit               = 40
+  collapse_variants   = true
+  ads_per_brand_limit = 2
+  compact             = true
+  sort_column         = "days_active"
+  sort_direction      = "desc"
 
-Search B - what just launched and is already climbing:
-  query = "[NICHE]", performance_scores = "winning,optimized", status = "active",
-  start_date = "[DATE_MINUS_90]", run_time = 21, geo = "[MARKET]",
-  limit = 25, collapse_variants = true, ads_per_brand_limit = 1
+Do NOT filter on performance_scores. Plenty of live, long-running ads carry a
+null score, and the tier filter excludes every one of them, so you would throw
+away proven winners without ever seeing them.
 
-Then give me a table of distinct PRODUCTS (not ads), with:
-product | what it does in one line | brand | brand's active_ads count | longest days_active | which search found it | share_url
+Do NOT rely on ad_spend_range_score either. It comes back null on most rows in
+most niches. Use these two instead, because they are always populated:
+  brand.active_ads    how many ads that brand is running right now
+  days_active         how long this specific ad has survived
+A brand running 30 or more ads with one that has lived past 60 days is spending
+real money. That is your spend signal.
 
-Rank by this logic and say so: a product is most interesting when the brand is running a meaningful number of active ads (a proxy for spend), the creative has been alive a long time (a proxy for conversion), and it appeared in Search B (still fresh). A product only in Search A with a huge brand behind it is proven but crowded.
+CLEAN THE RESULTS FIRST
+1. Drop anything that is not actually [NICHE]. Search is semantic and returns
+   neighbours. Tell me how many you dropped and what they were.
+2. For every surviving ad, read landing_page. That URL is the product. Get the
+   product name from the URL slug plus the ad copy. If landing_page is empty,
+   drop the row, you cannot verify the product.
+3. Group by product, not by ad. If several brands run the same product, that is
+   the strongest signal in the set, not a duplicate. Count the brands and say so.
 
-Finish with your top 3 picks, and for each: why it wins, who the buyer is, the obvious objection I would have to beat, and the honest reason it might be a bad idea for me specifically.
+SCORE WHAT SURVIVES
+Ship and source:
+  fits a padded mailer, roughly under 500g, not fragile
+  not liquid, aerosol, battery or perishable
+  a commodity you can actually source, not a custom formulation
+Money:
+  can sell for 3x or more of landed cost
+  solves a complaint people actually voice, not a nice-to-have
+Anything that fails ship and source is out, however well its ads are doing.
 
-Only use retrieved ads; drop off-topic ones. Cite ad_ids, keep share_urls intact. Mark inference as INFERRED - you can see spend BEHAVIOUR as a proxy, not their margins.</pre></div>
+GIVE ME THIS TABLE
+product | brand | brand active ads | longest runtime | product page | ad link
+
+  product page = the full landing_page URL
+  ad link      = the full share_url, including the ?signature= token, or it
+                 will not open
+Never give me a bare domain. Every row needs two URLs I can click.
+
+THEN THE TOP THREE ONLY
+  what the product is, one line
+  the complaint it solves, quoted from the ad copy
+  why it ships cheaply, one line
+  the one reason it might not work for me
+
+RULES
+Only use ads you actually retrieved. Cite the ad id on every row. Runtime and
+active ad count are public signals, not revenue, so mark anything you conclude
+from them as INFERRED. Do not describe a creative unless you actually viewed it.</pre></div>
 </article>
 <article class="card">
   <div class="ch"><h3>Take apart one competitor</h3><span class="tag">Competitor angles</span></div>

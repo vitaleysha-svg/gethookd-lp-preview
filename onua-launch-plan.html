@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex,nofollow"><meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Onua — Backend Launch Plan</title>
+  <style>
+    :root{
+      --canvas:#fafbfc;--paper:#fff;--ink:#0f172a;--body:#334155;--muted:#64748b;
+      --faint:#94a3b8;--line:#e2e8f0;--blue:#2563eb;--blue-soft:#eff6ff;
+      --amber:#92400e;--amber-soft:#fffbeb;--green:#166534;--green-soft:#f0fdf4;
+      --red:#b91c1c;--red-soft:#fef2f2;--sidebar:244px;--sheet:848px
+    }
+    *{box-sizing:border-box}html{height:100%;background:var(--canvas)}body{margin:0;min-height:100%;color:var(--ink);background:var(--canvas);font:14px/1.65 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,a{font:inherit}button{color:inherit}a{color:var(--blue)}
+    .mono,.label,.crumb,.nav-title,.nav-item,.status,.meta,th{font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+    .topbar{position:sticky;top:0;z-index:20;height:52px;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line)}.top-inner{max-width:1200px;height:100%;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}.crumb{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}.crumb span{color:var(--faint);font-weight:500}.top-actions{display:flex;align-items:center;gap:14px}.status{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.menu{display:none;border:0;background:transparent;padding:8px;font-size:18px;line-height:1}
+    .shell{max-width:1200px;margin:0 auto;padding:24px 20px 48px;display:flex;gap:36px;align-items:flex-start}.sidebar{width:var(--sidebar);flex:0 0 var(--sidebar);position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto;padding-right:14px}.nav-group+ .nav-group{margin-top:28px}.nav-title{margin:0 0 8px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700}.nav-item{display:block;width:100%;border:0;background:transparent;text-align:left;padding:7px 8px;margin:1px 0;border-left:2px solid transparent;color:var(--muted);font-size:12px;line-height:1.35;cursor:pointer}.nav-item:hover{color:var(--ink);background:#f1f5f9}.nav-item.active{color:var(--blue);border-left-color:var(--blue);background:var(--blue-soft);font-weight:700}.nav-state{float:right;font-size:9px;color:var(--faint);margin-left:8px}.nav-item.active .nav-state{color:var(--blue)}
+    .workspace{flex:1;min-width:0}.sheet{max-width:var(--sheet);min-height:calc(100vh - 100px);background:var(--paper);border:1px solid var(--line);border-radius:2px;box-shadow:0 1px 4px rgba(15,23,42,.05);overflow:hidden}.page{display:none;padding:28px 42px 44px}.page.active{display:block}.page-head{padding-bottom:17px;border-bottom:1px solid var(--line);margin-bottom:18px}.label{margin:0 0 6px;color:var(--blue);font-size:10px;line-height:1.3;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.page h1{font:400 30px/1.16 Georgia,"Times New Roman",serif;letter-spacing:-.02em;margin:0 0 8px}.deck{max-width:650px;margin:0;color:var(--muted);font-size:14px;line-height:1.55}.meta{margin-top:10px;font-size:9px;color:var(--faint);text-transform:uppercase;letter-spacing:.05em}
+    h2{margin:32px 0 12px;font-size:18px;line-height:1.35}h3{margin:22px 0 8px;font-size:15px}p{margin:8px 0;color:var(--body)}strong{color:var(--ink)}.plain{max-width:650px}.section-label{margin:30px 0 8px;color:var(--muted);font:700 10px/1.4 "SFMono-Regular",Consolas,monospace;letter-spacing:.1em;text-transform:uppercase}
+    .truth{border-top:1px solid var(--line)}.truth-row{display:grid;grid-template-columns:132px 1fr;gap:18px;padding:9px 0;border-bottom:1px solid var(--line)}.truth-row b{font:700 9px/1.5 "SFMono-Regular",Consolas,monospace;text-transform:uppercase;letter-spacing:.05em}.truth-row p{margin:0}.truth-row .good{color:var(--green)}.truth-row .need{color:var(--amber)}
+    .priority{margin:18px 2px 4px;padding:14px 17px;border:2px solid var(--ink);background:var(--amber-soft);box-shadow:3px 3px 0 var(--ink)}.priority .label{color:var(--amber)}.priority h2{margin:0 0 5px;font-size:17px}.priority p{margin:3px 0}.priority .done{margin-top:9px;padding-top:8px;border-top:1px solid #d6b86a;font-weight:700;color:var(--ink)}
+    .flow{margin:18px 0;border:1px solid var(--line)}.flow-row{display:grid;grid-template-columns:110px 24px 1fr;padding:11px 14px;border-bottom:1px solid var(--line);align-items:start}.flow-row:last-child{border-bottom:0}.flow-row b{font-size:13px}.flow-row span{color:var(--blue);font-weight:700}.flow-row p{margin:0}.shopify-note{padding:12px 14px;border-left:4px solid var(--faint);background:#f8fafc;color:var(--body)}
+    .system{display:grid;grid-template-columns:34px 170px 1fr;gap:12px;padding:15px 0;border-top:1px solid var(--line)}.system:last-of-type{border-bottom:1px solid var(--line)}.system-num{width:26px;height:26px;display:grid;place-items:center;background:var(--ink);color:white;border-radius:50%;font:700 11px "SFMono-Regular",monospace}.system h3{margin:2px 0;font-size:14px}.system p{margin:0}.why-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}.why-list li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+    .decision{display:grid;grid-template-columns:1.5fr 118px 108px;gap:14px;padding:14px 0;border-top:1px solid var(--line);align-items:start}.decision:last-child{border-bottom:1px solid var(--line)}.decision p{margin:2px 0}.owner{color:var(--muted);font-size:12px}.badge.answered{background:var(--green-soft);color:var(--green)}.badge.partial{background:var(--amber-soft);color:var(--amber)}.answerbox{grid-column:1/-1;background:var(--green-soft);border-left:3px solid var(--green);padding:9px 12px;font-size:13px;line-height:1.55;color:var(--body);margin-top:2px}.answerbox.partial{background:var(--amber-soft);border-left-color:var(--amber)}.answerbox b{color:var(--ink)}.annobar{background:var(--blue-soft);border:1px solid var(--blue);border-radius:4px;padding:10px 14px;margin:0 0 18px;font-size:13px;color:var(--body)}.annobar b{color:var(--blue)}.badge{display:inline-block;width:max-content;padding:3px 7px;border-radius:3px;font:700 9px/1.4 "SFMono-Regular",monospace;text-transform:uppercase;letter-spacing:.05em}.decision-needed{color:var(--amber);background:var(--amber-soft);border:1px solid #fde68a}.unproven{color:var(--blue);background:var(--blue-soft);border:1px solid #bfdbfe}.passed{color:var(--green);background:var(--green-soft);border:1px solid #bbf7d0}.blocker{color:var(--red);background:var(--red-soft);border:1px solid #fecaca}
+    .stage{display:grid;grid-template-columns:74px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line)}.stage:last-child{border-bottom:1px solid var(--line)}.days{font:700 11px/1.45 "SFMono-Regular",monospace;color:var(--blue);text-transform:uppercase}.stage h3{margin:0 0 4px}.stage p{margin:3px 0}.gate{margin-top:9px;padding:9px 11px;background:var(--green-soft);border-left:3px solid #22c55e;font-size:13px}.gate b{font:700 9px "SFMono-Regular",monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--green);margin-right:5px}
+    table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}th,td{padding:8px 10px;border:1px solid var(--line);text-align:left;vertical-align:top}th{background:#f8fafc;color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.07em}td:first-child{font-weight:700;color:var(--ink)}.note{padding:11px 13px;background:#f8fafc;border-left:3px solid var(--blue);font-size:12px}.note p{margin:0}.test-day{display:grid;grid-template-columns:64px 1fr 1.1fr;gap:14px;padding:11px 0;border-top:1px solid var(--line)}.test-day:last-child{border-bottom:1px solid var(--line)}.test-day b{font:700 10px "SFMono-Regular",monospace;color:var(--blue);text-transform:uppercase}.test-day p{margin:0;font-size:13px}
+    details{border-top:1px solid var(--line)}details:last-child{border-bottom:1px solid var(--line)}summary{cursor:pointer;list-style:none;position:relative;padding:13px 34px 13px 0;font-weight:700}summary::-webkit-details-marker{display:none}summary:after{content:"+";position:absolute;right:8px;color:var(--blue)}details[open] summary:after{content:"−"}.detail{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:0 0 15px}.detail b{display:block;margin-bottom:3px;color:var(--muted);font:700 9px "SFMono-Regular",monospace;text-transform:uppercase;letter-spacing:.06em}.detail p{margin:0;font-size:13px}.glossary{display:grid;grid-template-columns:128px 1fr;border-top:1px solid var(--line)}.glossary dt,.glossary dd{margin:0;padding:10px 0;border-bottom:1px solid var(--line)}.glossary dt{font-weight:700}.glossary dd{color:var(--body)}
+    .copy{margin-top:14px;padding:16px;border:1px solid var(--line);background:#f8fafc;white-space:pre-wrap;font-size:13px;color:var(--body)}.copy-btn{margin-top:12px;padding:8px 12px;border:1px solid var(--ink);border-radius:3px;background:var(--ink);color:#fff;font:700 10px "SFMono-Regular",monospace;text-transform:uppercase;letter-spacing:.06em;cursor:pointer}.copy-btn:hover{background:#334155}.copy-btn.copied{background:var(--green);border-color:var(--green)}
+    .principles{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}.principles strong{font-family:"SFMono-Regular",monospace;font-size:10px;text-transform:uppercase;letter-spacing:.06em}.footer-note{padding:18px 42px;border-top:1px solid var(--line);background:#f8fafc;color:var(--faint);font:10px/1.5 "SFMono-Regular",monospace;text-transform:uppercase;letter-spacing:.05em}
+    .mobile-overlay{display:none}
+    @media(max-width:850px){html,body{width:100%;max-width:100%;overflow-x:hidden}.menu{display:block}.top-inner{width:100%;padding:0 12px}.status{display:none}.shell,.workspace,.sheet,.page{width:100%;max-width:100%;min-width:0}.shell{padding:12px;display:block}.sidebar{position:fixed;z-index:40;left:0;top:0;bottom:0;width:280px;max-height:none;background:#fff;padding:64px 18px 24px;box-shadow:6px 0 18px rgba(15,23,42,.12);transform:translateX(-105%);transition:transform .18s ease}.sidebar.open{transform:translateX(0)}.mobile-overlay{position:fixed;inset:0;z-index:30;background:rgba(15,23,42,.22)}.mobile-overlay.open{display:block}.page{padding:26px 20px 38px}.page>*{min-width:0}.page h1{font-size:28px;overflow-wrap:anywhere}.truth-row{grid-template-columns:1fr;gap:2px}.system{grid-template-columns:30px 1fr}.system p{grid-column:2}.decision{grid-template-columns:1fr}.stage{grid-template-columns:1fr;gap:5px}.test-day{grid-template-columns:1fr;gap:3px}.detail{grid-template-columns:1fr}.glossary{grid-template-columns:1fr}.glossary dt{padding-bottom:0;border-bottom:0}.glossary dd{padding-top:2px}.footer-note{padding:16px 20px}.priority{margin-left:0;margin-right:3px}.table-wrap{width:100%;max-width:100%;overflow-x:auto}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-inner">
+      <div style="display:flex;align-items:center;gap:8px"><button class="menu" id="menuButton" aria-label="Open section index">☰</button><div class="crumb">ONUA <span>/ BACKEND LAUNCH PLAN</span></div></div>
+      <div class="top-actions"><div class="status">REVIEW DRAFT · 24 AUG 2026</div></div>
+    </div>
+  </header>
+  <div class="mobile-overlay" id="overlay"></div>
+  <div class="shell">
+    <aside class="sidebar" id="sidebar" aria-label="Document sections">
+      <div class="nav-group">
+        <p class="nav-title">Start here</p>
+        <button class="nav-item active" data-page="overview">• Executive truth <span class="nav-state">01</span></button>
+        <button class="nav-item" data-page="journey">• Customer journey <span class="nav-state">02</span></button>
+        <button class="nav-item" data-page="design">• Backend design <span class="nav-state">03</span></button>
+      </div>
+      <div class="nav-group">
+        <p class="nav-title">Make decisions</p>
+        <button class="nav-item" data-page="decisions">• Owner decisions <span class="nav-state">04</span></button>
+        <button class="nav-item" data-page="plan">• 30-day plan <span class="nav-state">05</span></button>
+        <button class="nav-item" data-page="testing">• Testing and launch <span class="nav-state">06</span></button>
+      </div>
+      <div class="nav-group">
+        <p class="nav-title">Reference</p>
+        <button class="nav-item" data-page="engineering">• Engineering detail <span class="nav-state">07</span></button>
+        <button class="nav-item" data-page="ownership">• Ownership and rules <span class="nav-state">08</span></button>
+        <button class="nav-item" data-page="message">• Message to the team <span class="nav-state">09</span></button>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <article class="sheet">
+        <section class="page active" id="overview">
+          <div class="page-head">
+            <p class="label">01 · EXECUTIVE TRUTH</p>
+            <h1>Build the system that lets a customer pay, receive access, and watch Onua securely.</h1>
+            <p class="deck">The website design exists. The account, payment, viewing-access, and protected-video system still needs to be built and tested.</p>
+            <p class="meta">STATUS: DESIGN DIRECTION · LAUNCH NOT YET APPROVED</p>
+          </div>
+
+          <div class="truth" aria-label="Current project truth">
+            <div class="truth-row"><b class="good">Real now</b><p>The public frontend and visual experience.</p></div>
+            <div class="truth-row"><b class="need">Still missing</b><p>Real accounts, secure payment confirmation, viewing-access records, protected video, support tools, monitoring, and recovery.</p></div>
+            <div class="truth-row"><b>Proposed split</b><p><strong>Whop</strong> for digital memberships. <strong>Shopify</strong> for physical merchandise. <s>The owners have not approved this division yet.</s> <b style="color:var(--green)">Approved: signed agreement, clause 1 (21 Aug).</b></p></div>
+            <div class="truth-row"><b>Build first</b><p>One complete customer journey from account creation through payment, viewing, cancellation, and correct access expiry.</p></div>
+          </div>
+
+          <div class="priority">
+            <p class="label">NEXT APPROVAL · DAY 1</p>
+            <h2>One 45-minute owner meeting</h2>
+            <p><strong>Vitaley and Samuel decide:</strong> what Whop owns, what Shopify owns, and the pricing, refund, cancellation, and renewal rules.</p>
+            <p><strong>Matt documents:</strong> the expected launch traffic and the successful test for every build stage.</p>
+            <p class="done">Meeting complete when every answer is written, assigned, and approved. Backend implementation starts after that.</p>
+          </div>
+
+          <p class="section-label">WHY THIS ORDER</p>
+          <p class="plain">The riskiest assumption is not whether we can create database tables. It is whether a real payment can safely become the correct viewing access—and later be removed at the correct time. We prove that complete path before expanding the product.</p>
+        </section>
+
+        <section class="page" id="journey">
+          <div class="page-head"><p class="label">02 · FIRST COMPLETE CUSTOMER JOURNEY</p><h1>What the customer experiences, in order</h1><p class="deck">This is the smallest real path that proves Onua can operate as a paid membership product.</p></div>
+          <div class="flow">
+            <div class="flow-row"><b>1. Account</b><span>→</span><p>The customer creates a real account and can sign in again later.</p></div>
+            <div class="flow-row"><b>2. Price</b><span>→</span><p>Onua shows the approved offer for the customer’s market.</p></div>
+            <div class="flow-row"><b>3. Checkout</b><span>→</span><p>Whop collects the digital-membership payment.</p></div>
+            <div class="flow-row"><b>4. Confirm</b><span>→</span><p>Whop sends Onua a signed message confirming what happened.</p></div>
+            <div class="flow-row"><b>5. Record</b><span>→</span><p>Onua records what this customer may watch and until when.</p></div>
+            <div class="flow-row"><b>6. Watch</b><span>→</span><p>The video provider creates a temporary protected viewing link.</p></div>
+            <div class="flow-row"><b>7. Change</b><span>→</span><p>Cancellation, refund, failed renewal, and expiry update access using the approved rules.</p></div>
+            <div class="flow-row"><b>8. Recover</b><span>→</span><p>An operator can explain a problem, retry safe work, and see every important change.</p></div>
+          </div>
+          <div class="shopify-note"><strong>Shopify is outside this membership path.</strong> Under the proposed split, Shopify handles physical products, fulfilment, and merchandise taxes—not permission to watch Onua videos.</div>
+
+          <h2>Regional pricing, explained honestly</h2>
+          <p class="plain">The team must define which evidence determines a customer’s market. Location, billing country, payment method, and account history can disagree. Those conflicts need one written fallback rule.</p>
+          <p class="plain"><strong>No system can make location fraud impossible.</strong> The practical goal is to make obvious manipulation difficult, detectable, and reviewable without punishing legitimate travelers.</p>
+          <div class="note"><p><strong>Successful test:</strong> approved markets see the correct offer; conflicting signals follow the written fallback; changing only a VPN does not silently create permanent cheaper access.</p></div>
+        </section>
+
+        <section class="page" id="design">
+          <div class="page-head"><p class="label">03 · BACKEND DESIGN</p><h1>One understandable backend with four jobs</h1><p class="deck">We need enough separation to stay safe and testable, but not a fleet of services that the team cannot operate.</p></div>
+          <div class="flow" aria-label="Simple backend system map">
+            <div class="flow-row"><b>Customer</b><span>↓</span><p>Uses the Onua website.</p></div>
+            <div class="flow-row"><b>Website</b><span>↓</span><p>Asks the Onua backend to perform trusted actions.</p></div>
+            <div class="flow-row"><b>Backend</b><span>├</span><p>Asks Whop whether payment was real.</p></div>
+            <div class="flow-row"><b>Backend</b><span>├</span><p>Records what the customer may watch.</p></div>
+            <div class="flow-row"><b>Backend</b><span>└</span><p>Asks the video provider for a temporary viewing link.</p></div>
+          </div>
+
+          <p class="section-label">THE FOUR JOBS</p>
+          <div class="system"><div class="system-num">1</div><h3>Know the customer</h3><p>Create a real account, keep login secure, and attach payment and viewing history to one person.</p></div>
+          <div class="system"><div class="system-num">2</div><h3>Confirm the money</h3><p>Create the Whop checkout, verify Whop’s signed payment messages, and record each money event exactly once.</p></div>
+          <div class="system"><div class="system-num">3</div><h3>Control viewing</h3><p>Decide what the customer may watch, then create a temporary protected link instead of exposing a permanent video URL.</p></div>
+          <div class="system"><div class="system-num">4</div><h3>Run the service</h3><p>Detect failures, alert the right person, explain customer problems, restore data, and reverse a bad release.</p></div>
+
+          <p class="section-label">WHY THIS DESIGN</p>
+          <ul class="why-list">
+            <li><strong>Understandable</strong><span>Matt and Vitaley can explain the complete system without tracing a maze of services.</span></li>
+            <li><strong>Secure</strong><span>The browser never holds payment secrets, signs videos, or grants itself access.</span></li>
+            <li><strong>Reliable</strong><span>A repeated payment message produces one result; a temporary failure can retry safely.</span></li>
+            <li><strong>Scalable</strong><span>The CDN and video provider carry heavy media traffic. The backend makes comparatively small authorization decisions.</span></li>
+            <li><strong>Reversible</strong><span>Whop and the video provider connect through narrow boundaries, so their code does not spread through the frontend.</span></li>
+          </ul>
+
+          <div class="note" style="margin-top:20px"><p><strong>Not choosing now:</strong> Kubernetes, a microservice fleet, Kafka, custom video delivery, or speculative global infrastructure. We add complexity only when a measured test proves the simpler design cannot meet an accepted requirement.</p></div>
+          <p class="principles"><strong>Engineering principles:</strong> Keep the complete system small enough to understand. Measure real bottlenecks. Make the smallest safe improvement and prove it worked.</p>
+        </section>
+
+        <section class="page" id="decisions">
+          <div class="page-head"><p class="label">04 · OWNER DECISIONS</p><h1>What must be decided before backend work starts</h1><p class="deck">These answers change what we build and how we test it. Engineering cannot safely guess them.</p></div>
+          <div class="decision"><div><strong>Digital membership responsibility</strong><p>Does Whop own checkout, recurring billing, payment events, cancellation, refunds, and subscription status?</p></div><div class="owner">Vitaley + Samuel<br>Day 1</div><span class="badge answered">Answered</span><div class="answerbox"><b>Yes.</b> Locked in the signed agreement (clause 1) and the 19 Aug scoping call: Whop owns checkout, recurring billing, payment events, cancellation and subscription status. A <b>new Whop organization</b> is being created and shared (Whop support recommendation, 24 Aug) so nothing is built on the old company account and the LLC switch becomes a payout-settings update, not a rebuild.</div></div>
+          <div class="decision"><div><strong>Physical merchandise responsibility</strong><p>Does Shopify own products, inventory, checkout, fulfilment, merchandise tax, and returns?</p></div><div class="owner">Vitaley + Samuel<br>Day 1</div><span class="badge answered">Answered</span><div class="answerbox"><b>Yes.</b> Separate <b>new</b> Shopify store, not ICON (Samuel, answer 14). Store already created: <b>44qqaw-be.myshopify.com</b> — Vitaley requesting collaborator access. Open detail: fulfilment owner at volume (Ryan).</div></div>
+          <div class="decision"><div><strong>Regional pricing policy</strong><p>All intended markets, currencies, offers, taxes, evidence signals, and the fallback when those signals conflict.</p></div><div class="owner">Business owners<br>Day 1</div><span class="badge partial">Part answered</span><div class="answerbox partial"><b>Structure agreed by convergence (25 Aug):</b> Ryan's continent breakdown arrived and matches the fee-based bands almost exactly. Merged table: <b>$19.99</b> developed &middot; <b>$12.99</b> C&amp;E Europe &middot; <b>$9.99</b> LatAm &middot; <b>$6.99</b> N.Africa/SE Asia/C.Asia &middot; <b>$4.99</b> Sub-Saharan Africa/S.Asia, annual at 10 months, VIP at 2.5&times;. All tiers clear the Whop fee floor (6.7&ndash;11.2%). <b>Region mapping resolved with Ryan (25 Aug):</b> tier 1 = North America, Western Europe, UK (+ Oceania, Japan, Korea, Singapore); Middle East coupled with North Africa at $6.99; no exclusions. <b>Open:</b> Samuel's final yes &middot; tax stance &middot; fallback rule confirm (billing country decides).</div></div>
+          <div class="decision"><div><strong>Membership lifecycle</strong><p>Refund, cancellation, grace period, renewal failure, expiry, account sharing, and support rules.</p></div><div class="owner">Vitaley + Samuel<br>Day 2</div><span class="badge partial">Part answered</span><div class="answerbox partial"><b>Mostly decided</b> (Samuel's written answers, 24 Aug): <b>no refunds</b> (A3) &middot; cancel anytime, <b>access runs to period end</b> (A4) &middot; <b>paid from first click</b>, no trial or free tier (A2) &middot; monthly billing only. <b>Open:</b> renewal-failure retry count, grace period, account-sharing rule, and a <b>named</b> support human for launch week.</div></div>
+          <div class="decision"><div><strong>Launch traffic model</strong><p>How many people browse, sign in, pay, receive events, and request playback during the busiest minute.</p></div><div class="owner">Vitaley + Matt<br>Day 2</div><span class="badge answered">Answered</span><div class="answerbox"><b>Yes.</b> Separate <b>new</b> Shopify store, not ICON (Samuel, answer 14). Store already created: <b>44qqaw-be.myshopify.com</b> — Vitaley requesting collaborator access. Open detail: fulfilment owner at volume (Ryan).</div></div>
+          <div class="decision"><div><strong>Backend and video candidates</strong><p>Which managed account/database and protected-video providers enter a short proof—not a permanent commitment.</p></div><div class="owner">Matt proposes<br>Vitaley accepts</div><span class="badge partial">Part answered</span><div class="answerbox partial"><b>Mostly decided</b> (Samuel's written answers, 24 Aug): <b>no refunds</b> (A3) &middot; cancel anytime, <b>access runs to period end</b> (A4) &middot; <b>paid from first click</b>, no trial or free tier (A2) &middot; monthly billing only. <b>Open:</b> renewal-failure retry count, grace period, account-sharing rule, and a <b>named</b> support human for launch week.</div></div>
+
+          <h2>The first meeting ends with</h2>
+          <div class="truth"><div class="truth-row"><b>Written rules</b><p>One versioned document, not decisions spread across voice notes and direct messages.</p></div><div class="truth-row"><b>Named owner</b><p>Every decision, implementation boundary, successful test, and recovery action has one owner.</p></div><div class="truth-row"><b>Explicit unknowns</b><p>Anything not decided is labeled and blocks only the work it actually affects.</p></div></div>
+        </section>
+
+        <section class="page" id="plan">
+          <div class="page-head"><p class="label">05 · THIRTY-DAY PLAN</p><h1>Three build weeks. One full test week.</h1><p class="deck">Each stage creates something real. The team moves forward only when that stage’s successful test passes.</p></div>
+          <div class="stage"><div class="days">Days 1–2</div><div><h3>Agree the launch rules</h3><p>Freeze payment responsibilities, pricing, cancellation rules, account states, owners, and test examples. Observe real Whop sandbox messages before finalizing Whop-specific fields.</p><div class="gate"><b>Continue when</b>Owners approve the written rules and no commercial decision is hidden inside engineering.</div></div></div>
+          <div class="stage"><div class="days">Days 3–7</div><div><h3>Make payment become viewing access</h3><p>Build real accounts, Whop test checkout, secure payment-message receiving, durable event storage, and one viewing-access record.</p><div class="gate"><b>Continue when</b>One test customer pays; forged messages fail; repeated messages still grant access once; the full journey appears in logs.</div></div></div>
+          <div class="stage"><div class="days">Days 8–14</div><div><h3>Complete the membership lifecycle</h3><p>Add protected playback, cancellation, expiry, refunds, renewal failure, customer notices, a small operator view, and recovery.</p><div class="gate"><b>Continue when</b>Paid, canceled, expired, refunded, and renewal-failed accounts all receive the correct result.</div></div></div>
+          <div class="stage"><div class="days">Days 15–20</div><div><h3>Connect the real frontend</h3><p>Tiardt replaces test examples through the frontend’s authoritative generator inputs—not by manually editing generated files.</p><div class="gate"><b>Continue when</b>Frontend and backend pass the same examples, regeneration creates no unexpected difference, and Tiardt approves what the customer sees.</div></div></div>
+          <div class="stage"><div class="days">Days 21–23</div><div><h3>Harden and freeze</h3><p>Add security limits, alerts, backups, restore rehearsal, load tests, cost limits, release binding, rollback, and the launch-day runbook. Stop adding features.</p><div class="gate"><b>Continue when</b>The release candidate is frozen, critical defects are zero, rollback works, and every alert has an owner.</div></div></div>
+          <div class="stage"><div class="days">Days 24–30</div><div><h3>Test only</h3><p>Run complete journeys, security attacks, growing load, provider failures, recovery drills, device/browser checks, and a launch rehearsal. Fix launch blockers only.</p><div class="gate"><b>Launch when</b>Every Launch Core requirement passes on the exact release candidate. Any open blocker, unknown, or disagreement stops launch.</div></div></div>
+        </section>
+
+        <section class="page" id="testing">
+          <div class="page-head"><p class="label">06 · TESTING AND LAUNCH</p><h1>Prove correctness first. Then increase the pressure.</h1><p class="deck">100,000 active people is the peak goal. It is not the first test, and it does not automatically mean 100,000 backend requests every second.</p></div>
+          <h2>Load test ladder</h2>
+          <div class="table-wrap"><table><thead><tr><th>Stage</th><th>Question</th><th>Successful test</th></tr></thead><tbody>
+            <tr><td>1 customer</td><td>Does the complete path work?</td><td>Account through cancellation passes with one trace.</td></tr>
+            <tr><td>100 active</td><td>Any obvious correctness or connection failures?</td><td>No lost payment messages, duplicate access, or cross-user access.</td></tr>
+            <tr><td>1,000 active</td><td>Do account, database, and provider connections stay healthy?</td><td>Pre-agreed response-time, error, queue, and connection limits hold.</td></tr>
+            <tr><td>10,000 active</td><td>Does the system protect itself during a burst?</td><td>Waiting work is controlled, limits are fair, and recovery needs no data repair.</td></tr>
+            <tr><td>25k → 50k</td><td>Where is the first measured bottleneck?</td><td>Evidence identifies it; one bounded fix improves it without a rewrite.</td></tr>
+            <tr><td>100,000 active</td><td>Does the agreed peak mix meet service and cost targets?</td><td>The exact workload passes twice with margin and approved spend.</td></tr>
+            <tr><td>Long run + failure</td><td>Does it stay healthy and recover?</td><td>No growing memory or waiting-work problem; failures alert and recover within target.</td></tr>
+          </tbody></table></div>
+          <div class="note"><p>Exact response-time, error, recovery, and cost thresholds are written before testing. The team does not redefine “passing” after seeing results. No unapproved traffic is sent to Whop, Shopify, Netlify, or the video provider.</p></div>
+
+          <h2>Final seven days</h2>
+          <div class="test-day"><b>Day 24</b><p>Every customer journey</p><p><strong>Pass:</strong> every account state matches the agreed rules.</p></div>
+          <div class="test-day"><b>Day 25</b><p>Security and permissions</p><p><strong>Pass:</strong> no critical/high issue and no cross-user access.</p></div>
+          <div class="test-day"><b>Day 26</b><p>Growing load</p><p><strong>Pass:</strong> response, error, waiting-work, and cost limits hold.</p></div>
+          <div class="test-day"><b>Day 27</b><p>Provider and database failures</p><p><strong>Pass:</strong> safe degradation, alert, recovery, and no lost money/access event.</p></div>
+          <div class="test-day"><b>Day 28</b><p>Restore and rollback</p><p><strong>Pass:</strong> the team restores data and reverses the exact release within target.</p></div>
+          <div class="test-day"><b>Day 29</b><p>Launch rehearsal</p><p><strong>Pass:</strong> each operator follows the runbook without an undocumented step.</p></div>
+          <div class="test-day"><b>Day 30</b><p>Owner readback</p><p><strong>Pass:</strong> all Launch Core tests pass; Vitaley separately authorizes release and deployment.</p></div>
+
+          <h2>Launch also requires</h2>
+          <div class="table-wrap"><table><tbody><tr><td>Customer</td><td>Receipts, welcome, renewal failure, cancellation, loading, empty, error, captions, and support.</td></tr><tr><td>Commercial</td><td>Prices, taxes, refund rules, privacy, terms, consent, and deletion.</td></tr><tr><td>Security</td><td>Message signatures, replay protection, cross-user isolation, abuse limits, and secret rotation.</td></tr><tr><td>Reliability</td><td>Alerts, backups, restore, recovery targets, cost ceiling, and vendor-limit evidence.</td></tr><tr><td>Release</td><td>Exact commit-to-deployment binding, rollback, operator roster, escalation path, and incident log.</td></tr></tbody></table></div>
+        </section>
+
+        <section class="page" id="engineering">
+          <div class="page-head"><p class="label">07 · OPTIONAL ENGINEERING DETAIL</p><h1>The technical parts behind the four plain-English jobs</h1><p class="deck">This section helps the builders. Vitaley does not need to memorize it to understand the plan.</p></div>
+          <details open><summary>1. Account and login</summary><div class="detail"><div><b>What</b><p>Creates users and secure sessions.</p></div><div><b>Why</b><p>Money and viewing rights need one stable person.</p></div><div><b>Successful test</b><p>A user signs in again later and cannot access another user’s records.</p></div></div></details>
+          <details><summary>2. Market and price decision</summary><div class="detail"><div><b>What</b><p>Selects an approved market, currency, and offer using server rules.</p></div><div><b>Why</b><p>The browser must not choose its own price.</p></div><div><b>Successful test</b><p>Correct offers appear and conflicting evidence follows the written fallback.</p></div></div></details>
+          <details><summary>3. Whop connection</summary><div class="detail"><div><b>What</b><p>Creates or selects the approved membership checkout.</p></div><div><b>Why</b><p>Whop-specific behavior stays in one replaceable place.</p></div><div><b>Successful test</b><p>Browser tampering cannot change the plan or amount.</p></div></div></details>
+          <details><summary>4. Secure payment-message receiver (webhook)</summary><div class="detail"><div><b>What</b><p>Verifies and stores Whop’s signed message.</p></div><div><b>Why</b><p>A checkout success screen is not proof of payment.</p></div><div><b>Successful test</b><p>Valid messages store, forged messages fail, and repeated delivery is safe.</p></div></div></details>
+          <details><summary>5. Payment history and retry worker</summary><div class="detail"><div><b>What</b><p>Records money changes and retries temporary failures.</p></div><div><b>Why</b><p>Every money decision must be explainable and recoverable.</p></div><div><b>Successful test</b><p>A forced outage alerts, waits, and later completes the event once.</p></div></div></details>
+          <details><summary>6. Viewing-access record (entitlement)</summary><div class="detail"><div><b>What</b><p>Records whether the customer may watch and until when.</p></div><div><b>Why</b><p>Payment status and viewing policy are not always identical.</p></div><div><b>Successful test</b><p>Paid, canceled, expired, refunded, and renewal-failed examples match policy.</p></div></div></details>
+          <details><summary>7. Database and access rules</summary><div class="detail"><div><b>What</b><p>Stores users, events, payments, access, and history.</p></div><div><b>Why</b><p>One durable record prevents competing versions of truth.</p></div><div><b>Successful test</b><p>Concurrent events remain consistent and users see only their own records.</p></div></div></details>
+          <details><summary>8. Protected playback</summary><div class="detail"><div><b>What</b><p>Creates a short-lived video link after checking access.</p></div><div><b>Why</b><p>A permanent public URL defeats paid membership.</p></div><div><b>Successful test</b><p>Paid viewing works; logged-out, unpaid, expired, and copied-link paths fail safely.</p></div></div></details>
+          <details><summary>9. Security and monitoring</summary><div class="detail"><div><b>What</b><p>Adds limits, logs, measurements, traces, and alerts.</p></div><div><b>Why</b><p>The team needs to detect abuse and locate failures.</p></div><div><b>Successful test</b><p>One test customer traces end to end and thresholds alert a named operator.</p></div></div></details>
+          <details><summary>10. Operator view and recovery</summary><div class="detail"><div><b>What</b><p>Shows account, payment, and access state with narrow recovery actions.</p></div><div><b>Why</b><p>Support cannot solve launch incidents from raw database tables.</p></div><div><b>Successful test</b><p>An operator explains a denial, safely retries work, and leaves an audit record.</p></div></div></details>
+
+          <h2>Plain-English glossary</h2>
+          <dl class="glossary"><dt>Webhook</dt><dd>Whop sends our backend a signed message saying a payment event occurred.</dd><dt>Idempotency</dt><dd>If Whop sends the same message twice, access changes once.</dd><dt>Entitlement</dt><dd>The database record saying what a customer may watch and until when.</dd><dt>Signed video link</dt><dd>A temporary viewing link that cannot be shared publicly forever.</dd><dt>Queue</dt><dd>A controlled waiting line that protects the backend during a burst.</dd></dl>
+        </section>
+
+        <section class="page" id="ownership">
+          <div class="page-head"><p class="label">08 · OWNERSHIP AND WORKING RULES</p><h1>Who owns each boundary</h1><p class="deck">Clear ownership prevents two systems—or two people—from silently becoming the source of truth.</p></div>
+          <div class="table-wrap"><table><thead><tr><th>Owner</th><th>Responsibility</th><th>Cannot do alone</th></tr></thead><tbody><tr><td>Vitaley</td><td>Product direction, final decisions, merges, release and deployment authorization.</td><td>Commercial decisions owned by Samuel/business owners.</td></tr><tr><td>Matt</td><td>Backend design, accounts, payments, secure messages, viewing access, media authorization, reliability, security, tests, and frontend/backend contract.</td><td>Merge, deploy, production change, or irreversible product choice.</td></tr><tr><td>Tiardt</td><td>Current frontend, generator, Webflow assets, UI integration, and current Netlify deployment.</td><td>Backend-owned paths or durable manual edits to generated output.</td></tr><tr><td>Samuel + owners</td><td>Launch scope, prices, taxes, refunds, content availability, and vendor/account authority.</td><td>Technical implementation without the accepted interface and proof.</td></tr></tbody></table></div>
+          <h2>How work moves</h2>
+          <div class="truth"><div class="truth-row"><b>One outcome</b><p>One issue, one feature branch, and one early draft pull request.</p></div><div class="truth-row"><b>No direct main</b><p>Vitaley separately authorizes merge and deployment. One does not imply the other.</p></div><div class="truth-row"><b>One contract</b><p>Frontend and backend use the same versioned requests, responses, account states, errors, and realistic test examples.</p></div><div class="truth-row"><b>Generated files</b><p>Tiardt changes authoritative generator inputs. Durable manual edits to generated output are rejected.</p></div><div class="truth-row"><b>Durable truth</b><p>Repository, issues, pull requests, decisions, tests, and verified runtime—not giant prompts or direct messages.</p></div></div>
+          <div class="note" style="margin-top:20px"><p><strong>Stop immediately if:</strong> work no longer matches the approved customer journey; generated output is edited directly; two systems claim the same truth; cost or vendor lock-in changes materially; scope grows without a tradeoff; component tests replace the real customer path; or an owner decision is being made implicitly.</p></div>
+        </section>
+
+        <section class="page" id="message">
+          <div class="page-head"><p class="label">09 · COPY-READY TEAM MESSAGE</p><h1>What to send Vitaley and the Onua team</h1><p class="deck">A non-technical explanation of why the payment account matters and what happens next.</p></div>
+          <div class="copy" id="teamCopy">The website already looks like the product, but the paid-membership journey is not real yet.
+
+We need Whop for more than adding a checkout button. We need a test organization so we can prove that a real payment is securely confirmed by our backend, creates the correct viewing access once, handles duplicate payment messages safely, removes access at the correct time after cancellation or refund, and works under our agreed launch traffic.
+
+Our proposed split is: Whop handles digital memberships and subscription events; Shopify handles physical merchandise and fulfilment. That split is not final until Vitaley and the business owners approve it.
+
+Regional pricing also needs one complete policy for every intended market—not only example countries. No system makes location fraud impossible. We will use multiple signals and a written fallback so obvious manipulation is difficult, detectable, and reviewable.
+
+The immediate next step is one 45-minute owner meeting. Vitaley and Samuel decide the Whop/Shopify responsibilities and the pricing, refund, cancellation, and renewal rules. Matt then documents the launch traffic and the successful test for every stage.
+
+After those rules are approved, Matt builds one complete journey: real account → Whop test payment → secure payment confirmation → viewing access → protected video → cancellation and correct expiry. Tiardt connects the frontend after that backend journey is proven. Days 24–30 are reserved for testing only. Launch stops if any Launch Core test is still open.</div>
+          <button class="copy-btn" id="copyButton">Copy team message</button>
+        </section>
+
+        <footer class="footer-note">ONUA WORLD · BACKEND LAUNCH PLAN V6 · REVIEW ARTIFACT ONLY · NO PRODUCT, ACCOUNT, VENDOR, DEPLOYMENT, OR PRODUCTION STATE CHANGED</footer>
+      </article>
+    </main>
+  </div>
+  <script>
+    const buttons=[...document.querySelectorAll('.nav-item')];
+    const pages=[...document.querySelectorAll('.page')];
+    const sidebar=document.getElementById('sidebar');
+    const overlay=document.getElementById('overlay');
+    function showPage(id,updateHash=true){
+      pages.forEach(page=>page.classList.toggle('active',page.id===id));
+      buttons.forEach(button=>button.classList.toggle('active',button.dataset.page===id));
+      sidebar.classList.remove('open');overlay.classList.remove('open');
+      window.scrollTo(0,0);
+      if(updateHash)history.replaceState(null,'','#'+id);
+    }
+    buttons.forEach(button=>button.addEventListener('click',()=>showPage(button.dataset.page)));
+    document.getElementById('menuButton').addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('open')});
+    overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('open')});
+    const initial=location.hash.slice(1);if(pages.some(page=>page.id===initial))showPage(initial,false);
+    document.getElementById('copyButton').addEventListener('click',async event=>{
+      try{await navigator.clipboard.writeText(document.getElementById('teamCopy').innerText);event.currentTarget.textContent='Copied';event.currentTarget.classList.add('copied')}catch(error){event.currentTarget.textContent='Select text to copy'}
+    });
+  </script>
+</body>
+</html>

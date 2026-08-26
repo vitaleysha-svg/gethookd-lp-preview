@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Landing Page Coverage Matrix</title>
+<style>
+  :root{--ink:#0b1a27;--mute:#5f6d7a;--dim:#8a949d;--line:#e2e6ea;--soft:#f7f9fa;--blue:#3352ff;--good:#12905a;--bad:#d0453b;--warn:#a56300;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;-webkit-font-smoothing:antialiased;padding:0 0 90px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  header{padding:54px 0 30px;border-bottom:1px solid var(--line);margin-bottom:34px}
+  .eyebrow{font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:13px}
+  h1{margin:0 0 12px;font-size:clamp(28px,4.2vw,40px);line-height:1.12;letter-spacing:-.03em}
+  .sub{color:var(--mute);font-size:17px;margin:0;max-width:760px}
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin:52px 0 18px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:8px}
+  .card{border:1px solid var(--line);border-radius:16px;padding:24px;background:#fff}
+  .card.win{border-color:var(--blue);box-shadow:0 14px 36px rgba(51,82,255,.12)}
+  .card h3{margin:0 0 4px;font-size:21px;letter-spacing:-.02em}
+  .card .role{color:var(--mute);font-size:13.5px;margin:0 0 16px;min-height:38px}
+  .score{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+  .score b{font:800 17px/1 var(--mono)}
+  .score .of{color:var(--dim);font-size:12px;font-weight:600}
+  .big{font:800 30px/1 var(--mono);letter-spacing:-.02em}
+  .lead{border:1px solid #cfd8ff;border-left:4px solid var(--blue);background:#f6f8ff;border-radius:0 14px 14px 0;padding:24px 28px;margin:0 0 26px;font-size:17.5px;line-height:1.6}
+  .lead b{color:var(--blue)}
+  .warnbox{border:1px solid #f0dcae;border-left:4px solid var(--warn);background:#fdf8ee;border-radius:0 14px 14px 0;padding:22px 26px;margin:0 0 20px}
+  .warnbox .t{font:800 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:9px}
+  .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+  table{border-collapse:collapse;width:100%;min-width:820px;font-size:14.5px}
+  th{background:var(--soft);text-align:left;padding:13px 14px;font:700 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--line)}
+  th.v{text-align:center;width:74px}
+  td{padding:12px 14px;border-bottom:1px solid #eef1f4;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.mono{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap}
+  td.src{font-size:11px}
+  td.y,td.n{text-align:center;font-size:17px;font-weight:800}
+  td.y{color:var(--good)} td.n{color:var(--bad)}
+  tr.grp td{background:#fbfcfd;font:700 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding:14px}
+  tr.gate td{background:#fff8f7}
+  .tag{display:inline-block;margin-left:8px;padding:3px 7px;border-radius:5px;background:#fdecea;color:var(--bad);font:800 9px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;vertical-align:1px}
+  .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+  .links a{padding:10px 16px;border:1px solid var(--line);border-radius:10px;color:var(--ink);font-size:14px;font-weight:750;text-decoration:none}
+  .links a:hover{border-color:var(--blue);color:var(--blue)}
+  p.note{color:var(--mute);font-size:15px;line-height:1.65;max-width:820px}
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;line-height:1.6}
+  @media(max-width:820px){.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">GetHookd &#183; Landing page &#183; Coverage matrix</div>
+  <h1>Three variations, checked against every request</h1>
+  <p class="sub">Every ask Alex made across the 11, 14 and 21 August calls, and every ask Mladen made in the 17 August call and the 19 August review document, checked one by one against the three live pages.</p>
+  <div class="links">
+    <a href="index.html">Open variation A</a>
+    <a href="b.html">Open variation B</a>
+    <a href="c.html">Open variation C</a>
+  </div>
+</header>
+
+<h2>01 &#183; Where each one lands</h2>
+
+<div class="cards">
+  <div class="card">
+    <h3>A &#183; Control</h3>
+    <p class="role">The original build. Familiar, safest, already reviewed by both.</p>
+    <div class="score"><span>Alex</span><span><b>6</b><span class="of"> / 10</span></span></div>
+    <div class="score"><span>Mladen</span><span><b>6</b><span class="of"> / 19</span></span></div>
+    <div class="score"><span>Total</span><span class="big">12</span></div>
+  </div>
+  <div class="card">
+    <h3>B &#183; Mladen&#8217;s rewrite</h3>
+    <p class="role">Built block by block from the 19 August review document.</p>
+    <div class="score"><span>Alex</span><span><b>6</b><span class="of"> / 10</span></span></div>
+    <div class="score"><span>Mladen</span><span><b>17</b><span class="of"> / 19</span></span></div>
+    <div class="score"><span>Total</span><span class="big">23</span></div>
+  </div>
+  <div class="card win">
+    <h3>C &#183; Alex&#8217;s asks</h3>
+    <p class="role">A&#8217;s design, with every outstanding item from Alex&#8217;s calls built in.</p>
+    <div class="score"><span>Alex</span><span><b>10</b><span class="of"> / 10</span></span></div>
+    <div class="score"><span>Mladen</span><span><b>9</b><span class="of"> / 19</span></span></div>
+    <div class="score"><span>Total</span><span class="big">19</span></div>
+  </div>
+</div>
+
+<h2>02 &#183; The one finding that matters</h2>
+
+<div class="lead">
+  <b>No single variation satisfies both of you.</b> C is the only page that clears Alex&#8217;s launch gate, showing both the in-app workflow and the AI-agent workflow. B is the only page that implements Mladen&#8217;s structure, the demonstration block, prompt gallery, Clone Ads block and the objection section. B scores highest overall and still misses the launch gate. C clears the gate and misses most of Mladen&#8217;s additions.
+</div>
+
+<div class="warnbox">
+  <span class="t">One direct conflict, worth settling in one line</span>
+  Alex on 14 August: <em>&#8220;I don&#8217;t give a damn how many ads are there on this library. It&#8217;s not a competitive edge.&#8221;</em> Mladen&#8217;s recommended headline is <em>&#8220;Give Your AI 10 Million Live Meta Ads.&#8221;</em> That is row A4 below, and it is the only place where following one of you means breaking the other. Everything else on this sheet is additive.
+</div>
+
+<div class="warnbox">
+  <span class="t">Also unresolved &#183; the library number</span>
+  Four different figures are in circulation: 21 million (Alex, 11 Aug), 10 million active ads (Mladen, 17 Aug), 13 million (customer call, 5 Aug) and 100,000+ brands (Alex, 21 Aug). All three pages currently commit to one of them somewhere, and B puts it in the largest text on the page. One confirmed number is needed before any of these sees paid traffic.
+</div>
+
+<h2>03 &#183; The full matrix</h2>
+
+<div class="tblwrap">
+<table>
+  <thead><tr><th>#</th><th>Request</th><th>Source</th><th class="v">A</th><th class="v">B</th><th class="v">C</th></tr></thead>
+  <tbody>
+<tr class="grp"><td colspan="6">Alex &#183; from the 11, 14 and 21 August calls</td></tr>
+<tr><td class="mono">A1</td><td>MCP / API explained on the main page with visuals and text</td><td class="mono src">11 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">A3</td><td>Sells the competitive gap, not the library</td><td class="mono src">14 Aug call</td><td class="n">&#10007;</td><td class="n">&#10007;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">A4</td><td>Library size is NOT the headline argument</td><td class="mono src">14 Aug call</td><td class="y">&#10003;</td><td class="n">&#10007;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">A5</td><td>Names the buyer / qualifies on spend</td><td class="mono src">14 Aug call</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">A6</td><td>States the output: three new statics</td><td class="mono src">14 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">A7</td><td>Sells setup speed, about 30 seconds</td><td class="mono src">14 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">A8</td><td>Trust bar reads 100,000+</td><td class="mono src">14 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">A9</td><td>Invented testimonial removed</td><td class="mono src">14 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr class="gate"><td class="mono">A11</td><td>LAUNCH GATE: both workflows shown, app and agent <span class="tag">launch gate</span></td><td class="mono src">21 Aug call</td><td class="n">&#10007;</td><td class="n">&#10007;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">A12</td><td>Subheadline offers manual or AI</td><td class="mono src">21 Aug call</td><td class="n">&#10007;</td><td class="n">&#10007;</td><td class="y">&#10003;</td></tr>
+<tr class="grp"><td colspan="6">Mladen &#183; from the 17 August call and the 19 August review doc</td></tr>
+<tr><td class="mono">M1</td><td>Data freshness above the fold</td><td class="mono src">17 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M3</td><td>Three-step schema: connect, ask, ready</td><td class="mono src">17 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M4</td><td>Moving background removed</td><td class="mono src">17 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M5</td><td>Eyebrow changed off "Ad Engine"</td><td class="mono src">17 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M6</td><td>Output / time multiplier section</td><td class="mono src">17 Aug call</td><td class="n">&#10007;</td><td class="n">&#10007;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M7</td><td>FAQ below pricing, MCP angle</td><td class="mono src">17 Aug call</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M8</td><td>Shows the app exists, not just MCP</td><td class="mono src">17 Aug call</td><td class="n">&#10007;</td><td class="n">&#10007;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M9</td><td>Headline holds one job, not three verbs</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M10</td><td>Word "Profitable" removed from headline</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M11</td><td>Answers "can't ChatGPT do this" above the fold</td><td class="mono src">19 Aug doc</td><td class="y">&#10003;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M12</td><td>Readable prompt-and-answer demo block</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M13</td><td>Prompt gallery</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M14</td><td>Clone Ads gets its own block</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M15</td><td>"Why not just" block before pricing</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M16</td><td>Pricing heading reframed to the gate</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M17</td><td>Volume access line / ceiling above $129</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="y">&#10003;</td></tr>
+<tr><td class="mono">M18</td><td>CTA reads "Connect Your AI"</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M19</td><td>Closing CTA on the position line</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+<tr><td class="mono">M21</td><td>FAQ resequenced, ChatGPT objection first</td><td class="mono src">19 Aug doc</td><td class="n">&#10007;</td><td class="y">&#10003;</td><td class="n">&#10007;</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>04 &#183; What this suggests</h2>
+
+<p class="note"><strong>The launch gate is the deciding vote.</strong> Alex&#8217;s message on 26 August was that once both workflows are visible, the test can launch. Only C does that today. If the goal is to start the test this week, C is the only page that qualifies without further work.</p>
+
+<p class="note"><strong>B is not wasted.</strong> Fourteen of its items are additive rather than conflicting: the demonstration block, the prompt gallery, the Clone Ads section, the objection block, the pricing reframe and the closing line. Every one of those could be folded into C without touching anything Alex asked for. That would produce a page covering roughly 26 of the 29 rows.</p>
+
+<p class="note"><strong>Only one row requires a decision rather than work.</strong> Row A4, whether library size belongs in the headline. Once that is settled, the rest is build time.</p>
+
+<footer>
+  Method: each row is a checked assertion against the rendered HTML of the three live pages, not a judgement call. Sources are the Fathom transcripts of the 11, 14 and 21 August calls with Alex, the 17 August call with Mladen, and the 19 August landing page copy review document. Rows marked as met are present on the page; rows marked as missed are absent. Numbers attributed to either party are reported and not independently verified. Audited 26 August 2026.
+</footer>
+
+</div>
+</body>
+</html>

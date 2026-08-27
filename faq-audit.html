@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAQ Audit</title>
+<style>
+  :root{--ink:#0b1a27;--mute:#5f6d7a;--dim:#8a949d;--line:#e2e6ea;--soft:#f7f9fa;--blue:#3352ff;--good:#12905a;--bad:#d0453b;--warn:#a56300;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;-webkit-font-smoothing:antialiased;padding:0 0 90px}
+  .wrap{max-width:1020px;margin:0 auto;padding:0 28px}
+  header{padding:54px 0 30px;border-bottom:1px solid var(--line);margin-bottom:34px}
+  .eyebrow{font:700 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:13px}
+  h1{margin:0 0 12px;font-size:clamp(28px,4.2vw,40px);line-height:1.12;letter-spacing:-.03em}
+  .sub{color:var(--mute);font-size:17px;margin:0;max-width:780px}
+  h2{font-size:12px;font-family:var(--mono);letter-spacing:.15em;text-transform:uppercase;color:var(--dim);margin:52px 0 18px;padding-bottom:9px;border-bottom:1px solid var(--line)}
+  .lead{border:1px solid #cfd8ff;border-left:4px solid var(--blue);background:#f6f8ff;border-radius:0 14px 14px 0;padding:24px 28px;margin:0 0 26px;font-size:17.5px;line-height:1.6}
+  .lead b{color:var(--blue)}
+  .warnbox{border:1px solid #f0dcae;border-left:4px solid var(--warn);background:#fdf8ee;border-radius:0 14px 14px 0;padding:22px 26px;margin:0 0 20px}
+  .warnbox.bad{border-color:#f2c9c5;border-left-color:var(--bad);background:#fdf4f3}
+  .warnbox .t{font:800 10px/1 var(--mono);letter-spacing:.13em;text-transform:uppercase;color:var(--warn);display:block;margin-bottom:9px}
+  .warnbox.bad .t{color:var(--bad)}
+  .tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-bottom:20px}
+  table{border-collapse:collapse;width:100%;min-width:760px;font-size:14.5px}
+  th{background:var(--soft);text-align:left;padding:13px 14px;font:700 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--line)}
+  th.n{text-align:right;width:90px}
+  td{padding:12px 14px;border-bottom:1px solid #eef1f4;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right;font-family:var(--mono);font-weight:800}
+  td.hi{color:var(--bad)} td.ok{color:var(--good)}
+  .pill{display:inline-block;padding:3px 8px;border-radius:6px;font:800 9.5px/1.5 var(--mono);letter-spacing:.06em;text-transform:uppercase}
+  .p-keep{background:#e7f6ee;color:var(--good)}
+  .p-add{background:#e9edff;color:var(--blue)}
+  .p-flag{background:#fdecea;color:var(--bad)}
+  .q{border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:14px;background:#fff}
+  .q h3{margin:0 0 6px;font-size:19px;letter-spacing:-.02em}
+  .q .ev{color:var(--dim);font:700 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+  .q .ans{margin:0;color:var(--mute);font-size:15.5px;line-height:1.62}
+  .q .ans b{color:var(--ink)}
+  .quote{margin:14px 0 0;padding:13px 16px;border-left:3px solid var(--line);background:var(--soft);border-radius:0 8px 8px 0;color:var(--mute);font-size:13.5px;line-height:1.55}
+  p.note{color:var(--mute);font-size:15.5px;line-height:1.65;max-width:830px}
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:13px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">GetHookd &#183; Variation C &#183; FAQ audit</div>
+  <h1>Are the FAQs actually built from the calls?</h1>
+  <p class="sub">Alex asked whether the FAQ is grounded in real call transcripts and what should be added. Answer: six of the ten are grounded, one has no support at all, and the four most common objections customers actually raise are missing.</p>
+</header>
+
+<h2>01 &#183; Method</h2>
+
+<p class="note">Every objection, blocker and gap recorded across <strong>52 logged customer calls, 29 May to 24 August</strong>, was pulled from the call log and counted by theme. Each of C&#8217;s ten FAQ questions was then matched against that frequency data. The counts below are mentions across the corpus, not calls, so one call can contribute several.</p>
+
+<h2>02 &#183; What customers actually raise, ranked</h2>
+
+<div class="tblwrap">
+<table>
+  <thead><tr><th>Theme</th><th class="n">Mentions</th><th>On the FAQ today?</th></tr></thead>
+  <tbody>
+    <tr><td>Connecting the AI agent, setup, technical difficulty</td><td class="num ok">180</td><td><span class="pill p-keep">Covered, 3 questions</span></td></tr>
+    <tr><td><strong>Which plan do I need, and what is gated</strong></td><td class="num hi">154</td><td><span class="pill p-flag">Not covered</span></td></tr>
+    <tr><td>Is my niche in there, coverage</td><td class="num ok">76</td><td><span class="pill p-keep">Covered</span></td></tr>
+    <tr><td><strong>The Chrome extension as the coverage fix</strong></td><td class="num hi">55</td><td><span class="pill p-flag">Not mentioned anywhere</span></td></tr>
+    <tr><td><strong>Country and geography coverage</strong></td><td class="num hi">36</td><td><span class="pill p-flag">Not covered</span></td></tr>
+    <tr><td>Data accuracy, trusting the numbers</td><td class="num ok">34</td><td><span class="pill p-keep">Covered, 2 questions</span></td></tr>
+    <tr><td><strong>What do credits cost</strong></td><td class="num hi">31</td><td><span class="pill p-flag">Not covered</span></td></tr>
+    <tr><td>Did not know the feature existed</td><td class="num ok">23</td><td><span class="pill p-keep">Partly covered</span></td></tr>
+    <tr><td>Comparison to Foreplay, AdSpy, TrendTrack</td><td class="num ok">14</td><td><span class="pill p-keep">Covered</span></td></tr>
+    <tr><td>Billing, cancelling, being charged</td><td class="num ok">12</td><td><span class="pill p-keep">Covered</span></td></tr>
+    <tr><td><strong>Is this Meta only, what about TikTok</strong></td><td class="num">5</td><td><span class="pill p-flag">Not covered</span></td></tr>
+    <tr><td>&#8220;Why pay when Meta&#8217;s ad library is free&#8221;</td><td class="num hi">0</td><td><span class="pill p-flag">It is question one</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="warnbox bad">
+  <span class="t">The headline result</span>
+  The first question on the FAQ, <strong>&#8220;Why pay for this when Meta&#8217;s ad library is free?&#8221;</strong>, appears <strong>zero times</strong> across 52 calls. Meanwhile plan gating, the single most common thing customers get stuck on at 154 mentions, has no question at all. The page leads with an objection nobody has raised and omits the one everybody raises.
+</div>
+
+<div class="warnbox">
+  <span class="t">One honest caveat before anyone cuts that question</span>
+  The call log records <em>customers</em>, people who already paid and booked onboarding. They would never raise &#8220;why pay when the library is free&#8221;, because they already answered it by buying. This corpus is strong evidence for what confuses buyers <em>after</em> purchase and weak evidence for what stops them <em>before</em> it. So the recommendation is to <strong>demote that question, not delete it</strong>. Mladen&#8217;s review reached the same conclusion independently and moved it to position five.
+</div>
+
+<h2>03 &#183; Four questions to add, in frequency order</h2>
+
+<div class="q">
+  <h3>Which plan do I actually need?</h3>
+  <div class="ev">154 mentions &#183; the most common blocker in the corpus</div>
+  <p class="ans">Everything in the library, the filters, boards and Brand Spy works on every plan. <b>Clone Ads starts on Pro. Connecting your AI agent starts on Team.</b> If the AI connection is the reason you are here, start on Team, because Starter and Pro cannot do it.</p>
+  <div class="quote">Gijs, 1 Jul: &#8220;MCP is Team-plan-only ($79); he&#8217;s on Pro ($49) and thinks Pro is already a little expensive. The one feature mapping to his goal is gated behind an upgrade he is resistant to.&#8221; Same pattern logged for Anmol, Tommy Siu and Gustav Paal.</div>
+</div>
+
+<div class="q">
+  <h3>What if my niche or my competitor is not in there?</h3>
+  <div class="ev">55 mentions for the extension, 36 for country coverage</div>
+  <p class="ans">Install the free Chrome extension, open Facebook&#8217;s Ad Library, and save any ad. That brand and its ads get pulled into GetHookd and become searchable. <b>This is the standard fix and it is what we do on onboarding calls.</b> Coverage is thinnest in smaller countries and in service or info niches, so if that is you, the extension is the route.</p>
+  <div class="quote">Nellie blocked on South Africa. Cubbage could not find his niche or his competitor. Damon Lye, 26 Aug, blocked on Singapore with the extension given as the workaround. Ruben and Quinten Gish both hit thin service and info coverage.</div>
+</div>
+
+<div class="q">
+  <h3>What do credits cost, and what uses them?</h3>
+  <div class="ev">31 mentions &#183; no price list exists anywhere in the product</div>
+  <p class="ans">Needs the real figures before publishing. From the call log: <b>Clone Ads is 2 credits per variation and Brand Spy is 2 credits per brand.</b> Everything else needs confirming with the dev team.</p>
+  <div class="quote">Tommy Siu: &#8220;no per-feature credit price list anywhere.&#8221; Jake at TrueMed: &#8220;credit costs unclear for MCP calls.&#8221; Reshma Patel: &#8220;per-action credit costs not surfaced.&#8221; Christian T&#246;rnsten: credit-cost sensitivity on Brand Spy.</div>
+</div>
+
+<div class="q">
+  <h3>Is this Meta only?</h3>
+  <div class="ev">5 mentions &#183; low frequency, but it is a first-minute confusion</div>
+  <p class="ans">Yes. Facebook and Instagram ads today. <b>TikTok is not in the library.</b></p>
+  <div class="quote">Beth thought the platform was &#8220;mainly TikTok&#8221;, could not find Meta, filtered channels and still saw TikTok URLs. Kyle Kerr flagged that the filters lack TikTok versus what he had read online.</div>
+</div>
+
+<h2>04 &#183; What the existing ten get right</h2>
+
+<p class="note">Six of the ten map cleanly onto real, frequent objections and should not change: coverage in my niche, needing to be technical, what can I ask it, how do I know the numbers are real, will I still get charged, and how this differs from Foreplay and AdSpy. The three questions covering AI setup are correctly weighted, since that is the top theme in the corpus by a wide margin.</p>
+
+<p class="note">&#8220;How current is the data&#8221; and &#8220;I am just starting out&#8221; are both weaker on frequency but earn their place for other reasons. The first is the data-trust theme, which shows up as accuracy complaints rather than as a question. The second qualifies the buyer, which is what Alex asked for on 14 August.</p>
+
+<h2>05 &#183; Recommended order</h2>
+
+<p class="note">Ranked by how often the objection actually appears, with the one prospect-side question kept but demoted:</p>
+
+<div class="tblwrap">
+<table>
+  <thead><tr><th class="n">#</th><th>Question</th><th>Change</th></tr></thead>
+  <tbody>
+    <tr><td class="num">1</td><td>Do I need to be technical to connect my AI agent?</td><td>Move up. Top theme, 180 mentions.</td></tr>
+    <tr><td class="num">2</td><td>Which plan do I actually need?</td><td><span class="pill p-add">New</span></td></tr>
+    <tr><td class="num">3</td><td>Do you actually have ads in my niche?</td><td>Keep.</td></tr>
+    <tr><td class="num">4</td><td>What if my niche or competitor is not in there?</td><td><span class="pill p-add">New</span></td></tr>
+    <tr><td class="num">5</td><td>What can I actually ask it?</td><td>Keep.</td></tr>
+    <tr><td class="num">6</td><td>How do I know the numbers are real?</td><td>Keep.</td></tr>
+    <tr><td class="num">7</td><td>How current is the data?</td><td>Keep.</td></tr>
+    <tr><td class="num">8</td><td>What do credits cost, and what uses them?</td><td><span class="pill p-add">New</span></td></tr>
+    <tr><td class="num">9</td><td>Is this Meta only?</td><td><span class="pill p-add">New</span></td></tr>
+    <tr><td class="num">10</td><td>Why pay when Meta&#8217;s ad library is free?</td><td>Demote from 1. No support in the corpus.</td></tr>
+    <tr><td class="num">11</td><td>How is this different from Foreplay, AdSpy or TrendTrack?</td><td>Keep.</td></tr>
+    <tr><td class="num">12</td><td>Can I use it without an AI agent?</td><td>Keep.</td></tr>
+    <tr><td class="num">13</td><td>I am just starting out. Is this useful for me?</td><td>Keep. Qualifies the buyer.</td></tr>
+    <tr><td class="num">14</td><td>If I cancel, will I still get charged?</td><td>Keep, always last.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="warnbox">
+  <span class="t">Two things need a real answer before this publishes</span>
+  The <strong>credit price list</strong>, which does not exist anywhere in the product today, and the <strong>refund policy</strong> after a renewal has processed. The second one is what three of your one-star Trustpilot reviews are about, so getting it right matters more than the wording.
+</div>
+
+<footer>
+  Source: gethookd-customer-call-log.csv, 52 calls between 29 May and 24 August 2026, fields covering onboarding friction, feature gaps, concerns and deal-breakers, and retention risk. Theme counts are regex matches across that corpus and are indicative rather than exact. Quotes are from the log entries, condensed from the original analysis. Credit costs and refund terms are unconfirmed and marked as such. Audited 27 August 2026.
+</footer>
+
+</div>
+</body>
+</html>

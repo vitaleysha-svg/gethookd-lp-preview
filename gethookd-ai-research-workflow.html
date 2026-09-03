@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The GetHookd AI Research Workflow</title>
+<style>
+  :root{
+    --bg:#0d0f14; --panel:#151922; --panel2:#1b2130; --ink:#e8ecf4; --muted:#9aa6bd;
+    --line:#252c3b; --accent:#5b8cff; --accent2:#31d0aa; --warn:#ffb84d; --code:#0a0c11;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:48px 22px 80px}
+  header{border-bottom:1px solid var(--line);padding-bottom:28px;margin-bottom:36px}
+  .kicker{color:var(--accent2);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:12px}
+  h1{font-size:34px;line-height:1.15;margin:12px 0 10px;letter-spacing:-.5px}
+  .sub{color:var(--muted);font-size:18px;margin:0}
+  h2{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:44px 0 14px}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px 24px 20px;margin:18px 0}
+  .step-h{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .num{color:var(--accent);font-weight:800;font-size:14px;letter-spacing:.1em}
+  .step-t{font-size:22px;font-weight:700;margin:0}
+  .job{color:var(--muted);margin:2px 0 16px}
+  .lbl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);font-weight:700;margin:18px 0 8px}
+  pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:0;
+    white-space:pre-wrap;color:#dfe6f5;font:14px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-x:auto}
+  ul{margin:10px 0 0;padding-left:20px}
+  li{margin:7px 0}
+  li b{color:#fff}
+  .decide{background:var(--panel2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
+    padding:12px 16px;margin:16px 0 0;color:#cfd8ec;font-size:15px}
+  .decide b{color:var(--accent2)}
+  .run ol{padding-left:22px} .run li{margin:9px 0}
+  .warn{background:rgba(255,184,77,.07);border:1px solid rgba(255,184,77,.28);border-radius:12px;padding:18px 22px}
+  .warn li b{color:var(--warn)}
+  .prompts .p{margin:0 0 14px}
+  .close{color:var(--muted);border-top:1px solid var(--line);margin-top:44px;padding-top:24px}
+  .sig{color:var(--ink);font-weight:600}
+  .pill{display:inline-block;background:var(--panel2);border:1px solid var(--line);border-radius:999px;
+    padding:3px 12px;font-size:12px;color:var(--muted);margin-right:8px}
+  a{color:var(--accent)}
+  @media (max-width:520px){h1{font-size:27px}.step-t{font-size:19px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">GetHookd · AI Research Workflow</div>
+    <h1>Blank chat to a launch-ready ad, in one sitting.</h1>
+    <p class="sub">You connected your AI agent. Here is exactly what to do with it. Three steps, the prompt for each, and how to read what comes back. About 10 to 15 minutes end to end.</p>
+    <p style="margin-top:14px"><span class="pill">Find</span><span class="pill">Decode</span><span class="pill">Clone</span></p>
+  </header>
+
+  <p>Connecting GetHookd to your AI agent is the easy part. The reason most people connect it and then stall is that they type random questions, get a mediocre answer, and decide the AI thing is overrated. It isn't. They just never ran it in the right order.</p>
+  <p>This is the order. Same three steps, every session.</p>
+
+  <h2>Before you start</h2>
+  <p>Have GetHookd connected to your AI agent (Claude or ChatGPT) and know the one thing you need going in: <b>your niche, or your product</b>. That's it. Swap the bracketed parts in each prompt for yours.</p>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-h"><span class="num">STEP 1</span><h3 class="step-t">Find the winners worth your time</h3></div>
+    <p class="job">Surface the ads that have already proven themselves. Run time is the whole game: an ad that has been live for months is paying for itself, or it would have been switched off.</p>
+    <div class="lbl">Paste this</div>
+    <pre>Using GetHookd, pull the top winning image ads in [your niche], running 45+ days, sorted by longest run time. For the top 5, give me the brand, how many days it has been live, the hook, and the one angle I should steal. Longest-running first.</pre>
+    <div class="lbl">How to read what comes back</div>
+    <ul>
+      <li><b>Run time is your #1 filter.</b> Something live 300+ days is a proven money-maker. Ignore the flashy new ones, they haven't earned it yet.</li>
+      <li><b>Hunt for the repeated angle.</b> If the same message shows up across three or four winners, that's not a coincidence, it's the market telling you what it buys.</li>
+      <li><b>Throw out the noise:</b> page-like ads, generic marketplace/dropship reposts, anything under 45 days.</li>
+    </ul>
+    <div class="decide"><b>Your decision:</b> pick the ONE angle that shows up most and fits your product. You now know what the market already responds to.</div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-h"><span class="num">STEP 2</span><h3 class="step-t">Decode why the leader keeps winning</h3></div>
+    <p class="job">One winning ad is luck you can't read. The pattern behind a brand running dozens of them is a playbook you can. Go deep on the #1 brand from Step 1.</p>
+    <div class="lbl">Paste this</div>
+    <pre>Take the #1 brand from that list and break down everything they're running in GetHookd: how many active ads, the angles they repeat most, their single longest-running ad, and the structure of that winning ad (the hook, the body, the offer, the call to action). I want the pattern behind why they win, not just one creative.</pre>
+    <div class="lbl">How to read what comes back</div>
+    <ul>
+      <li><b>Active ad count = confidence.</b> Brands multiply what works. A brand running 40 versions isn't lazy, it's telling you the concept converts.</li>
+      <li><b>The angle they repeat most</b> is the proven message. <b>Their longest-runner</b> is the proven creative. You want both.</li>
+      <li><b>Map the skeleton:</b> the hook (what stops the scroll), the agitation and proof (why you should care), the offer (what makes it a yes), the CTA. That skeleton is the part you keep.</li>
+    </ul>
+    <div class="decide"><b>Your decision:</b> you now hold the proven angle AND the proven structure. You are no longer guessing what a good ad looks like in your niche.</div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-h"><span class="num">STEP 3</span><h3 class="step-t">Clone it around your own product</h3></div>
+    <p class="job">This is not copying. You are applying a proven structure to your product, your brand, your offer. The idea is borrowed, everything the customer sees is yours.</p>
+    <div class="lbl">Paste this</div>
+    <pre>Take the longest-running winner and rebuild it around my product with Clone Ads. My product is [product + the one main benefit]. Keep the proven hook structure and offer framing, swap in my product, and give me launch-ready ad copy plus 2 hook variations to test.</pre>
+    <div class="lbl">How to use what comes back</div>
+    <ul>
+      <li><b>Keep the structure, change the specifics.</b> Same skeleton, your product, your proof, your offer. If you rewrite the structure you've thrown away the only thing that was proven.</li>
+      <li><b>The 2 hook variations are your first test.</b> Same body, two different opening lines. Let the market pick the winner instead of you guessing.</li>
+      <li><b>Compliance pass.</b> In a policed niche (health, finance, supplements) keep claims clean, lead with the outcome, put the specifics on the page, not in the ad.</li>
+    </ul>
+    <div class="decide"><b>Your decision:</b> you have launch-ready copy and a first test, built on something that already works. Ship it.</div>
+  </div>
+
+  <!-- THE RUN -->
+  <h2>The one-sitting run</h2>
+  <div class="step run">
+    <ol>
+      <li><b>Step 1 prompt</b> → pick the angle that repeats.</li>
+      <li><b>Step 2 prompt</b> → pull the leader's structure.</li>
+      <li><b>Step 3 prompt</b> → get the copy plus 2 hooks.</li>
+      <li><b>Drop it into your ad account</b> and launch the test.</li>
+    </ol>
+    <p style="margin:6px 0 0;color:var(--muted)">Ten to fifteen minutes, and you did it without opening a single tab of the dashboard. That's the difference between "I connected the AI" and "the AI runs my research for me."</p>
+  </div>
+
+  <!-- MISTAKES -->
+  <h2>The four ways people get this wrong</h2>
+  <div class="warn">
+    <ul>
+      <li><b>Chasing new over proven.</b> The shiny ad from last week hasn't survived anything. Run time is the truth serum.</li>
+      <li><b>Copying the product, not the structure.</b> You don't want their product, you want the reason people buy it.</li>
+      <li><b>Skipping Step 2.</b> Cloning one random creative without decoding the pattern is how you copy a brand that's quietly dying.</li>
+      <li><b>Testing ten things at once.</b> Two hooks, same body. One clean variable. Anything more and you learn nothing.</li>
+    </ul>
+  </div>
+
+  <!-- BONUS PROMPTS -->
+  <h2>Bonus: 5 prompts to keep on hand</h2>
+  <div class="step prompts">
+    <div class="p"><div class="lbl">Scan a niche fast</div><pre>Using GetHookd, show me the top 10 longest-running winning image ads in [niche] with the hook and the angle for each.</pre></div>
+    <div class="p"><div class="lbl">Spy one competitor</div><pre>Break down [brand] in GetHookd: every active angle they're testing, their longest-running ad, and what they've stopped running.</pre></div>
+    <div class="p"><div class="lbl">Steal the hooks</div><pre>Give me the opening line of the 10 longest-running winners in [niche], side by side, and tell me the pattern.</pre></div>
+    <div class="p"><div class="lbl">Find the growing stores</div><pre>In [niche], which stores are growing (traffic climbing), how many products they carry, and what they're advertising most.</pre></div>
+    <div class="p"><div class="lbl">Turn a winner into copy</div><pre>Rebuild the longest-running [niche] winner around my product [product], keep the structure, give me 3 hook options.</pre></div>
+  </div>
+
+  <div class="close">
+    <p>Run it once. The click everyone talks about happens on the first pass, not the tenth. If you get stuck anywhere, just reply and tell me where.</p>
+    <p class="sig">Vitaliy</p>
+  </div>
+</div>
+</body>
+</html>

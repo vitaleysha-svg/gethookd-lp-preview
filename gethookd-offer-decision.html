@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<style>@media(max-width:640px){.p{padding:24px 16px 60px!important}h1{font-size:25px!important}table{font-size:12px!important}.cols{grid-template-columns:1fr!important}.cards{grid-template-columns:1fr 1fr!important}}img{max-width:100%}</style>
+<style>@media(max-width:640px){.p{padding:24px 16px 60px!important}h1{font-size:25px!important}table{font-size:12px!important}.cols{grid-template-columns:1fr!important}.cards{grid-template-columns:1fr 1fr!important}.tg{width:100%}.tg button{flex:1;padding:9px 10px}}img{max-width:100%}</style>
 <title>The Offer Decision</title><style>
 body{margin:0;background:#202225;color:#c7cdd4;font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6}
 .p{max-width:1000px;margin:0 auto;padding:44px 24px 90px}
@@ -40,6 +40,22 @@ ol,ul{padding-left:22px}li{margin-top:6px}
 .tag{display:inline-block;font-family:Menlo,monospace;font-size:10px;letter-spacing:.1em;padding:3px 8px;border-radius:3px;background:#0f3a24;color:#2ea871;margin-bottom:8px}
 .tag.gold{background:#3d3200;color:#d29922}
 a{color:#7da2f5}
+.tg{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 4px;padding:6px;background:#1c1e21;border:1px solid #3d4148;border-radius:10px;width:fit-content}
+.tg button{font:inherit;font-size:13.5px;font-weight:600;color:#9aa2ab;background:transparent;border:0;padding:9px 18px;border-radius:7px;cursor:pointer;transition:background .15s,color .15s}
+.tg button:hover{color:#e8eaed}
+.tg button[aria-pressed="true"]{background:#2b2e33;color:#e8eaed;box-shadow:inset 0 0 0 1px #4a505a}
+.tg button:focus-visible{outline:2px solid #7da2f5;outline-offset:2px}
+.pv{margin-top:14px}
+.pv[hidden]{display:none}
+.mock{background:#101214;border:1px solid #3d4148;border-radius:10px;padding:26px 30px}
+.mock .lbl{font-family:Menlo,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7d848c;margin-bottom:14px}
+.mock h4{font-family:Georgia,serif;font-size:22px;color:#fff;margin:0 0 4px}
+.mock ul{margin:12px 0}
+.mock li{font-size:14px}
+.btnm{display:inline-block;background:#2ea871;color:#06210f;font-weight:700;padding:12px 24px;border-radius:7px;margin-top:10px;font-size:15px}
+.btnm.gold{background:#d9a520;color:#241a02}
+.decline{display:block;margin-top:10px;font-size:12.5px;color:#7d848c}
+@media print{.tg{display:none}.pv[hidden]{display:block!important}.pv{page-break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -49,6 +65,79 @@ a{color:#7da2f5}
 <h1>Two versions of the same offer. Both are no-brainers, to two different people.</h1>
 <p>We built a $97 package that answers Alex's question from the Sep 2-3 memo. Then Matt read it, said it could be ten times better, and pointed us at what Iman Gadzhi is running right now. We tore that down. This page holds both versions and the recommendation, so nobody has to read two documents to make one decision.</p>
 <p class="small">Full detail if you want it: <a href="https://vitaleysha-svg.github.io/gethookd-lp-preview/gethookd-97-package.html">the $97 package in full</a> &middot; <a href="https://vitaleysha-svg.github.io/gethookd-lp-preview/gethookd-iman-teardown.html">the Iman teardown</a></p>
+
+
+<div class="tg" role="group" aria-label="Choose which version to preview">
+  <button type="button" data-pv="both" aria-pressed="true">Both, side by side</button>
+  <button type="button" data-pv="p15" aria-pressed="false">The $15 version</button>
+  <button type="button" data-pv="p97" aria-pressed="false">The $97 version</button>
+</div>
+<p class="small" style="margin-top:6px">This is what the customer sees on the thank-you page, ninety seconds after they pay. Flip between them.</p>
+
+<div class="pv" id="pv-both">
+<div class="cols">
+  <div class="col"><div class="tag">MOST WILL TAKE THIS</div>
+    <h4>Everything, right now</h4>
+    <p><span class="strike">$97</span> <span class="pricebig">$15</span></p>
+    <ul class="small"><li>The twelve prompts we actually use</li><li>The filter recipe that cuts 11M ads to a few dozen</li><li>The AI agent unlocked 14 days, any plan</li><li>Your top 3 competitors torn down</li><li>200 credits and a plan for spending them</li><li>Scripts and landing page structure</li></ul>
+    <p class="small"><b>No call. Nothing to schedule.</b> It is all in your account the second you pay.</p>
+    <a class="btnm" href="#">Yes, unlock it for $15</a></div>
+  <div class="col gold"><div class="tag gold">IF YOU WANT A HUMAN</div>
+    <h4>Everything, plus 60 minutes with us</h4>
+    <p><span class="pricebig">$97</span></p>
+    <ul class="small"><li>Everything in the $15, unlocked immediately</li><li>60 minutes one to one, niche opened and filters run live</li><li>We connect the AI agent for you, on the call</li><li>Three validated products found for you, with the proof</li><li>Your real packaging loaded so clones show your box</li><li>Three weeks on Mark's live call</li></ul>
+    <p class="small">15 seats a week. Vitaley runs these himself.</p>
+    <a class="btnm gold" href="#">Book my 60 minutes for $97</a></div>
+</div>
+<p class="small">Same guarantee on both: do the three things and if no winner is live at day 14, next month is free. Below: <span class="q">"No thanks, I'll explore on my own."</span></p>
+</div>
+
+<div class="pv" id="pv-p15" hidden>
+<div class="mock">
+  <div class="lbl">Thank-you page &middot; the $15 version &middot; one column, no choice to make</div>
+  <h4>Everything you need to actually use this, unlocked right now.</h4>
+  <p><span class="strike">$97</span> <span class="pricebig">$15</span> <span class="small">today only, card already on file</span></p>
+  <ul>
+    <li><b>The twelve prompts we actually use.</b> Product discovery, competitor teardown, angles, hooks, scripts.</li>
+    <li><b>The filter recipe.</b> One card. Takes eleven million ads down to the few dozen genuinely working right now.</li>
+    <li><b>The AI agent unlocked for 14 days</b>, whatever plan you are on.</li>
+    <li><b>Your top three competitors, torn apart.</b> Format split, ads over time, landing pages, top hooks.</li>
+    <li><b>200 credits and a plan for spending them</b>, so you do not ration them into uselessness or burn them in a weekend.</li>
+    <li><b>Scripts and landing page structure</b> from the winners you pick.</li>
+  </ul>
+  <p><b>No call. Nothing to book. Nothing to wait for.</b> Click and it is all in your account.</p>
+  <p class="small"><b>The guarantee:</b> connect the agent and clone one ad with your own product. Do that and if you do not have a winner live at day 14, your next month of GetHookd is free.</p>
+  <a class="btnm" href="#">Yes, unlock it for $15</a>
+  <span class="decline">No thanks, I'll explore on my own</span>
+</div>
+<p class="small" style="margin-top:10px"><b>Costs us roughly $4 per buyer.</b> No calendar, no ceiling. Wins on volume and on activation. Weakest for the 25% who have no product yet, because it hands assets to someone who already failed to use assets.</p>
+</div>
+
+<div class="pv" id="pv-p97" hidden>
+<div class="mock">
+  <div class="lbl">Thank-you page &middot; the $97 version &middot; what we built first</div>
+  <h4>One hour from now, a winning ad with your product already in it.</h4>
+  <p><span class="pricebig">$97</span> <span class="small">one click, card already on file</span></p>
+  <ul>
+    <li><b>60 minutes on a call with me.</b> Not a demo. We open your niche, run the filters live, and you leave with the ads you are modelling this week.</li>
+    <li><b>I connect the AI agent to your account on the call</b> and we watch it pull real winners before we hang up. Yours for 14 days on any plan.</li>
+    <li><b>The twelve prompts we actually use.</b></li>
+    <li><b>The filter recipe</b> that cuts eleven million ads to a few dozen.</li>
+    <li><b>No product yet? Three of them</b>, validated, with the proof.</li>
+    <li><b>Your real packaging loaded in</b>, so clones show your box and not an AI guess.</li>
+    <li><b>Your top three competitors already pulled apart</b> before you get on the call.</li>
+    <li><b>200 credits and a plan for spending them.</b></li>
+    <li><b>Scripts and landing page structure</b> from the winners you pick.</li>
+    <li><b>Three weeks on Mark's live call.</b></li>
+  </ul>
+  <p>Priced separately that is <b>$3,079</b>. You pay $97.</p>
+  <p class="small"><b>The guarantee:</b> show up, connect the agent, clone one ad with your own product. Do those three and if you do not have a winner live at day 14, your next month is free.</p>
+  <p class="small">15 seats a week, grouped into Monday cohorts. Vitaley runs these himself.</p>
+  <a class="btnm gold" href="#">Book my 60 minutes for $97</a>
+  <span class="decline">No thanks, I'll explore on my own</span>
+</div>
+<p class="small" style="margin-top:10px"><b>Costs us an hour of Vitaley per buyer.</b> Strongest offer for the stuck beginner, and the guarantee is better than anything Iman runs. But it is a second real purchase ninety seconds after the first, it needs a calendar, and it caps at fifteen a week. This is the version Matt stopped reading at item four.</p>
+</div>
 
 <h2>1. The split that actually matters</h2>
 <div class="k g"><b>A no-brainer for one person is a chore for another.</b> Some buyers want the value in their hands the second they pay. Booking a call, waiting for it, showing up at a set time, that is friction, and for them it makes the offer worse no matter how good the call is. Other buyers are stuck, know they are stuck, and a human hour is the single most valuable thing you could hand them.<br><br>We have been arguing about which of those to build. The answer is that they are two different buyers and we already know both of them are in our signup flow.</div>
@@ -136,6 +225,18 @@ a{color:#7da2f5}
 
 <div class="src">Sources: live pull of <code>event.monetise.com/lp-1-o</code> and <code>/vip/vip0-ftk2</code> on 2026-09-03. Our side: the $97 package doc, the 68-call log (all counts computed across all 68 rows), the audited 30-day gross subscription churn of 26.787%, and reported unit economics from Jul-2026. Take rates in &sect;5 are labelled assumptions. Matt's feedback relayed by Vitaley: "not horrible, could be 10 times better, too many offers, lost me after the fourth."</div>
 </div>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.tg button');
+  var panes={both:document.getElementById('pv-both'),p15:document.getElementById('pv-p15'),p97:document.getElementById('pv-p97')};
+  function show(key){
+    for(var k in panes){ panes[k].hidden = (k!==key); }
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.pv===key)); });
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ show(b.dataset.pv); }); });
+})();
+</script>
 
 </body>
 </html>

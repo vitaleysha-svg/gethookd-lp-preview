@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<style>@media(max-width:640px){.p{padding:24px 16px 60px!important}h1{font-size:24px!important}table{font-size:11.5px!important}.cols{grid-template-columns:1fr!important}.cards{grid-template-columns:1fr 1fr!important}}img{max-width:100%}</style>
+<title>Dunning: What The Data Says</title><style>
+body{margin:0;background:#202225;color:#c7cdd4;font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6}
+.p{max-width:1010px;margin:0 auto;padding:44px 24px 90px}
+h1{color:#e8eaed;font-family:Georgia,serif;font-size:32px;margin:8px 0 0;line-height:1.2}
+.eb{font-family:Menlo,monospace;font-size:11.5px;letter-spacing:.16em;color:#7da2f5}
+h2{color:#e8eaed;font-family:Georgia,serif;font-size:21px;margin:40px 0 8px;border-bottom:1px solid #3d4148;padding-bottom:8px}
+h3{color:#e8eaed;font-size:16px;margin:20px 0 4px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+th{text-align:left;font-family:Menlo,monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#9aa2ab;padding:8px 9px;border-bottom:1px solid #3d4148}
+td{padding:9px 9px;border-bottom:1px solid #2f3339;vertical-align:top}
+td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+b{color:#e8eaed}
+.k{background:#2b2e33;border-left:4px solid #7da2f5;padding:16px 20px;border-radius:4px;margin-top:14px}
+.r{border-left-color:#e5534b}.g{border-left-color:#2ea871}.y{border-left-color:#d29922}
+.ch{display:inline-block;font-family:Menlo,monospace;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:4px}
+.v{background:#0f3a24;color:#2ea871}.rp{background:#3d3200;color:#d29922}.u{background:#2a2f3a;color:#9aa2ab}.rd{background:#3d1f1d;color:#e5534b}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.c{background:#2b2e33;border:1px solid #3d4148;border-radius:8px;padding:14px}
+.c .vv{font-size:23px;font-weight:700;color:#e8eaed;font-variant-numeric:tabular-nums}
+.c .l{font-size:12.5px;color:#9aa2ab;margin-top:4px}
+.src{font-size:12.5px;color:#9aa2ab;margin-top:36px;border-top:1px solid #3d4148;padding-top:14px}
+ol,ul{padding-left:22px}li{margin-top:6px}
+.q{color:#9aa2ab;font-style:italic}
+.small{font-size:12.5px;color:#9aa2ab}
+.wrap{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.col{background:#1c1e21;border:1px solid #3d4148;border-radius:8px;padding:16px 18px}
+.col.gold{border-color:#8a6d1f;background:#231f14}
+.col h4{margin:0 0 8px;color:#e8eaed;font-size:15px}
+.mail{background:#101214;border:1px solid #3d4148;border-radius:8px;padding:18px 20px;margin-top:10px;font-size:14px}
+.mail .subj{font-family:Menlo,monospace;font-size:12px;color:#7da2f5;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid #2f3339}
+.cta{display:inline-block;background:#2ea871;color:#06210f;font-weight:700;padding:9px 18px;border-radius:6px;margin:8px 0;font-size:13.5px}
+.bad{color:#e5534b}.good{color:#2ea871}
+</style>
+</head>
+<body>
+<div class="p">
+
+<div class="eb">GETHOOKD · DUNNING · WHAT THE DATA SAYS + THE A/B TEST · 2026-09-04</div>
+<h1>Your dunning emails recover almost nothing. Four things are misconfigured, and only one of them is worth A/B testing.</h1>
+<p>Pulled live from the Churnkey API, Mar 1 to Sep 4 2026, both delinquency blueprints: aggregate recoveries, per-email engagement, full blueprint config, and the decline-reason breakdown. <span class="ch v">verified, API</span> Nothing below is from the dashboard screenshot.</p>
+
+<div class="cards">
+<div class="c"><div class="vv">44,275</div><div class="l">dunning emails sent</div></div>
+<div class="c"><div class="vv">67</div><div class="l">recoveries the emails are credited with</div></div>
+<div class="c"><div class="vv">1 in 660</div><div class="l">emails sent per recovery</div></div>
+<div class="c"><div class="vv">2.7%</div><div class="l">of all recoveries came from email</div></div>
+<div class="c"><div class="vv">97.3%</div><div class="l">came from Stripe's automatic retries</div></div>
+<div class="c"><div class="vv">$559,586</div><div class="l">lost to failed payments in 6 months</div></div>
+</div>
+
+<h2>1. The number that reframes the whole exercise</h2>
+<div class="k r"><b>Of 2,515 recoveries in six months, 67 are attributed to the email sequence.</b> The other 2,448 happened because Stripe retried the card and it worked. We sent 44,275 emails to earn 67 recoveries, which is one per 660 sends.<br><br>This matters for how you test. If you A/B test and measure <b>total recovery rate</b>, you will measure Stripe's retry engine with a rounding error of email on top, and every test will come back flat. The email can only be judged on the metric the email controls, which is the click.</div>
+
+<h2>2. Opens are fine. Clicks are the failure.</h2>
+<p>37.1% of 44,275 emails were opened. 1.01% were clicked. Deliverability is healthy, the subject lines work, and then the body loses them.</p>
+<div class="wrap"><table><thead><tr><th>Blueprint</th><th class="n">Sent</th><th class="n">Open</th><th class="n">Click</th><th class="n">Recoveries credited</th></tr></thead><tbody>
+<tr><td><b>Paid</b> (days 0/3/7/15/28)</td><td class="n">10,777</td><td class="n">42.5%</td><td class="n">1.32%</td><td class="n">26</td></tr>
+<tr><td><b>Trial Users</b> (days 0/2/5/7/28)</td><td class="n">33,498</td><td class="n">35.4%</td><td class="n">0.91%</td><td class="n">41</td></tr>
+<tr><td><b>Combined</b></td><td class="n">44,275</td><td class="n">37.1%</td><td class="n">1.01%</td><td class="n">67</td></tr>
+</tbody></table></div>
+<p>Roughly 16,400 people opened a dunning email in six months and 15,990 of them did nothing. That is the whole opportunity, and it is a copy and offer problem, not a technical one.</p>
+
+<h2>2. The misconfiguration. Fix this, do not test it.</h2>
+<p>Per-email, with the <code>hasOffers</code> flag straight from the blueprint config:</p>
+<div class="wrap"><table><thead><tr><th>#</th><th class="n">Day</th><th class="n">Sent</th><th class="n">Open</th><th class="n">Click</th><th class="n">Share of clicks</th><th class="n">Recoveries</th><th>Offer attached?</th></tr></thead><tbody>
+<tr><td colspan="8"><b>PAID</b></td></tr>
+<tr><td>1</td><td class="n">0</td><td class="n">4,403</td><td class="n">46.4%</td><td class="n">1.91%</td><td class="n">59%</td><td class="n">16</td><td><span class="ch rd">NO</span></td></tr>
+<tr><td>2</td><td class="n">3</td><td class="n">3,197</td><td class="n">44.1%</td><td class="n">1.00%</td><td class="n">23%</td><td class="n">8</td><td><span class="ch rd">NO</span></td></tr>
+<tr><td>3</td><td class="n">7</td><td class="n">1,967</td><td class="n">38.6%</td><td class="n">0.92%</td><td class="n">13%</td><td class="n">0</td><td><span class="ch v">yes</span></td></tr>
+<tr><td>4</td><td class="n">15</td><td class="n">759</td><td class="n">31.5%</td><td class="n">0.79%</td><td class="n">4%</td><td class="n">1</td><td><span class="ch v">yes</span></td></tr>
+<tr><td>5</td><td class="n">28</td><td class="n">451</td><td class="n">28.8%</td><td class="n">0.44%</td><td class="n">1%</td><td class="n">1</td><td><span class="ch v">yes</span></td></tr>
+<tr><td colspan="8"><b>TRIAL</b></td></tr>
+<tr><td>1</td><td class="n">0</td><td class="n">10,762</td><td class="n">39.1%</td><td class="n">1.72%</td><td class="n">61%</td><td class="n">34</td><td><span class="ch rd">NO</span></td></tr>
+<tr><td>2</td><td class="n">2</td><td class="n">8,240</td><td class="n">36.4%</td><td class="n">0.66%</td><td class="n">18%</td><td class="n">3</td><td><span class="ch rd">NO</span></td></tr>
+<tr><td>3</td><td class="n">5</td><td class="n">6,894</td><td class="n">33.9%</td><td class="n">0.61%</td><td class="n">14%</td><td class="n">3</td><td><span class="ch v">yes</span></td></tr>
+<tr><td>4</td><td class="n">7</td><td class="n">5,775</td><td class="n">30.6%</td><td class="n">0.40%</td><td class="n">8%</td><td class="n">1</td><td><span class="ch v">yes</span></td></tr>
+<tr><td>5</td><td class="n">28</td><td class="n">1,827</td><td class="n">29.6%</td><td class="n">0.05%</td><td class="n">0%</td><td class="n">0</td><td><span class="ch v">yes</span></td></tr>
+</tbody></table></div>
+<div class="k r"><b>The offer is attached only to emails 3, 4 and 5.</b> Those three carry <b>21% of all clicks and 9% of all recoveries</b>. Emails 1 and 2, which carry <b>79% of clicks and 91% of recoveries</b>, have no offer on them at all.<br><br>We have been running a save offer exclusively on the three emails nobody clicks. This is not a hypothesis to test over six weeks, it is a wiring error to correct. The board task <code>dunningorder</code> says move the offer to email 2. The data says go further: <b>email 1 is where 60% of every click in the sequence happens.</b></div>
+
+<h2>3. Half of all failures are "no money in the account", and we are asking the wrong thing</h2>
+<div class="wrap"><table><thead><tr><th>Decline reason</th><th class="n">Recovered / total</th><th class="n">Rate</th><th class="n">Share of all failures</th><th class="n">Attempted</th></tr></thead><tbody>
+<tr><td><b>insufficient_funds</b></td><td class="n">1,708 / 5,775</td><td class="n">29.6%</td><td class="n"><b>52.5%</b></td><td class="n">$347,470</td></tr>
+<tr><td>transaction_not_allowed</td><td class="n">143 / 1,057</td><td class="n">13.5%</td><td class="n">9.6%</td><td class="n">$76,945</td></tr>
+<tr><td>rule</td><td class="n">63 / 704</td><td class="n">8.9%</td><td class="n">6.4%</td><td class="n">$51,127</td></tr>
+<tr><td>do_not_honor</td><td class="n">194 / 648</td><td class="n">29.9%</td><td class="n">5.9%</td><td class="n">$53,872</td></tr>
+<tr><td>try_again_later</td><td class="n">95 / 575</td><td class="n">16.5%</td><td class="n">5.2%</td><td class="n">$38,969</td></tr>
+<tr><td>previously_declined_do_not_retry</td><td class="n">9 / 362</td><td class="n">2.5%</td><td class="n">3.3%</td><td class="n">$28,514</td></tr>
+<tr><td>highest_risk_level</td><td class="n">27 / 357</td><td class="n">7.6%</td><td class="n">3.2%</td><td class="n">$27,790</td></tr>
+<tr><td>card_velocity_exceeded</td><td class="n">75 / 321</td><td class="n">23.4%</td><td class="n">2.9%</td><td class="n">$27,368</td></tr>
+<tr><td>incorrect_number</td><td class="n">34 / 257</td><td class="n">13.2%</td><td class="n">2.3%</td><td class="n">$14,620</td></tr>
+<tr><td>invalid_account</td><td class="n">9 / 155</td><td class="n">5.8%</td><td class="n">1.4%</td><td class="n">$12,118</td></tr>
+<tr><td>blocklist</td><td class="n">3 / 130</td><td class="n">2.3%</td><td class="n">1.2%</td><td class="n">$7,334</td></tr>
+</tbody></table></div>
+<div class="k y"><b>insufficient_funds is 52.5% of every failed payment and $347,470 of attempted charges.</b> Their card is not broken. Their account is empty. Every email in both sequences opens by asking them to <span class="q">"update the card on file"</span>, which is advice for a problem they do not have. Meanwhile genuine card-data failures (wrong number, expired, lost, stolen, invalid account) are only about <b>5.3%</b> of the total.<br><br>So the primary ask is aimed at one twentieth of the audience, and the half of the audience that is simply short on cash this week gets no path at all. <b>That is what the offer is for, and that is why it belongs on email 1.</b></div>
+
+<h2>4. The trial blueprint is where the money actually leaks</h2>
+<div class="wrap"><table><thead><tr><th>Blueprint</th><th class="n">Failures</th><th class="n">Recovered</th><th class="n">Rate</th><th class="n">Recovered $</th><th class="n">Lost</th><th class="n">Lost $</th></tr></thead><tbody>
+<tr><td>Paid</td><td class="n">3,161</td><td class="n">1,498</td><td class="n"><span class="good">47.4%</span></td><td class="n">$52,321</td><td class="n">1,563</td><td class="n">$54,884</td></tr>
+<tr><td>Trial Users</td><td class="n">7,832</td><td class="n">1,017</td><td class="n"><span class="bad">13.0%</span></td><td class="n">$40,554</td><td class="n">6,532</td><td class="n"><span class="bad">$504,702</span></td></tr>
+<tr><td><b>Total</b></td><td class="n"><b>10,993</b></td><td class="n"><b>2,515</b></td><td class="n"><b>22.9%</b></td><td class="n"><b>$92,875</b></td><td class="n"><b>8,095</b></td><td class="n"><b>$559,586</b></td></tr>
+</tbody></table></div>
+<p><b>6,532 trials failed their first charge and never recovered.</b> That is roughly 1,090 a month of people who wanted to become customers and whose payment did not go through. The paid blueprint recovers 47.4%; the trial one recovers 13.0%. Same emails, three and a half times worse.</p>
+<div class="k"><b>Why this is also the right place to run the test.</b> The trial blueprint sends about 1,790 first emails a month against the paid blueprint's 730. Any A/B test on paid volume alone would take most of a year to read. See &sect;6.</div>
+
+<h2>5. Ten SMS steps are configured on these two blueprints and every one is switched off</h2>
+<p>Both blueprints carry a full five-step SMS sequence with a magic-link body already written, all <code>enabled: false</code>. With email clicking at 1.01%, an untried channel that lands on a phone with a one-tap link is the most obvious unexplored lever in the account. It is not part of the A/B test and should not be bundled into it, but it belongs on the list.</p>
+<p class="small">Constraint on file from Mladen (call 2026-09-02): Churnkey smart retries were tried and <b>hurt</b> us, 10 to 15 attempts over 8 weeks dropped our issuer ratings. So retry count stays where it is. SMS is a different mechanism and does not touch that.</p>
+
+<h2>6. The A/B test, designed honestly</h2>
+<p>What we can and cannot detect at real volumes, at 80% power and 95% confidence, testing email 1's click rate:</p>
+<div class="wrap"><table><thead><tr><th>Arm baseline</th><th>Relative lift to detect</th><th class="n">Needed per arm</th><th class="n">Time to read</th></tr></thead><tbody>
+<tr><td>Trial email 1, 1.72%</td><td>+30% (to 2.2%)</td><td class="n">11,285</td><td class="n"><span class="bad">12.6 months</span></td></tr>
+<tr><td>Trial email 1, 1.72%</td><td>+50% (to 2.6%)</td><td class="n">4,408</td><td class="n"><span class="bad">4.9 months</span></td></tr>
+<tr><td>Trial email 1, 1.72%</td><td><b>+100% (to 3.4%)</b></td><td class="n"><b>1,317</b></td><td class="n"><span class="good"><b>1.5 months</b></span></td></tr>
+<tr><td>Paid email 1, 1.91%</td><td>+50%</td><td class="n">3,965</td><td class="n"><span class="bad">10.9 months</span></td></tr>
+<tr><td>Paid email 1, 1.91%</td><td>+100%</td><td class="n">1,184</td><td class="n">3.2 months</td></tr>
+</tbody></table></div>
+<div class="k g"><b>Two conclusions fall straight out of that table.</b><br><br>
+<b>One: run it on the trial blueprint.</b> It has 2.4 times the volume, the worse recovery rate, and the bigger dollar leak. A test on paid volume cannot be read inside a quarter.<br><br>
+<b>Two: the variant has to be a big swing, not a polish.</b> Anything under a 50% relative lift is undetectable in a useful timeframe. So we are not testing a subject line or a button colour. We are testing a different email with a different ask, and if it only nudges things we will correctly conclude it was not worth shipping.</div>
+<h3>The test</h3>
+<table><tbody>
+<tr><td><b>Where</b></td><td>Trial Users blueprint, email 1 (day 0) only. Everything downstream held constant.</td></tr>
+<tr><td><b>Primary metric</b></td><td><b>Click rate on email 1.</b> Not total recovery rate, because 97.3% of recovery is Stripe's retry engine and would drown the signal.</td></tr>
+<tr><td><b>Secondary</b></td><td>Email-attributed recoveries, offer take-up, and reply volume. Guardrails: unsubscribes, spam complaints, bounce rate.</td></tr>
+<tr><td><b>Split</b></td><td>50/50. Churnkey's native A/B feature covers <b>cancel flows only</b> and <code>list_ab_tests</code> returns empty, so this needs a cloned blueprint plus an audience filter to split traffic. <span class="ch rp">to confirm with Churnkey support</span></td></tr>
+<tr><td><b>Duration</b></td><td>Six weeks minimum, and stop at a pre-committed date rather than when it first looks good.</td></tr>
+<tr><td><b>Hypothesis</b></td><td>Naming the real decline reason and offering a smaller amount, rather than asking everyone to update a card that works, at least doubles click rate on email 1.</td></tr>
+</tbody></table>
+
+<h2>7. The two emails</h2>
+<div class="cols">
+<div class="col"><h4>CONTROL, live today</h4>
+<div class="mail"><div class="subj">Payment 💳 failure for Gethookd.ai.</div>
+Hey {{FIRST_NAME|there}} &mdash;<br><br>
+Just letting you know that we're having trouble completing your most recent payment.<br><br>
+👇 Mind updating the {{CARD_BRAND}} card on file ({{LAST_4}})? We'd hate for you to lose out on your subscription!<br>
+<span class="cta">Update Your Card Now</span></div>
+<p class="small"><b>What is wrong with it:</b> "just letting you know" carries no stakes. "Mind updating" is a favour, not an instruction. "We'd hate for you to lose out" is about us. It never says what they lose or when. And the single ask, update your card, is the wrong instruction for the 52.5% whose card is fine and whose balance is not.</p></div>
+
+<div class="col gold"><h4>VARIANT, to test</h4>
+<div class="mail"><div class="subj">Your GetHookd payment didn't go through</div>
+{{FIRST_NAME|Hey}} &mdash;<br><br>
+Your card came back <b>insufficient funds</b>, so the charge didn't land. Nothing's wrong with the card itself.<br><br>
+Your account stays live for <b>28 days</b>, then it closes and your saved ads, boards and Brand Spy history go with it.<br><br>
+Two ways to sort it in about ten seconds:<br><br>
+<b>1. Short this week?</b> Take 50% off your next two months and we'll run it now at the lower amount.<br>
+<span class="cta">Charge me the lower amount</span><br>
+<b>2. Card's fine, just retry it.</b><br>
+<span class="cta" style="background:#2b2e33;color:#c7cdd4">Retry my card</span><br><br>
+Either one takes one tap, no login.<br><br>
+Reply to this and it comes to me directly.<br><br>
+Vitaley<br>Head of Customer Success, GetHookd
+</div>
+<p class="small"><b>What changed and why:</b> the real decline reason instead of a vague apology; a concrete loss with a date attached; the discount as the <i>primary</i> path because half the list is short on cash, not broken on card; two named options instead of one wrong one; a real human on the reply line; and the offer moved onto the email that gets 61% of the clicks.</p></div>
+</div>
+<p class="small"><b>Merge-field note:</b> the variant reads best when the decline reason is dynamic. If Churnkey cannot merge <code>failReason</code> into the body, the fallback is two audience-filtered variants, one for insufficient_funds and one for card-data failures, which is stronger anyway. <span class="ch rp">to confirm with Churnkey support</span></p>
+
+<h2>8. Fix these four before the test, not after</h2>
+<table><thead><tr><th>#</th><th>Move</th><th>Why it is not a test</th><th>Owner</th></tr></thead><tbody>
+<tr><td>1</td><td><b>Put the offer on email 1 and email 2.</b> It currently sits only on 3, 4 and 5.</td><td>Running a save offer exclusively on the emails that generate 9% of recoveries is a wiring error. Correct it.</td><td>Vitaley, <b>Alex signs off the offer</b></td></tr>
+<tr><td>2</td><td><b>Split the sequence by decline reason.</b> insufficient_funds gets the amount-reduction path; card-data failures get the update-card path.</td><td>52.5% versus 5.3%. One ask cannot serve both, and we already know which is which at send time.</td><td>Vitaley in Churnkey</td></tr>
+<tr><td>3</td><td><b>Turn on at least the day-0 SMS.</b> Body is already written on both blueprints.</td><td>Ten configured steps sitting at <code>enabled: false</code> while email clicks at 1%. Nothing to learn from leaving it off.</td><td>Vitaley, Alex to approve sending</td></tr>
+<tr><td>4</td><td><b>Cut emails 4 and 5, or repurpose them.</b> Together: 8 clicks and 2 recoveries in six months from 3,037 sends.</td><td>They are a deliverability tax on the domain for no return. If they stay, they should carry the strongest offer, not the weakest.</td><td>Vitaley, check against Troy's rules first</td></tr>
+</tbody></table>
+<div class="k y"><b>Why the order matters.</b> If we A/B test the current email 1 against a variant while the offer is still misconfigured, we spend six weeks measuring a version of the sequence we already know is wrong, and whatever we learn will be relitigated the moment fixes 1 and 2 ship. Fix the wiring, let it settle for a fortnight, then test copy against a correctly wired baseline.</div>
+
+<h2>9. One disagreement to surface, not blend</h2>
+<div class="k r"><span class="ch rd">split_truth</span> <b>The Churnkey dashboard reports 38.2% recovery. The API's own numbers give 22.9%</b> (2,515 recovered of 10,993 failures, Mar 1 to Sep 4). Excluding in-flight campaigns still only gets to 23.7%. The dashboard also reports 2,510 subscriptions recovered against the API's 2,515, so the underlying rows agree and the <i>denominator</i> does not.<br><br>I do not know which definition Churnkey's headline uses and I am not going to guess. Before any of these numbers go to Alex or Mladen, this needs one question to Churnkey support: what exactly is the denominator on the Overall Performance recovery percentage. Everything else in this document is computed from the raw rows and is not affected either way.</div>
+
+<div class="src">
+Source: Churnkey API, pulled 2026-09-04. <code>aggregate_payment_recoveries</code> (grouped by blueprint, by decline reason), <code>get_recovery_engagement</code> on both blueprints, <code>get_recovery_blueprint</code> for the full config and the <code>hasOffers</code> flags, <code>list_ab_tests</code> (empty). Window Mar 1 to Sep 4 2026. Warehouse refresh is roughly 20 minutes, so the last few recoveries may be missing. Blueprint ids: paid <code>69399ebd46c6cec8386020be</code>, trial <code>693acef77a4e40f272ad0a7e</code>. Retry-count constraint from Mladen, call of 2026-09-02.
+</div>
+</div>
+
+</body>
+</html>

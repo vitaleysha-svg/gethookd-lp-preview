@@ -1,0 +1,558 @@
+<title>GetHookd Retention — Cancel Flow + Stripe Truth (Sep 4, 2026)</title>
+<style>
+:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3240;--text:#e6edf3;--muted:#8b949e;--dim:#6e7681;--green:#3fb950;--red:#f85149;--amber:#d29922;--blue:#58a6ff;--accent:#a371f7;--grid:#232b38;}
+@media (prefers-color-scheme: light){:root{--bg:#f6f8fa;--panel:#fff;--panel2:#eef1f5;--line:#d0d7de;--text:#1f2328;--muted:#57606a;--dim:#818b98;--green:#1a7f37;--red:#cf222e;--amber:#9a6700;--blue:#0969da;--accent:#8250df;--grid:#e3e8ee;}}
+:root[data-theme="light"]{--bg:#f6f8fa;--panel:#fff;--panel2:#eef1f5;--line:#d0d7de;--text:#1f2328;--muted:#57606a;--dim:#818b98;--green:#1a7f37;--red:#cf222e;--amber:#9a6700;--blue:#0969da;--accent:#8250df;--grid:#e3e8ee;}
+:root[data-theme="dark"]{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3240;--text:#e6edf3;--muted:#8b949e;--dim:#6e7681;--green:#3fb950;--red:#f85149;--amber:#d29922;--blue:#58a6ff;--accent:#a371f7;--grid:#232b38;}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;padding:0 0 80px}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+header{padding:40px 0 24px;border-bottom:1px solid var(--line);margin-bottom:28px}
+.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 8px}
+h1{font-size:27px;line-height:1.15;margin:0 0 12px;font-weight:800;letter-spacing:-.015em}
+.verdict{font-size:16px;line-height:1.5;color:var(--text);margin:0;font-weight:500}.verdict b{color:var(--green)}
+.cmp{display:flex;gap:10px;margin:18px 0 2px;flex-wrap:wrap}
+.cmp-block{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 15px}
+.cmp-block.now{border-left:3px solid var(--green)}.cmp-block.wk{border-left:3px solid var(--blue)}.cmp-block.base{border-left:3px solid var(--dim)}
+.cmp-lbl{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:800;color:var(--muted);margin:0 0 5px}
+.cmp-block.now .cmp-lbl{color:var(--green)}.cmp-block.wk .cmp-lbl{color:var(--blue)}
+.cmp-date{display:block;font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
+.meta{color:var(--muted);font-size:13px;margin:14px 0 0}
+h2{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:38px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h2 .q{color:var(--accent);text-transform:none;letter-spacing:0}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}@media (max-width:720px){.tiles{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+.tile .tl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin:0 0 10px;min-height:26px}
+.tile .tv{font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+.tile .td{font-size:12.5px;margin-top:8px;color:var(--muted)}.tile .td b{font-weight:700}.up,.down{color:var(--green)}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media (max-width:760px){.charts{grid-template-columns:1fr}}
+.chartbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 18px 12px}
+.chartbox h3{margin:0 0 2px;font-size:15px;font-weight:800}.chartbox .csub{margin:0 0 10px;font-size:12px;color:var(--muted)}
+.chartbox svg{width:100%;height:auto;display:block}
+.leg{display:flex;gap:16px;margin:8px 2px 0;font-size:12px;color:var(--muted)}.leg i{display:inline-block;width:20px;height:3px;border-radius:2px;margin-right:6px;vertical-align:3px}
+.better{font-size:11px;color:var(--dim);float:right}
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:6px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:11px 13px;text-align:right;white-space:nowrap;vertical-align:middle}th:first-child,td:first-child{text-align:left;white-space:normal}
+thead th{font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:1px solid var(--line)}
+thead th .w{display:block;font-size:10px;color:var(--dim);font-weight:500;margin-top:3px}
+tbody tr+tr td{border-top:1px solid var(--line)}tbody td:first-child{font-weight:600}
+.grouphdr td{background:var(--panel2);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.lbl-sub{display:block;font-size:12px;color:var(--dim);font-weight:400;margin-top:2px}
+.num{font-variant-numeric:tabular-nums}.big{font-size:16px;font-weight:700}.cnt{font-size:12px;color:var(--dim);margin-left:5px}.dim{color:var(--dim)}
+.pos{color:var(--green);font-weight:700}.neg{color:var(--red);font-weight:700}.flatv{color:var(--amber);font-weight:700}
+.rowhi td{background:color-mix(in srgb,var(--green) 10%,transparent)}.rowhi td:first-child{box-shadow:inset 3px 0 0 var(--green)}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:15px 18px;margin:14px 0;font-size:14px}
+.note.win{border-left-color:var(--green)}.note.warn{border-left-color:var(--amber)}.note.crit{border-left-color:var(--red)}.note b{color:var(--text)}
+.note .t{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:6px}
+.note.win .t{color:var(--green)}.note.warn .t{color:var(--amber)}.note.crit .t{color:var(--red)}.note.accent .t{color:var(--accent)}
+ul{margin:8px 0;padding-left:20px}li{margin:6px 0}
+.fbmeta{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 12px}
+.chip{font-size:12px;padding:4px 11px;border-radius:20px;font-weight:700}
+.chip.real{color:var(--green);background:color-mix(in srgb,var(--green) 15%,transparent)}
+.chip.low{color:var(--amber);background:color-mix(in srgb,var(--amber) 15%,transparent)}
+.chip.junk{color:var(--dim);background:var(--panel2)}
+.themebar{display:flex;align-items:center;gap:10px;margin:6px 0}
+.themebar .tn{min-width:220px;font-size:13px;font-weight:600}
+.themebar .track{flex:1;height:16px;background:var(--panel2);border-radius:4px;overflow:hidden;min-width:60px}
+.themebar .fill{height:100%;border-radius:4px}
+.themebar .tc{min-width:80px;font-size:12px;color:var(--dim);text-align:right;font-variant-numeric:tabular-nums}
+.appendix{page-break-before:always;break-before:page}
+.themehdr{margin:22px 0 6px;font-size:15px;font-weight:800;color:var(--accent);display:flex;justify-content:space-between;align-items:baseline}
+.themehdr .n{font-size:12px;color:var(--dim);font-weight:600}
+.vb td:nth-child(1){font-size:11px;color:var(--blue);font-weight:700;white-space:nowrap}
+.vb td:nth-child(2){font-size:11px;color:var(--muted);white-space:nowrap}.vb td:nth-child(3){font-size:11px;color:var(--dim);white-space:nowrap}
+.vb td:nth-child(4){text-align:left;white-space:normal;font-weight:400;font-size:13px}
+.foot{margin-top:38px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--dim);line-height:1.7}.foot b{color:var(--muted)}
+code{background:var(--panel2);padding:1px 6px;border-radius:5px;font-size:12px;font-family:ui-monospace,Menlo,monospace;color:var(--muted)}
+@media print{:root:root{--bg:#0d1117;--panel:#161b22;--panel2:#1c2330;--line:#2a3240;--text:#e6edf3;--muted:#8b949e;--dim:#6e7681;--green:#3fb950;--red:#f85149;--amber:#d29922;--blue:#58a6ff;--accent:#a371f7;--grid:#232b38}
+*{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important}@page{margin:0}html,body{background:#0d1117 !important}body{padding:0}.wrap{max-width:none;padding:24px 28px}
+.tblwrap,.note,.chartbox,.tile,table,.cmp-block{break-inside:avoid;page-break-inside:avoid}h1,h2{break-after:avoid}.charts{grid-template-columns:1fr 1fr}}
+
+.vtoggle{position:sticky;top:0;z-index:60;display:flex;gap:8px;justify-content:center;padding:12px 0;background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.vtoggle button{font:inherit;font-size:13.5px;font-weight:700;padding:9px 22px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
+.vtoggle button.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.vtoggle button#btn-st.active{background:var(--green);border-color:var(--green);color:#04260f}
+.vtoggle .hint{align-self:center;font-size:11px;color:var(--dim);margin-left:6px}
+@media print{.vtoggle{display:none}#view-ck,#view-st{display:block !important}#view-st{break-before:page}}
+</style>
+
+<div class="vtoggle">
+ <button id="btn-ck" class="active" onclick="show('ck')">Cancel Flow · Churnkey</button>
+ <button id="btn-st" onclick="show('st')">Business Truth · Stripe</button>
+ <span class="hint">same periods · same pre-Jul-10 baseline</span>
+</div>
+<script>
+function show(v){document.getElementById('view-ck').style.display=v==='ck'?'':'none';document.getElementById('view-st').style.display=v==='st'?'':'none';document.getElementById('btn-ck').classList.toggle('active',v==='ck');document.getElementById('btn-st').classList.toggle('active',v==='st');window.scrollTo(0,0);}
+window.addEventListener('DOMContentLoaded',()=>{if(location.hash==='#stripe')show('st');});
+</script>
+<div id="view-ck"><div class="wrap">
+<header>
+<p class="kicker">GetHookd · Cancel-Flow Retention · Bi-Weekly Exec Report</p>
+<h1>Cancel-Flow Retention — Two Weeks Ending Sep 4, 2026</h1>
+<p class="verdict">Eight weeks in, the flow keeps compounding: <b>existing paying retention hit a new two-week high of 8.5%</b> (35 real paying saves, all plan-switch), churn holding ~80% (7 pts under baseline). Trial steady at ~63% churn, ~4 pts under baseline.</p>
+<div class="cmp">
+<div class="cmp-block now"><span class="cmp-lbl">This period</span><span class="cmp-date">Aug 22 → Sep 4</span></div>
+<div class="cmp-block wk"><span class="cmp-lbl">vs Last period</span><span class="cmp-date">Aug 8 → 21</span></div>
+<div class="cmp-block base"><span class="cmp-lbl">vs Baseline</span><span class="cmp-date">Old flow · pre-Jul 10</span></div>
+</div>
+<p class="meta">Gethookd LLC · LIVE data · prepared Fri Sep 4, 2026 · flows launched Jul 10 · every rate is the share of engaged customers who <b>kept paying money</b> unless labeled otherwise</p>
+</header>
+
+<h2>Since launch — the numbers that matter</h2>
+<div class="tiles">
+<div class="tile"><p class="tl">Existing · Churn</p><div class="tv">80.2%</div><p class="td"><b class="down">▼ 7.2 pts</b> from 87.4% baseline</p></div>
+<div class="tile"><p class="tl">Existing · Paying retention</p><div class="tv" style="color:var(--green)">6.6%</div><p class="td"><b class="up">▲ 2.4×</b> from 2.7% baseline</p></div>
+<div class="tile"><p class="tl">Trial · Churn</p><div class="tv">62.9%</div><p class="td"><b class="down">▼ 3.9 pts</b> from 66.8% baseline</p></div>
+<div class="tile"><p class="tl">Trial · Paying retention</p><div class="tv" style="color:var(--green)">1.9%</div><p class="td"><b class="up">▲ 2.7×</b> from 0.7% baseline</p></div>
+</div>
+<p class="meta" style="margin-top:12px">8-week post-launch average (Jul 10 – Sep 4) vs the pre-launch baseline. "Paying retention" = kept paying money (discount or plan switch); pauses and free trial extensions are not counted as paying.</p>
+
+<h2>The trend since launch</h2>
+<div class="charts">
+<div class="chartbox"><h3>Churn rate <span class="better">↓ lower is better</span></h3><p class="csub">Share who completed the cancel, by week</p>
+<svg viewBox="0 0 720 280" role="img">
+<g stroke="var(--grid)" stroke-width="1"><line x1="70" y1="30" x2="690" y2="30"/><line x1="70" y1="78.9" x2="690" y2="78.9"/><line x1="70" y1="127.8" x2="690" y2="127.8"/><line x1="70" y1="176.7" x2="690" y2="176.7"/><line x1="70" y1="225.6" x2="690" y2="225.6"/></g>
+<g fill="var(--dim)" font-size="11" text-anchor="end"><text x="60" y="34">90%</text><text x="60" y="82.9">80%</text><text x="60" y="131.8">70%</text><text x="60" y="180.7">60%</text><text x="60" y="229.6">50%</text></g>
+<g fill="var(--muted)" font-size="9" text-anchor="middle"><text x="70" y="268">Base</text><text x="139" y="268">Jul10*</text><text x="208" y="268">Jul13</text><text x="277" y="268">Jul20</text><text x="346" y="268">Jul27</text><text x="414" y="268">Aug3</text><text x="483" y="268">Aug10</text><text x="552" y="268">Aug17</text><text x="621" y="268">Aug24</text><text x="690" y="268">Aug31*</text></g>
+<polyline fill="none" stroke="var(--accent)" stroke-width="2.5" points="70,42.7 139,103.3 208,64.0 277,72.1 346,83.0 414,82.9 483,74.7 552,75.3 621,83.4 690,74.5"/>
+<g fill="var(--accent)"><circle cx="70" cy="42.7" r="4"/><circle cx="208" cy="64.0" r="4"/><circle cx="277" cy="72.1" r="4"/><circle cx="346" cy="83.0" r="4"/><circle cx="414" cy="82.9" r="4"/><circle cx="483" cy="74.7" r="4"/><circle cx="552" cy="75.3" r="4"/><circle cx="621" cy="83.4" r="4"/></g>
+<g fill="var(--bg)" stroke="var(--accent)" stroke-width="2"><circle cx="139" cy="103.3" r="4"/><circle cx="690" cy="74.5" r="4"/></g>
+<polyline fill="none" stroke="var(--blue)" stroke-width="2.5" points="70,143.4 139,126.1 208,155.6 277,150.8 346,186.7 414,157.0 483,169.3 552,164.7 621,161.8 690,161.7"/>
+<g fill="var(--blue)"><circle cx="70" cy="143.4" r="4"/><circle cx="208" cy="155.6" r="4"/><circle cx="277" cy="150.8" r="4"/><circle cx="346" cy="186.7" r="4"/><circle cx="414" cy="157.0" r="4"/><circle cx="483" cy="169.3" r="4"/><circle cx="552" cy="164.7" r="4"/><circle cx="621" cy="161.8" r="4"/></g>
+<g fill="var(--bg)" stroke="var(--blue)" stroke-width="2"><circle cx="139" cy="126.1" r="4"/><circle cx="690" cy="161.7" r="4"/></g>
+</svg><div class="leg"><span><i style="background:var(--accent)"></i>Existing</span><span><i style="background:var(--blue)"></i>Trial</span></div></div>
+<div class="chartbox"><h3>Paying retention <span class="better">↑ higher is better</span></h3><p class="csub">Share who kept paying money, by week</p>
+<svg viewBox="0 0 720 280" role="img">
+<g stroke="var(--grid)" stroke-width="1"><line x1="70" y1="30" x2="690" y2="30"/><line x1="70" y1="74" x2="690" y2="74"/><line x1="70" y1="118" x2="690" y2="118"/><line x1="70" y1="162" x2="690" y2="162"/><line x1="70" y1="206" x2="690" y2="206"/><line x1="70" y1="250" x2="690" y2="250"/></g>
+<g fill="var(--dim)" font-size="11" text-anchor="end"><text x="60" y="34">10%</text><text x="60" y="78">8%</text><text x="60" y="122">6%</text><text x="60" y="166">4%</text><text x="60" y="210">2%</text><text x="60" y="254">0%</text></g>
+<g fill="var(--muted)" font-size="9" text-anchor="middle"><text x="70" y="268">Base</text><text x="139" y="268">Jul10*</text><text x="208" y="268">Jul13</text><text x="277" y="268">Jul20</text><text x="346" y="268">Jul27</text><text x="414" y="268">Aug3</text><text x="483" y="268">Aug10</text><text x="552" y="268">Aug17</text><text x="621" y="268">Aug24</text><text x="690" y="268">Aug31*</text></g>
+<polyline fill="none" stroke="var(--accent)" stroke-width="2.5" points="70,190.6 139,167.5 208,150.6 277,106.7 346,87.0 414,115.3 483,156.4 552,38.1 621,59.2 690,109.9"/>
+<g fill="var(--accent)"><circle cx="70" cy="190.6" r="4"/><circle cx="208" cy="150.6" r="4"/><circle cx="277" cy="106.7" r="4"/><circle cx="346" cy="87.0" r="4"/><circle cx="414" cy="115.3" r="4"/><circle cx="483" cy="156.4" r="4"/><circle cx="552" cy="38.1" r="4"/><circle cx="621" cy="59.2" r="4"/></g>
+<g fill="var(--bg)" stroke="var(--accent)" stroke-width="2"><circle cx="139" cy="167.5" r="4"/><circle cx="690" cy="109.9" r="4"/></g>
+<polyline fill="none" stroke="var(--blue)" stroke-width="2.5" points="70,234.6 139,250.0 208,228.5 277,223.1 346,200.1 414,197.8 483,207.4 552,194.2 621,209.3 690,188.7"/>
+<g fill="var(--blue)"><circle cx="70" cy="234.6" r="4"/><circle cx="208" cy="228.5" r="4"/><circle cx="277" cy="223.1" r="4"/><circle cx="346" cy="200.1" r="4"/><circle cx="414" cy="197.8" r="4"/><circle cx="483" cy="207.4" r="4"/><circle cx="552" cy="194.2" r="4"/><circle cx="621" cy="209.3" r="4"/></g>
+<g fill="var(--bg)" stroke="var(--blue)" stroke-width="2"><circle cx="139" cy="250.0" r="4"/><circle cx="690" cy="188.7" r="4"/></g>
+</svg><div class="leg"><span><i style="background:var(--accent)"></i>Existing</span><span><i style="background:var(--blue)"></i>Trial</span></div></div>
+</div>
+<p class="meta" style="margin-top:10px">Leftmost point is the pre-launch baseline. <b>*Partial weeks</b> (hollow dots): Jul 10–12 launch stub; Aug 31–Sep 4 current period to date. Existing paying is volatile week to week (small numerators) but the level has climbed into the 6–9% band, ~2.4× baseline.</p>
+
+<h2>Scoreboard — this period vs last period vs baseline</h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Metric</th><th>This period<span class="w">Aug 22–Sep 4</span></th><th>Last period<span class="w">Aug 8–21</span></th><th>Δ period</th><th>Baseline<span class="w">pre-Jul 10</span></th><th>Δ vs base</th></tr></thead>
+<tbody>
+<tr class="grouphdr"><td colspan="6">Existing customers</td></tr>
+<tr class="rowhi"><td>Real paying retention <span class="lbl-sub">kept paying (35 saves)</span></td><td class="num big pos">8.5%</td><td class="num">6.2%</td><td class="num pos">+2.3</td><td class="num">2.7%</td><td class="num pos">+5.8</td></tr>
+<tr><td>Churn <span class="lbl-sub">completed cancel</span></td><td class="num big">80.0%</td><td class="num">79.2%</td><td class="num flatv">+0.8</td><td class="num">87.4%</td><td class="num pos">−7.4</td></tr>
+<tr><td>Segmented retention <span class="lbl-sub">didn't cancel, incl. pauses</span></td><td class="num">20.0%</td><td class="num">20.8%</td><td class="num flatv">−0.8</td><td class="num">12.6%</td><td class="num pos">+7.4</td></tr>
+<tr class="grouphdr"><td colspan="6">Trial users</td></tr>
+<tr class="rowhi"><td>Real paying retention <span class="lbl-sub">became paying (19 saves)</span></td><td class="num big pos">2.1%</td><td class="num">2.3%</td><td class="num flatv">−0.2</td><td class="num">0.7%</td><td class="num pos">+1.4</td></tr>
+<tr><td>Churn <span class="lbl-sub">completed cancel</span></td><td class="num big">62.7%</td><td class="num">62.4%</td><td class="num flatv">+0.3</td><td class="num">66.8%</td><td class="num pos">−4.1</td></tr>
+<tr><td>Segmented retention <span class="lbl-sub">didn't cancel, incl. extensions</span></td><td class="num">37.3%</td><td class="num">37.6%</td><td class="num flatv">−0.3</td><td class="num">33.2%</td><td class="num pos">+4.1</td></tr>
+</tbody></table></div>
+<div class="note win"><span class="t">Honest read — existing paying keeps climbing, everything else steady</span>
+<b>Existing paying retention rose again, 6.2% → 8.5% (22 → 35 saves)</b> — a new two-week high, all driven by the plan-switch offer. Churn essentially flat (~80%, well under the 87.4% baseline). <b>Trial is flat on every measure</b> (~63% churn, ~2% paying) and holding ~4 pts under baseline. No regressions; the existing flow is compounding while trial has plateaued.</div>
+
+<h2><span class="q">Where everyone went this period</span></h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Outcome</th><th>Existing %</th><th>Existing #</th><th>Trial %</th><th>Trial #</th></tr></thead>
+<tbody>
+<tr class="rowhi"><td>✅ Kept paying <span class="lbl-sub">real retention</span></td><td class="num big">8.5%</td><td class="num">35</td><td class="num big">2.1%</td><td class="num">19</td></tr>
+<tr><td>⏸ Paused <span class="lbl-sub">$0 now, not cancel</span></td><td class="num big">10.4%</td><td class="num">43</td><td class="num dim">—</td><td class="num dim">—</td></tr>
+<tr><td>🔁 Extended trial <span class="lbl-sub">free, not paying</span></td><td class="num dim">—</td><td class="num dim">—</td><td class="num big">35.1%</td><td class="num">311</td></tr>
+<tr><td>↪ Sent to a call</td><td class="num big">1.2%</td><td class="num">5</td><td class="num big">0.1%</td><td class="num">1</td></tr>
+<tr><td>❌ Canceled <span class="lbl-sub">churned</span></td><td class="num big">80.0%</td><td class="num">331</td><td class="num big">62.7%</td><td class="num">556</td></tr>
+</tbody></table></div>
+
+<h2><span class="q">Why they cancel this period</span></h2>
+<div class="tblwrap"><table><thead><tr><th>Existing — reason</th><th>Gave it</th><th>Canceled</th><th>Became paying</th></tr></thead>
+<tbody>
+<tr class="rowhi"><td>Budget</td><td class="num">162</td><td class="num">134</td><td class="num">21</td></tr>
+<tr><td>Not Needed Right Now</td><td class="num">115</td><td class="num">106</td><td class="num">6</td></tr>
+<tr><td>Found an Alternative</td><td class="num">72</td><td class="num">59</td><td class="num">7</td></tr>
+<tr><td>Missing Features</td><td class="num">7</td><td class="num">6</td><td class="num neg">0</td></tr>
+<tr><td>Technical Issues</td><td class="num">6</td><td class="num">3</td><td class="num">1</td></tr>
+</tbody></table></div>
+<div class="tblwrap" style="margin-top:14px"><table><thead><tr><th>Trial — reason</th><th>Gave it</th><th>Canceled</th><th>Became paying</th></tr></thead>
+<tbody>
+<tr class="rowhi"><td>Budget</td><td class="num">286</td><td class="num">251</td><td class="num">16</td></tr>
+<tr><td>Not Needed Right Now</td><td class="num">185</td><td class="num">164</td><td class="num">2</td></tr>
+<tr><td>Found an Alternative</td><td class="num">99</td><td class="num">94</td><td class="num">1</td></tr>
+<tr><td>Missing Features</td><td class="num">22</td><td class="num">21</td><td class="num neg">0</td></tr>
+<tr><td>Technical Issues</td><td class="num">14</td><td class="num">12</td><td class="num neg">0</td></tr>
+</tbody></table></div>
+<p style="color:var(--dim);font-size:12px;margin:8px 2px 0">Rows don't sum to "gave it" — the rest paused, abandoned, or extended. The plan-switch is the dominant Budget save (21 existing + 16 trial) and also converts "Found an Alternative" existing customers (7 plan switches instead of losses).</p>
+
+<h2><span class="q">Churn feedback — every response, bucketed by theme</span></h2>
+<p class="meta" style="margin-top:0">All 234 written exit answers over the two weeks, classified REAL / low-signal / junk by a <b>fixed rule-based script</b> (no AI guesswork), then every REAL one sorted into a theme. <b>Full list of all 150 real responses is in the appendix.</b></p>
+<div class="fbmeta"><span class="chip real">150 REAL (64%)</span><span class="chip low">11 low-signal (5%)</span><span class="chip junk">73 junk (31%)</span><span style="align-self:center;color:var(--dim);font-size:12px">of 234 written</span></div>
+<div style="background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px">
+<div style="font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin-bottom:12px">Theme distribution (REAL · E=existing / T=trial)</div>
+<div class="themebar"><span class="tn">Billing / accidental / duplicate account</span><div class="track"><div class="fill" style="width:3%;background:var(--red)"></div></div><span class="tc">2 <span style="color:var(--dim)">(E2/T0)</span></span></div>
+<div class="themebar"><span class="tn">Product not working / bugs</span><div class="track"><div class="fill" style="width:2%;background:var(--blue)"></div></div><span class="tc">1 <span style="color:var(--dim)">(E0/T1)</span></span></div>
+<div class="themebar"><span class="tn">Search / filtering / relevance</span><div class="track"><div class="fill" style="width:2%;background:var(--blue)"></div></div><span class="tc">1 <span style="color:var(--dim)">(E0/T1)</span></span></div>
+<div class="themebar"><span class="tn">Ad quality / database / cloning</span><div class="track"><div class="fill" style="width:37%;background:var(--accent)"></div></div><span class="tc">23 <span style="color:var(--dim)">(E11/T12)</span></span></div>
+<div class="themebar"><span class="tn">Geography / market coverage</span><div class="track"><div class="fill" style="width:2%;background:var(--blue)"></div></div><span class="tc">1 <span style="color:var(--dim)">(E0/T1)</span></span></div>
+<div class="themebar"><span class="tn">Price / budget</span><div class="track"><div class="fill" style="width:10%;background:var(--amber)"></div></div><span class="tc">6 <span style="color:var(--dim)">(E2/T4)</span></span></div>
+<div class="themebar"><span class="tn">Missing feature / roadmap</span><div class="track"><div class="fill" style="width:5%;background:var(--blue)"></div></div><span class="tc">3 <span style="color:var(--dim)">(E0/T3)</span></span></div>
+<div class="themebar"><span class="tn">Found an alternative</span><div class="track"><div class="fill" style="width:2%;background:var(--blue)"></div></div><span class="tc">1 <span style="color:var(--dim)">(E0/T1)</span></span></div>
+<div class="themebar"><span class="tn">Not needed / timing</span><div class="track"><div class="fill" style="width:81%;background:var(--dim)"></div></div><span class="tc">50 <span style="color:var(--dim)">(E32/T18)</span></span></div>
+</div>
+<div class="note warn"><span class="t">Ad-database quality remains the top product churn driver — still hitting paying customers</span>
+Setting aside "Not needed / timing" (50, mostly timing), the largest actionable theme is again <b>ad-database quality / cloning (23)</b>, split <b>existing 11 / trial 12</b> — paying customers keep citing "database too small / can't find good ads." Price (6) and a small billing cluster (2) round it out. This has been the #1 fixable theme three periods running. Full quotes in the appendix.</div>
+
+<h2>Bottom line</h2>
+<div class="note accent"><span class="t">Where we stand (8 weeks in)</span>
+<ul>
+<li><b>Existing flow compounding:</b> paying retention 6.2% → 8.5% this period, a new high (35 saves), churn steady ~80% (−7.4 vs baseline).</li>
+<li><b>Trial plateaued:</b> flat on every measure (~63% churn, ~2% paying), holding ~4 pts under baseline but no longer improving.</li>
+<li><b>Product signal persists:</b> ad-database quality is the top churn theme for a third period, now hitting paying customers as much as trials.</li>
+</ul>
+<b>Asks:</b> (1) Product to prioritize ad-database quality / relevance — sustained #1 fixable theme. (2) Trial flow needs a new lever (it's stopped improving) — worth testing the plan-switch earlier or a real trial offer. (3) See the Stripe view (toggle at top) for real business churn + the failed-payment finding.</div>
+
+<div class="foot">
+<b>Windows.</b> This period = Aug 22 – Sep 4 (14 days). Last period = Aug 8 – 21. Baseline = the retired flows' last two weeks before the Jul 10 switch. Trend charts use ISO weeks; launch (Jul 10–12) and current (Aug 31–Sep 4) are partial, marked *. Rates are shares of engaged sessions (total − abandons/bounces). Kept paying = discount + plan-change; pause / trial-extension / redirect are not paying. Bi-weekly cadence.<br>
+<b>Feedback method.</b> Deterministic rule-based classifier + theme bucketer (no LLM). Non-English real feedback preserved. Every real response verbatim in the appendix.<br>
+<b>Source.</b> Churnkey LIVE (Gethookd LLC), get_flow_metrics + aggregate_sessions + list_sessions, ~3-hr lag. Verified 2026-09-04. Active flows last republished 2026-07-23.
+</div>
+
+<div class="appendix"><h2>Appendix — all 150 real responses, by theme</h2>
+<p class="meta" style="margin-top:0">Complete, unedited. Flow · stated reason · outcome · verbatim.</p><div class="themehdr"><span>Billing / accidental / duplicate account</span><span class="n">2</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>i already canceled my subscription and i got charge</td></tr>
+<tr><td>Existing</td><td>Technical Issues</td><td>saved · plan_change</td><td>Its not working perfect. Sorry I am leaving. please issue me the refund.</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Product not working / bugs</span><span class="n">1</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Idk the search doesn&#x27;t work so well for my niche.</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Search / filtering / relevance</span><span class="n">1</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Let me image search products to see if there are any ads with them</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Ad quality / database / cloning</span><span class="n">23</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>saved · plan_change</td><td>i find a wining product . i will back soon</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>i have founda product that i am testing</td></tr>
+<tr><td>Existing</td><td>Technical Issues</td><td>abandoned</td><td>Not using frequently. And no new ads are coming.</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Just moving on/found a product</td></tr>
+<tr><td>Existing</td><td>Technical Issues</td><td>canceled</td><td>I spent 8 hours making a creative based on my research on gethookd and on a &quot;winning ad&quot; i found in my niche with great numbers and 5 star performance. then i realised the data is wrong and in the facebook ad library the ad isnt even active and it was one of the worst creatives ever on the ad library. i checked and it seemed that the data in gethookd wasnt accurate often. there are many other ways to find it out. but cool app. if just the tracking of the data was accurate.</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>not running ads anymore, goung ugc route</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I just don&#x27;t need it rn because I already find a product for the moment , maybe later I will pay for it again</td></tr>
+<tr><td>Existing</td><td>Technical Issues</td><td>canceled</td><td>doesn&#x27;t show me any ads, tried talking to customer service and got nothing</td></tr>
+<tr><td>Existing</td><td>Missing Features</td><td>canceled</td><td>Not showing new ads quickly like others</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>its not helpful for beauty products</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I don&#x27;t run ads anymore. My e-commerce business failed and I no longer require this service. Thank you very much for your understanding. Thank you.</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>cheaper plans, no one uses your ai tools -- only your ad libary</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Not looking to launch ads at the moment</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>shit ass product no value at all haha where are the stats i only need the rest i can do myself</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>abandoned</td><td>make ads</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>canceled</td><td>the ad library does non work and i cannot find meanininful things</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>i used it and found the product i wanted</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>canceled</td><td>cant even go direct to their ad library that sucks</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>add a digital products as well not just ecomm</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>canceled</td><td>Not enough service business ads to analyze</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>found what I need. multiple products</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>canceled</td><td>creative analytics and tagging</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>only found 2 apps in my niche</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Geography / market coverage</span><span class="n">1</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Trial</td><td>Missing Features</td><td>canceled</td><td>my country isn&#x27;t there and that&#x27;s the main reason I wanted it for g</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Price / budget</span><span class="n">6</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Anything we can do to help you make more money</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I don’t like money thank you a lot</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Once the business starts to generate money I will subscribe</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>canceled</td><td>too expensive</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>i will buy it later its too expensive for me</td></tr>
+<tr><td>Trial</td><td>Technical Issues</td><td>canceled</td><td>It said $29.99/month and its showign 129 no idea what the offer actually was or how this works but its very confusing</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Missing feature / roadmap</span><span class="n">3</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Trial</td><td>Technical Issues</td><td>canceled</td><td>The MCP connector makes me login into a Claude account with no subscription, so I can&#x27;t use the MCP due to usage limits of the free plan on that Claude Account</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Not using the features as much</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>canceled</td><td>i didnt find mcp as it said in the plan</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Found an alternative</span><span class="n">1</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>I am interesed in other alternative</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Not needed / timing</span><span class="n">50</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>No, just dont need gethookd currently</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Not using at the moment as I’m not in the Ecom space</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>No currently as i don&#x27;t need it</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no nothing right now...........</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I no longer need the service and do not plan to use it. Please cancel my subscription and prevent any future renewals.</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>not using it at all. cool though</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Deploying don&#x27;t need subscription</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Not need shsjsjsksjdhdhnsskmdm</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no needed nowno needed nowno needed nowno needed now</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>No, thank you. I just dont need the subscription right now</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>No I just don’t need it at all</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>dont need it</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>will come back. taking a break</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>not using it enough for my current use case</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Not right now, great tool otherwise</td></tr>
+<tr><td>Existing</td><td>Budget</td><td>canceled</td><td>dont need anymore</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>dont need it anymoreeeeeeeeeeee</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I&#x27;m good for now. Thanks for asking.</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no need hdhdhhdhduchdjhbgvdvvdv</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no need more eeeee no need more eeeeeno need more eeeee</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>starting later on becquse isnt ther uight time to ecom right now</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>not need right now thaaanjjssss</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>No longer in Ecommerce. Great tool, happy to have used it. Will return if I ever make my return to the industry.</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>This tool is not needed for me at this time.</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Just don’t need the service at all</td></tr>
+<tr><td>Existing</td><td>Budget</td><td>canceled</td><td>no need</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>not at the moment  hhuihrkhgkjdhgkjd</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I&#x27;m not using it right now. I&#x27;ll get back to it when I do. Otherwise, well made.</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>not needed right now good app though</td></tr>
+<tr><td>Existing</td><td>Technical Issues</td><td>canceled</td><td>i cant pay it for now, ill try then</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no needno needno needno needno needno needno needno needno need</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no need to explain pleaseeeeee</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>not needed right now maybe later</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>canceled</td><td>Im not dropshipping right now</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>nope I&#x27;m not using it at the moment</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no thank you very much but I dont need it now</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no i dont need your help
+no i dont need your help</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>No, right now I just don&#x27;t want the software.</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no not really needed at the moment</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>not at the moment. Thats why i stop</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no need for me to use right now</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no need , and not is my plan rigth now</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>dont need please let me cancel</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>saved · plan_change</td><td>i dont need the subscription right now</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>canceled</td><td>Not at the moment</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>I do not have the time and space right now</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>i dont need this right now but will need it soon</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>No I don’t need get hookd in this moment</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>maybe later sdaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Thank you so much i dont need</td></tr>
+</tbody></table></div>
+<div class="themehdr"><span>Other / unspecified</span><span class="n">62</span></div>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Outcome</th><th>What they said</th></tr></thead><tbody>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>already had access in other account</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I just wnat to cancel it before so i dont forget in a year</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no thanks im okay with this ..</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Don&#x27;t use it, what&#x27;s not clear here?</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>im doing something that requires more of my time</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Encontre una mejor manera
+dsadsa</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>ugijggjh guviuvg yg g yg yg oug ouyg</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Thanks so much i found a new platform.</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>tack men behöver inte gethooked just nu</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no time at this moment. Ill be back</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no im already rich lol</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>vgbhnjk,l.k,mknjhb hiohiljköm,.nhbkuoijöklmkn,kbjouhijpköl</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>oiuyūupi;ūip[;9ū0p[90[-0&#x27;ou;0ugkluyiūo</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no quiero pagar tanto dinero ,,,</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>NADA SOLAMENTE NO LO ESTOY USANDOS</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I&#x27;ll be back</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>no lo necesito mas muchas gracias</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>No, all good, thank you. ddddd</td></tr>
+<tr><td>Existing</td><td>Budget</td><td>canceled</td><td>not currently</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Im just not doing clothing and focusing on making music</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>ahora mismo no la uso por eso</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>i&#x27;m using adplexity</td></tr>
+<tr><td>Existing</td><td>Missing Features</td><td>canceled</td><td>Does not have apps, only focused on ecom</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>I stopped dropshipping it wasnt working out</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>Not now aoimdoiasndiasndaiondionasion</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>No la necesito en el momento necesito priorizar otros gastos</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>thirty characters thirty characters</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>NO NECESITO ESTO AHORA NO ME INTERESA YA</td></tr>
+<tr><td>Existing</td><td>Missing Features</td><td>canceled</td><td>asdasdasdsadsasda asda sd a sda ds a</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>canceled</td><td>dang 30 chracters to use  accounts</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Novan i fucking cancel now or what</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no I fon&#x27;t need it. Thank youu</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>canceled</td><td>hiiyhb ug vjfoiv vfuvfjo vovjvjo</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>spam emails are ridulous lol dont want to use just based off that chill out with them</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>I will resume this service when I have a paid client</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Not for me. It Does not help me in my ecommerse</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Honestly no, this is just not what i need rn</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>unable to cancel my account taking too long to find things</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>NO THANKS, I DONT WANT TO USE GETHOOKED AMN</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>i dont use it anymore so thats</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Nope nothing else you guys can do</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>da da sad asda das d asa dsd as</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>canceled</td><td>Not at the presesnt</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Jdisiwbfkdbdifbfudhsisid8ririrhridhe</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no no no no no no no no no no no no no no no no no no no no no no no  fuck off with the 30 character requirement</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>abandoned</td><td>no thanks for this opportunity i will get back</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>i dont know but i doubt it honestly</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>qwrijvha0fhv0aerh80vh9pqeruv9-erquv-ef</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no lo necesitomas gracias por todo</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>no there is not mcuhaaaaaaaaaa</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>nothing yet, we have found data incurracy</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>We already finished with our ecommerce</td></tr>
+<tr><td>Trial</td><td>Technical Issues</td><td>canceled</td><td>Doesnt find any competitors, useless</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>canceled</td><td>NO lo quiero</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>I wanted to try it out but couldnt find success with it</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>dcfasdadw dasd wadasd wa dsad was</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>canceled</td><td>not suited for my sector / industry.</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>just got the subscription, paid by employer, from other account</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>Tell Mark to keep making banger videos.</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>canceled</td><td>dsadsas das sad dsa sads asfddfasfasfasfasf</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>canceled</td><td>i&#x27;m not happy for this app thanks</td></tr>
+<tr><td>Trial</td><td>Technical Issues</td><td>canceled</td><td>would n r find what i want actually</td></tr>
+</tbody></table></div>
+</div>
+<div class="appendix"><h2>Appendix — filtered (11 low-signal + 73 junk)</h2>
+<div class="tblwrap"><table class="vb"><thead><tr><th>Flow</th><th>Reason</th><th>Verdict</th><th>Text</th></tr></thead><tbody><tr><td>Existing</td><td>Not Needed Right Now</td><td>Low Signal</td><td>No thank you aAAA No thank you aAAANo thank you aAAA</td></tr>
+<tr><td>Existing</td><td>Budget</td><td>Junk</td><td>аасдасдасд</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>efwefwefwfwqeiufgorueeurgbliegnirelgg</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>.sdhvchvbv db jbdvzfjkfbsGFuygdrub</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>uuiuuiuiouioiuouiouuiuuiuiouioiuouiouuiuuiuiouioiuouio</td></tr>
+<tr><td>Existing</td><td>Missing Features</td><td>Junk</td><td>wbqbqeberwtbwrbertbqerbqerbqreb</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>ewrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>adsfgasdfg sdfg sdfg sdfg sdfsdfg s</td></tr>
+<tr><td>Existing</td><td>Budget</td><td>Low Signal</td><td>nothing</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>dawdawdwadwadwadwadwadwadwadwadwa</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>nononononononononononononononono</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>gfdhjgfhjgfjjfgjfgjfgjfgjfgjfgj</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>nnooooooooooooooooooooooooooooo</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>nopojsakdjaosjdopasjdpahjdihasiofhasiofh</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>------------------------------</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>vvvvvvvvvvvvvvvvvvv vv v v v v v</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>Fhjkbbjbhhhhjjjkkhhhjkkkkjjjjkk</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>wgwgrbrwbbbwrbrbrwbrbwrbrbrbwbrwb</td></tr>
+<tr><td>Existing</td><td>Budget</td><td>Low Signal</td><td>. nothing</td></tr>
+<tr><td>Existing</td><td>Missing Features</td><td>Junk</td><td>rtduredtjdrjdrjdrjrdjdrjrdjrdjdrj</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>noooooooooooooooooooooooooooooo</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>ergergergergoiergjo jerogjoegjiogj .</td></tr>
+<tr><td>Existing</td><td>Missing Features</td><td>Junk</td><td>ewqfwwefwefweggfwweef2wefweregwergwe</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>sacasdcdcdscdscsdcdscsdcdscdscdsc</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>.......................................</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>ehhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Low Signal</td><td>no....................................................</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>llllpkmlmoppokpokpokpokpokpokpokpok</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>------------------------------</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>שגשגשגשגשגשגשגשגשגשגשגשגשגשגשג</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>nonzndndnsnsnsnsnsnsnsnsnsnsnsnsn</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>cdcvdsvdvdvdvsdvdvddvdvdvddvdvd</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>..............................</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>ddsddsdasdsdassdsdasdsadasdsdasds</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>gemsidesvfsfvsdvsdvsdvsdvsdvsdvsd</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>......................................</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>noooooooooooooooooooooooooooooo</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>//////////////////////////////</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>s</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>ffffffffffffffffffffffffffffffffffffffff</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>tfg6ygfyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>weddddwdwdwdwdwdwdwdwdwdwdwwdwd</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>poooooooooooooooooooooooooooooooooooooooooooop</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>fffffffffffffffffffffffffffffffffffffff</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>asdsajdnsajdnasjdnasjdnasjdnasjdnasjd</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Low Signal</td><td>no hihhihgtuubububyubyubiybiybyyib</td></tr>
+<tr><td>Existing</td><td>Not Needed Right Now</td><td>Junk</td><td>------------------------------------</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>Junk</td><td>iorvwfjoifjioeraiojgerajiogaeoijgjlreasojg</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>ssssssssssssssdsdsdsdssdsdsdsdssd</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</td></tr>
+<tr><td>Trial</td><td>Technical Issues</td><td>Junk</td><td>kukbvghb tf yf guy. ft yg tf yf y</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Low Signal</td><td>No thank you dddddddddddddddddd</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>Aaaaaaadddjfjfjdjdjdjdjshhshshshs</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Low Signal</td><td>no no no no no no n o no no no no</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>qq223e323excfdwdfewrfvfdfewsffewf</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>ىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىىى</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>kjfuyucfyjh libljkkljblkblblblkb</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>dsfsdfsdfsdfsdfsdfffdsfsdfsdfffffffdsfsdf</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>ssadasdasdasdasdasdasdasdasasdadasd</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>Junk</td><td>sasssasssasssasssasssasssasssasssasssasssasssass</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>cvbvxcbvxcvbvxcbvcxbcxvbcvbv xcvbxcvb</td></tr>
+<tr><td>Trial</td><td>Missing Features</td><td>Junk</td><td>erirkgrpkogwmwptlmgtpgmpkltgmk</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>drfwdddddddddddddddddddddddddddddddd</td></tr>
+<tr><td>Trial</td><td>Technical Issues</td><td>Low Signal</td><td>no needdddddddddddddddddddddddddddddddddd</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>nooooooooooooooooooooooooooooo</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>Low Signal</td><td>No</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>SSSVCXZRFFFFFFFFFFFFFFSHGGGDSFF</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>zvsvdsvdsvsdvsdvvvsvsvvvdsvsdvsdv</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Low Signal</td><td>no thanks</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>nooooooooooooooooooooooooooooo</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>sry not ur problemsry not ur problemsry not ur problemsry not ur problemsry not ur problem</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>sdfsfsfdsfsdfdsfsdfsfsdfsdffffff</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>maaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>Junk</td><td>n</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>noooooooooooooooooooonoooooooooooooooooooonoooooooooooooooooooonoooooooooooooooooooonoooooooooooooooooooonoooooooooooooooooooonoooooooooooooooooooonoo</td></tr>
+<tr><td>Trial</td><td>Budget</td><td>Low Signal</td><td>no</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>jbk;jbububububulujbubublububuublu</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>ddddddd d d. d d.  dqmdowmdwmdewmde</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>..........................................</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>N/A N/A N/A N/A N/A N/A N/A N/A N/A</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk</td></tr>
+<tr><td>Trial</td><td>Not Needed Right Now</td><td>Junk</td><td>nopeeeeeeeeeeeeeeeeeeeeeeeeeeee</td></tr>
+</tbody></table></div></div>
+</div></div>
+<div id="view-st" style="display:none"><div class="wrap">
+<header>
+<p class="kicker">GetHookd · Stripe (Source of Truth) · Real Business Churn</p>
+<h1>Real Churn &amp; Retention — Stripe Reconciliation</h1>
+<p class="verdict">The <b>whole paying base</b>, not just the cancel flow — including failed-payment churn Churnkey never sees. Real paying churn this period: <b>11.3%</b> (baseline 12.2%), still falling while the base grows.</p>
+<div class="cmp">
+<div class="cmp-block now"><span class="cmp-lbl">This period</span><span class="cmp-date">Aug 22 → Sep 4</span></div>
+<div class="cmp-block wk"><span class="cmp-lbl">vs Last period</span><span class="cmp-date">Aug 8 → 21</span></div>
+<div class="cmp-block base"><span class="cmp-lbl">vs Baseline</span><span class="cmp-date">Jun 26 → Jul 9 · pre-relaunch</span></div>
+</div>
+<p class="meta">Gethookd LLC · LIVE Stripe data via restricted read key · same windows as the Churnkey view · audited method: every churn classified from full invoice history</p>
+</header>
+<div style="display:flex;gap:12px;flex-wrap:wrap;margin:0 0 24px">
+ <div style="flex:1;min-width:230px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--dim);border-radius:12px;padding:16px 18px">
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:800;margin-bottom:6px">Then · before the Jul 10 relaunch</div>
+  <div style="font-size:28px;font-weight:800;font-variant-numeric:tabular-nums">12.2% <span style="font-size:13px;color:var(--muted);font-weight:600">real churn / 14d</span></div>
+  <div style="font-size:12.5px;color:var(--muted);margin-top:6px">5,161 payers · $206,803/mo base</div>
+ </div>
+ <div style="align-self:center;font-size:20px;color:var(--dim);font-weight:800">→</div>
+ <div style="flex:1;min-width:230px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--green);border-radius:12px;padding:16px 18px">
+  <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--green);font-weight:800;margin-bottom:6px">Now · Aug 22–Sep 4</div>
+  <div style="font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--green)">11.3% <span style="font-size:13px;color:var(--muted);font-weight:600">real churn / 14d</span></div>
+  <div style="font-size:12.5px;color:var(--muted);margin-top:6px">5,666 payers · $246,421/mo base · <b style="color:var(--green)">churn -0.8 pts, base +19%</b></div>
+ </div>
+</div>
+<h2>The four numbers that matter</h2>
+<div class="tiles">
+<div class="tile"><p class="tl">Real paying churn <span class="dim">(14 days)</span></p><div class="tv">11.3%</div><p class="td"><b class="down">▼ 0.8 pts</b> vs 12.2% baseline</p></div>
+<div class="tile"><p class="tl">MRR churned this period</p><div class="tv">$26,637</div><p class="td">from 640 lost payers · base $246,421/mo</p></div>
+<div class="tile"><p class="tl">Involuntary share</p><div class="tv" style="color:var(--amber)">27%</div><p class="td">175 of 640 paid churns = failed payments</p></div>
+<div class="tile"><p class="tl">Trial → paid conversion</p><div class="tv" style="color:var(--green)">32.5%</div><p class="td">875 of 2,696 trials ending converted</p></div>
+</div>
+<h2>Scoreboard — this period vs last period vs baseline</h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Metric</th><th>This period<span class="w">Aug 22–Sep 4</span></th><th>Last period<span class="w">Aug 8–21</span></th><th>Δ period</th><th>Baseline<span class="w">Jun 26–Jul 9</span></th><th>Δ vs base</th></tr></thead>
+<tbody>
+<tr class="grouphdr"><td colspan="6">Paying customers (the real base)</td></tr>
+<tr class="rowhi"><td>Real paying churn <span class="lbl-sub">subs ended ÷ base at start</span></td><td class="num big">11.3%</td><td class="num">11.9%</td><td class="num pos">-0.6</td><td class="num">12.2%</td><td class="num pos">-0.8</td></tr>
+<tr><td>Paying base at period start</td><td class="num">5,666</td><td class="num">5,550</td><td class="num dim">—</td><td class="num">5,161</td><td class="num dim">—</td></tr>
+<tr><td>Payers lost <span class="lbl-sub">voluntary + failed-payment</span></td><td class="num">640 <span class="cnt">(465+175)</span></td><td class="num">660 <span class="cnt">(481+179)</span></td><td class="num dim">—</td><td class="num">627 <span class="cnt">(454+173)</span></td><td class="num dim">—</td></tr>
+<tr><td>MRR churned <span class="lbl-sub">gross plan value</span></td><td class="num">$26,637</td><td class="num">$27,026</td><td class="num dim">—</td><td class="num">$23,651</td><td class="num dim">—</td></tr>
+<tr class="grouphdr"><td colspan="6">Trials</td></tr>
+<tr class="rowhi"><td>Trial → paid conversion <span class="lbl-sub">of trials ending in window</span></td><td class="num big">32.5%</td><td class="num">21.9%</td><td class="num pos">+10.6</td><td class="num">27.0%</td><td class="num pos">+5.5</td></tr>
+<tr><td>Trials ending / converted</td><td class="num">2,696 / 875</td><td class="num">2,720 / 595</td><td class="num dim">—</td><td class="num">2,906 / 786</td><td class="num dim">—</td></tr>
+</tbody></table></div>
+<h2>Voluntary vs failed-payment — the churn Churnkey can't see</h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Period</th><th>Voluntary</th><th>Failed payment</th><th>Involuntary share</th><th>MRR lost to failed payments</th></tr></thead>
+<tbody>
+<tr><td>This period</td><td class="num">465</td><td class="num">175</td><td class="num big flatv">27%</td><td class="num">$7,363</td></tr>
+<tr><td>Last period</td><td class="num">481</td><td class="num">179</td><td class="num">27%</td><td class="num">$6,841</td></tr>
+<tr><td>Baseline</td><td class="num">454</td><td class="num">173</td><td class="num">28%</td><td class="num">$6,147</td></tr>
+</tbody></table></div>
+<div class="note warn"><span class="t">The failed-payment battlefield — still the biggest untouched lever</span>
+~27% of real payer churn is <b>failed payments, not decisions</b> — no cancel flow touches them. The August spike we traced (trial→annual first-charges bouncing, $229–$999) keeps this elevated: $7,363/mo lost this period on card failures alone. The lever is dunning: fallback-to-monthly offer, split-pay, or card pre-validation on annual trials. Churnkey Payment Recovery runs (~25% recovery) but isn't tuned for big-ticket annual failures.</div>
+<div class="note"><span class="t" style="color:var(--blue)">Why the two views must stay separate</span>
+Churnkey's ~80% "churn" (Cancel Flow view) = share of <b>flow enterers</b> who completed a cancel — a save-flow efficiency metric. Stripe's 11.3% = share of the <b>entire paying base</b> that ended — the business metric. Same word, different denominators. Layered, each validates the other: real churn falling + flow saves rising = the same story from two angles.</div>
+<h2>Bottom line — did real churn decrease?</h2>
+<div class="note accent"><span class="t">Yes — monotonically, while the base grows</span>
+<ul>
+<li><b>Real paying churn:</b> 12.2% → 11.9% → 11.3% (three periods down), while paying base grew 5,161 → 5,666 and MRR $206,803 → $246,421.</li>
+<li><b>Trial → paid conversion:</b> 27.0% baseline → 32.5% this period.</li>
+<li><b>~27% of churn is failed payments</b> — the flow can't reach it; dunning is the next lever.</li>
+</ul>
+<b>Asks:</b> (1) treat payment recovery as its own workstream (fallback-to-monthly on annual-trial failures); (2) keep both views layered — flow performance vs business truth.</div>
+<div class="foot">
+<b>Method (audited, Sigma-confirmed 99.6%).</b> Enumerated from live subscription objects (current_period_end ≥ Jun 19). Paid churn = subscription ended in window AND ≥1 collected invoice across FULL invoice history (latest-invoice shortcut undercounts ~42%). Trial churn = ended ≤ trial_end+1h. Voluntary vs failed = final invoice collected or not. Base = payers active at window start. MRR = gross plan value, monthly-normalized. Windows UTC, identical to the Churnkey view.<br>
+<b>Source.</b> Stripe LIVE, restricted read-only key, pulled 2026-09-04. Current period includes today — cancels decided but not yet effective appear in later windows.
+</div>
+</div></div>

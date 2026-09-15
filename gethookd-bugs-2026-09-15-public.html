@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GetHookd — Bugs from onboarding calls, Sep 15 2026</title>
+<style>
+  :root{--bg:#f6f7f9;--card:#fff;--ink:#171d28;--mut:#69738a;--line:#e4e8ef;
+        --red:#cf3b3b;--amb:#c07d10;--blu:#2b62d9;--gry:#7b8497}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:14.5px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;padding:34px 18px 80px}
+  .wrap{max-width:840px;margin:0 auto}
+  h1{font-size:23px;margin:0 0 3px}
+  .sub{color:var(--mut);font-size:13px;margin:0 0 16px}
+  .stats{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 22px}
+  .chip{background:#eaeef4;border-radius:20px;padding:5px 13px;font-size:12.5px;color:var(--mut)}
+  .chip b{color:var(--ink)}
+  .bug{background:var(--card);border:1px solid var(--line);border-radius:11px;margin:14px 0;box-shadow:0 1px 2px rgba(16,24,40,.05);overflow:hidden}
+  .bh{display:flex;gap:10px;align-items:flex-start;padding:13px 17px;border-bottom:1px solid var(--line);background:#fbfcfd}
+  .pri{flex:0 0 auto;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;padding:3px 8px;border-radius:5px;color:#fff;margin-top:2px;white-space:nowrap}
+  .p1{background:var(--red)} .p2{background:var(--amb)} .p3{background:var(--gry)}
+  .bh b{font-size:15px;flex:1;line-height:1.35}
+  .bh .id{color:var(--mut);font-size:11.5px;font-variant-numeric:tabular-nums;white-space:nowrap;margin-top:3px}
+  .bb{padding:13px 17px}
+  .who{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;font-size:13.2px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .who dt{color:var(--mut);font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding-top:2px}
+  .who dd{margin:0}
+  .fld{margin:0 0 11px}
+  .fld:last-child{margin-bottom:0}
+  .fld .k{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin-bottom:3px}
+  .fld .v{font-size:13.5px;color:#333d51}
+  .fld .v ul{margin:6px 0 0;padding-left:19px} .fld .v li{margin:4px 0}
+  blockquote{margin:5px 0 0;padding:9px 13px;background:#f3f5f9;border-left:3px solid var(--blu);border-radius:0 6px 6px 0;font-size:13.3px;color:#2c3646;font-style:italic}
+  blockquote .src{display:block;font-style:normal;color:var(--mut);font-size:12px;margin-top:5px}
+  a{color:var(--blu);text-decoration:none} a:hover{text-decoration:underline}
+  .note{background:#f4f7fd;border:1px solid #d8e2f5;border-radius:9px;padding:12px 15px;margin:0 0 20px;font-size:13.2px;color:#2a3b5c}
+  .foot{color:var(--mut);font-size:12.5px;margin-top:26px;text-align:center;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Bugs from onboarding calls</h1>
+<p class="sub">3 customer calls, 2026-09-15 · compiled by Vitaliy, Customer Success</p>
+<div class="stats">
+  <span class="chip"><b>4</b> issues</span>
+  <span class="chip"><b>3</b> reproduced live on the call</span>
+  <span class="chip"><b>2</b> are repeat occurrences</span>
+</div>
+
+<div class="note">Every item below has a verbatim quote and a timestamped link to the moment in the recording. Customer email addresses are held internally and available on request rather than published here.</div>
+
+<!-- 01 -->
+<div class="bug">
+  <div class="bh"><span class="pri p1">P1</span><b>Clone Ads produces nothing when the inspiration ad is a native / advertorial</b><span class="id">01</span></div>
+  <div class="bb">
+    <dl class="who">
+      <dt>User</dt><dd>Meenakshi Grover · Netherlands · day 2 of a 7-day trial</dd>
+      <dt>Recording</dt><dd><a href="https://fathom.video/calls/823763562?timestamp=1464">fathom.video/calls/823763562 at 24:24</a></dd>
+    </dl>
+    <div class="fld"><div class="k">What happens</div><div class="v">Ran live on the call. Her own Shopify product page (a supplement) was used as the product source, against a native-style inspiration ad. Two variations requested, GPT Image generator. <b>The generation returned no usable output.</b> The same feature worked normally on a standard product-on-background static shown immediately afterwards.</div></div>
+    <div class="fld"><div class="k">Verbatim</div><div class="v"><blockquote>you see, it didn't, it didn't do it because it was only for, because it was a native one. that's what it was. So I do apologize about that. But I'm going to bring this back to the team, see if there's any way we can do natives.<span class="src">Vitaliy, live on the call, 24:24</span></blockquote></div></div>
+    <div class="fld"><div class="k">Why it is P1</div><div class="v">She is <b>mid-trial and choosing a plan this week</b>. Her niche runs native and advertorial creative almost exclusively, so this is the format she most needs. The failure happened on her own product during her evaluation window. <b>Either make Clone Ads handle native layouts, or have the UI say up front that it does not</b>, so it does not consume credits and trust silently.</div></div>
+  </div>
+</div>
+
+<!-- 02 -->
+<div class="bug">
+  <div class="bh"><span class="pri p2">P2</span><b>Onboarding "pick 5 ads to personalise your feed" step gets stuck</b><span class="id">02 · third occurrence</span></div>
+  <div class="bb">
+    <dl class="who">
+      <dt>User</dt><dd>Faisal Hourani · e-commerce agency, Southeast Asia</dd>
+      <dt>Recording</dt><dd><a href="https://fathom.video/calls/823727072?timestamp=1130">fathom.video/calls/823727072 at 18:50</a></dd>
+    </dl>
+    <div class="fld"><div class="k">What happens</div><div class="v">During onboarding, at the screen asking the user to select five ads to personalise their feed, the flow would not advance. He had to navigate back and forward repeatedly before it let him through. Everything else in onboarding he described as straightforward.</div></div>
+    <div class="fld"><div class="k">Verbatim</div><div class="v"><blockquote>One issue was it got stuck when it was showing me the list of ads to choose five, to personalize my feed. I had to go back and forth, back and forth, and then it went ahead. Other than that, very straightforward.<span class="src">Faisal Hourani, 18:50</span></blockquote></div></div>
+    <div class="fld"><div class="k">Ask</div><div class="v"><b>Third onboarding-flow blocker reported in four weeks, all the same shape:</b> the flow will not release a user who has already satisfied the step.
+      <ul>
+        <li><b>Aug 19</b> — onboarding quiz dead-ends at the final step. That user was locked out of the app for 8 days. Still open.</li>
+        <li><b>Sep 2</b> — connection gate did not detect a completed MCP connection. User escaped by reloading until a skip appeared.</li>
+        <li><b>Sep 15</b> — ad-picker step, this report.</li>
+      </ul>
+      Worth looking at onboarding step-completion logic as one problem rather than three separate tickets.</div></div>
+  </div>
+</div>
+
+<!-- 03 -->
+<div class="bug">
+  <div class="bh"><span class="pri p2">P2</span><b>Brand Spy "Most used hooks" returns a single empty hook on non-English video</b><span class="id">03</span></div>
+  <div class="bb">
+    <dl class="who">
+      <dt>User</dt><dd>Faisal Hourani · e-commerce agency, Southeast Asia</dd>
+      <dt>Recording</dt><dd><a href="https://fathom.video/calls/823727072?timestamp=435">fathom.video/calls/823727072 at 07:15</a></dd>
+    </dl>
+    <div class="fld"><div class="k">What happens</div><div class="v">Brand Spy on <b>Nateskin</b>, a brand running many video ads. The "Most used hooks" panel showed <b>only one hook</b>. Clicking "view all" did not expand it meaningfully, and the hook had no audible or readable content. The brand's video creative is in Chinese.</div></div>
+    <div class="fld"><div class="k">Verbatim</div><div class="v"><blockquote>How come you only have one hook?<span class="src">Faisal Hourani, 07:15</span></blockquote>
+      <blockquote>I don't hear anything.<span class="src">Vitaliy, checking live, 07:45</span></blockquote>
+      <blockquote>Maybe because it's in Chinese.<span class="src">Faisal Hourani, 07:55</span></blockquote></div></div>
+    <div class="fld"><div class="k">Ask</div><div class="v">Confirm whether the video transcription step handles non-English audio, and what the panel does when transcription fails. Right now it shows one empty result rather than an honest "no hooks extracted."<br><br><b>Related open question:</b> two customers in the last four weeks were given <b>contradictory answers about whether hooks are extracted from the video or from the ad copy.</b> Worth settling that definitively at the same time.</div></div>
+  </div>
+</div>
+
+<!-- 04 -->
+<div class="bug">
+  <div class="bh"><span class="pri p2">P2</span><b>Platform noticeably slow, confirmed live</b><span class="id">04 · second occurrence</span></div>
+  <div class="bb">
+    <dl class="who">
+      <dt>User</dt><dd>Tessa Silasudjana · United Kingdom</dd>
+      <dt>Recording</dt><dd><a href="https://fathom.video/calls/823794837?timestamp=220">fathom.video/calls/823794837 at 03:40</a></dd>
+    </dl>
+    <div class="fld"><div class="k">What happens</div><div class="v">Ad feed slow during her screen share. She assumed the cause was her own machine. <b>Watched on screen and confirmed slower than usual</b>, independent of her filter count.</div></div>
+    <div class="fld"><div class="k">Verbatim</div><div class="v"><blockquote>I don't know why, is it because I have so many programs open? It's a bit slow.<span class="src">Tessa Silasudjana, 03:20</span></blockquote>
+      <blockquote>it is a little bit slower than usual.<span class="src">Vitaliy, watching her screen, 03:40</span></blockquote></div></div>
+    <div class="fld"><div class="k">Ask</div><div class="v">Second report in two weeks. A separate user raised the same thing on <b>2026-09-02</b> ("I feel like it's loading a little bit slower, just like the ads") and was promised a dev answer that has not come back. Two independent users, one confirmed live. If this is index growth, say so and we will tell users. If it is not, it is a regression worth catching now.</div></div>
+  </div>
+</div>
+
+<p class="foot">3 onboarding calls, 2026-09-15 · quotes taken from call transcripts, timestamps link to the moment<br>Compiled by Vitaliy, Head of Customer Success, GetHookd</p>
+</div>
+</body>
+</html>

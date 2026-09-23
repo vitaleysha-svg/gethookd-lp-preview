@@ -5,7 +5,7 @@
 .shell{width:min(900px,calc(100% - 32px));margin:auto;padding:30px 0 80px}
 h1{font-size:27px;letter-spacing:-.03em;margin:0 0 6px}.sub{color:var(--sub);font-size:14.5px;margin:0 0 26px;max-width:70ch}
 section{margin-top:34px}h2{font-size:20px;letter-spacing:-.02em;margin:0 0 14px}h2 small{display:block;font-size:13.5px;font-weight:500;color:var(--sub);margin-top:2px}
-.p{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px 18px;margin-bottom:12px}
+details.p{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}details.p summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 18px;font-weight:700;font-size:15.5px}details.p summary::-webkit-details-marker{display:none}details.p summary::before{content:"+";width:20px;color:var(--faint);font-weight:500}details.p[open] summary::before{content:"\2212"}.body{padding:0 18px 18px}
 h3{margin:0 0 4px;font-size:16px}.wyg{color:var(--sub);margin:0 0 12px;font-size:14.5px}
 pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6edf3;padding:14px 16px;border-radius:9px;margin:0}
 .lb{color:#9fd3ff;font-weight:700}.ph{background:#f5b301;color:#1a1a1a;font-weight:700;padding:1px 6px;border-radius:5px}
@@ -13,7 +13,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 </style></head><body><div class="shell">
 <h1>GetHookd prompt library</h1>
 <p class="sub">45 prompts in 7 sections. Yellow is what the user types in. Every prompt is capped at 4 searches and 5 ads so it answers in about a minute.</p>
-<section><h2>1. Find a product to sell<small>Start here if you have no product yet. Type a market, not a product.</small></h2><div class="p"><h3>1. New products in a market you pick</h3><p class="wyg">Type a market or niche and get up to 5 products with ads that are new and already working in it, each with the ad link and how long it has run.</p><pre><span class="lb">Goal:</span> Using GetHookd, find real products people are already selling in <span class="ph">[your market or niche in 3 or 4 words]</span>.
+<section><h2>1. Find a product to sell<small>Start here if you have no product yet. Type a market, not a product.</small></h2><details class="p"><summary>1. New products in a market you pick</summary><div class="body"><p class="wyg">Type a market or niche and get up to 5 products with ads that are new and already working in it, each with the ad link and how long it has run.</p><pre><span class="lb">Goal:</span> Using GetHookd, find real products people are already selling in <span class="ph">[your market or niche in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running and have run 30 days or more, one per brand, from brands running 5 or more live ads. List up to 5 products. If fewer than 5 are left, widen to ads running 14 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -23,7 +23,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the one product to check first. Do not draw a conclusion about the whole market from this list.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>2. New products that are already working</h3><p class="wyg">Products whose ads are new but already working, so you see what is selling before the market is crowded.</p><pre><span class="lb">Goal:</span> Using GetHookd, find products whose ads are new but already working in <span class="ph">[your market or niche in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>2. New products that are already working</summary><div class="body"><p class="wyg">Products whose ads are new but already working, so you see what is selling before the market is crowded.</p><pre><span class="lb">Goal:</span> Using GetHookd, find products whose ads are new but already working in <span class="ph">[your market or niche in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 5-star ads (GetHookd&#x27;s Winning performance rating) that started 60 to 90 days ago, are still running, one per brand, from brands running fewer than 50 live ads. If fewer than 5 are left, widen to ads that started in the last 120 days. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -33,7 +33,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the one product to look at first, and back it with how long its ad has run or how many times the brand has re-run it. A discount is not proof that it sells, and a star rating every result shares is not proof either.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>3. Is anyone making money selling this</h3><p class="wyg">A straight answer on whether lots of brands are making money in your market, only a few are, or none of the ads you get back show it.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me whether anyone is actually making money selling <span class="ph">[your market or niche in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>3. Is anyone making money selling this</summary><div class="body"><p class="wyg">A straight answer on whether lots of brands are making money in your market, only a few are, or none of the ads you get back show it.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me whether anyone is actually making money selling <span class="ph">[your market or niche in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running and have run 60 days or more, one per brand. If nothing comes back, widen to 30 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -43,7 +43,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> judge it from how long the ads have kept running, and tell me straight whether lots of brands are making money here, only a few are, or none of the ads I read shows it, and which ad to study first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>4. The selling angle almost nobody is using</h3><p class="wyg">A reason-to-buy almost nobody in your market is using, so you can own it, with the closest existing ad shown so you can see the difference.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the selling angle almost nobody is using for <span class="ph">[your market or niche in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>4. The selling angle almost nobody is using</summary><div class="body"><p class="wyg">A reason-to-buy almost nobody in your market is using, so you can own it, with the closest existing ad shown so you can see the difference.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the selling angle almost nobody is using for <span class="ph">[your market or niche in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running and have run 60 days or more, one per brand. If fewer than 5 come back, widen to 30 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -53,7 +53,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the one angle I should own, show me the closest ad you found to it with its GetHookd link, and say how mine is different. If two angles tie, pick the one whose ads have run longest and say why.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></section><section><h2>2. See what is winning in your market<small>Top winners first, then the proven long-runners, then what is new, then the gaps.</small></h2><div class="p"><h3>1. Top 5 winning ads in my market</h3><p class="wyg">The 5 best performing ads in your market right now, each from a different brand, with the one to copy first.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the top 5 winning ads for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details></section><section><h2>2. See what is winning in your market<small>Top winners first, then the proven long-runners, then what is new, then the gaps.</small></h2><details class="p"><summary>1. Top 5 winning ads in my market</summary><div class="body"><p class="wyg">The 5 best performing ads in your market right now, each from a different brand, with the one to copy first.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the top 5 winning ads for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 5-star ads (GetHookd&#x27;s Winning performance rating) that are still running, one per brand, ranked by how long they have been running, longest first. When a brand has several, use its longest-running one. If fewer than 5 come back, add 4-star ads (the Optimized rating) until you have 5. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -63,7 +63,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me which one to copy first and why.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>2. Ads that have been running the longest</h3><p class="wyg">The 5 ads brands have kept paying for the longest. Nobody runs an ad for months unless it makes money.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me the ads for <span class="ph">[your product in 3 or 4 words]</span> that have been running the longest.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>2. Ads that have been running the longest</summary><div class="body"><p class="wyg">The 5 ads brands have kept paying for the longest. Nobody runs an ad for months unless it makes money.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me the ads for <span class="ph">[your product in 3 or 4 words]</span> that have been running the longest.
 
 <span class="lb">Find:</span> the 5 longest-running ads that are still live, at least 180 days, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -73,7 +73,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the one to study first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>3. Ads brands keep re-running</h3><p class="wyg">The ads brands have launched again and again, which is the clearest sign an ad keeps making money.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the ads for <span class="ph">[your product in 3 or 4 words]</span> that brands keep launching again.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>3. Ads brands keep re-running</summary><div class="body"><p class="wyg">The ads brands have launched again and again, which is the clearest sign an ad keeps making money.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the ads for <span class="ph">[your product in 3 or 4 words]</span> that brands keep launching again.
 
 <span class="lb">Find:</span> ads where the same image or video has been launched more than once and is still running, ranked by how many times it has been run, across every star rating. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -83,7 +83,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> compare the 5-star ads (GetHookd&#x27;s Winning performance rating) in the list against each other, then name the one to study first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>4. New ads launched in the last 30 days</h3><p class="wyg">What competitors started testing this month, so you see their next move before it becomes a winner.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me what competitors started running for <span class="ph">[your product in 3 or 4 words]</span> in the last 30 days.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>4. New ads launched in the last 30 days</summary><div class="body"><p class="wyg">What competitors started testing this month, so you see their next move before it becomes a winner.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me what competitors started running for <span class="ph">[your product in 3 or 4 words]</span> in the last 30 days.
 
 <span class="lb">Find:</span> the 5 newest ads started in the last 30 days, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -93,7 +93,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me the one new idea worth testing first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>5. Opening lines on new video ads</h3><p class="wyg">The words new video ads are opening with right now, ranked by how many brands use them, plus 5 openings written for your product.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me how new video ads for <span class="ph">[your product in 3 or 4 words]</span> are opening right now.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>5. Opening lines on new video ads</summary><div class="body"><p class="wyg">The words new video ads are opening with right now, ranked by how many brands use them, plus 5 openings written for your product.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me how new video ads for <span class="ph">[your product in 3 or 4 words]</span> are opening right now.
 
 <span class="lb">Find:</span> up to 5 video ads that already have a transcript that started in the last 14 days and are still running, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -103,7 +103,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> write 5 opening lines for my product in the same style, and tell me which to use first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>6. Selling angles the biggest brands use</h3><p class="wyg">5 different reasons-to-buy the biggest advertisers push, each backed by an ad that has run a month or more.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me the selling angles the biggest advertisers use for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>6. Selling angles the biggest brands use</summary><div class="body"><p class="wyg">5 different reasons-to-buy the biggest advertisers push, each backed by an ad that has run a month or more.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me the selling angles the biggest advertisers use for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running and have run 30 days or more, one per brand, taking the brands running the most ads for this product first. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -113,7 +113,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the angle to copy first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>7. What offers my market is using</h3><p class="wyg">The discounts, bundles, free gifts, trials and guarantees your competitors put in their ads, brand by brand, and the one offer to test.</p><pre><span class="lb">Goal:</span> Using GetHookd, list the offers brands put in their ads for <span class="ph">[your product in 3 or 4 words]</span>: discounts, bundles, free gifts, free shipping, free trials, guarantees and warranties.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>7. What offers my market is using</summary><div class="body"><p class="wyg">The discounts, bundles, free gifts, trials and guarantees your competitors put in their ads, brand by brand, and the one offer to test.</p><pre><span class="lb">Goal:</span> Using GetHookd, list the offers brands put in their ads for <span class="ph">[your product in 3 or 4 words]</span>: discounts, bundles, free gifts, free shipping, free trials, guarantees and warranties.
 
 <span class="lb">Find:</span> the 5 brands running the most ads for this product, then the longest-running 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) from each, one ad per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -123,7 +123,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me the one offer I should test first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>8. What the winning ads have in common</h3><p class="wyg">The patterns that keep showing up across the best ads in your market, each with the single ad that shows it best.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me what the best ads for <span class="ph">[your product in 3 or 4 words]</span> have in common.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>8. What the winning ads have in common</summary><div class="body"><p class="wyg">The patterns that keep showing up across the best ads in your market, each with the single ad that shows it best.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me what the best ads for <span class="ph">[your product in 3 or 4 words]</span> have in common.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings), one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -133,7 +133,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the one pattern to copy first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>9. The angle almost nobody is running</h3><p class="wyg">An obvious selling angle for your product that almost no competitor uses, with the closest ad shown.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the selling angle almost nobody is running for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>9. The angle almost nobody is running</summary><div class="body"><p class="wyg">An obvious selling angle for your product that almost no competitor uses, with the closest ad shown.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the selling angle almost nobody is running for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings), one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -143,7 +143,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> pick the single best one for me to own, and show me the GetHookd link to the closest ad so I can see what not to copy.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>10. Borrow a winning idea from a nearby market</h3><p class="wyg">5 winning ads from a market next to yours, using angles your own market&#x27;s ads are not using.</p><pre><span class="lb">Goal:</span> Using GetHookd, pick one market next to <span class="ph">[your product in 3 or 4 words]</span>, meaning a product the same kind of buyer also purchases that does not show up when you search for mine, and tell me why you picked it.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>10. Borrow a winning idea from a nearby market</summary><div class="body"><p class="wyg">5 winning ads from a market next to yours, using angles your own market&#x27;s ads are not using.</p><pre><span class="lb">Goal:</span> Using GetHookd, pick one market next to <span class="ph">[your product in 3 or 4 words]</span>, meaning a product the same kind of buyer also purchases that does not show up when you search for mine, and tell me why you picked it.
 
 <span class="lb">Find:</span> 5 of its 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running, one per brand, using a selling angle my market is not using. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -153,7 +153,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me which one to adapt first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>11. How my ad stacks up against the market</h3><p class="wyg">Where your ad sounds like everyone else, and 3 ways to say it that none of the ads you get back use.</p><pre><span class="lb">Goal:</span> Using GetHookd, compare my own ad wording against the best ads for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>11. How my ad stacks up against the market</summary><div class="body"><p class="wyg">Where your ad sounds like everyone else, and 3 ways to say it that none of the ads you get back use.</p><pre><span class="lb">Goal:</span> Using GetHookd, compare my own ad wording against the best ads for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings), one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -165,7 +165,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></section><section><h2>3. Angles, hooks and copy<small>What the market says, how the best ads open, and what nobody is saying yet.</small></h2><div class="p"><h3>1. What everyone is claiming</h3><p class="wyg">The 5 promises your market keeps making, each with the ad that shows it, plus your own version of the top 2.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me what every brand is claiming about <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></details></section><section><h2>3. Angles, hooks and copy<small>What the market says, how the best ads open, and what nobody is saying yet.</small></h2><details class="p"><summary>1. What everyone is claiming</summary><div class="body"><p class="wyg">The 5 promises your market keeps making, each with the ad that shows it, plus your own version of the top 2.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me what every brand is claiming about <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running, one per brand. If fewer than 5 come back, add ads still running 60 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -175,7 +175,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> write my own version of the top 2 claims, and tell me which to test first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>2. Opening lines of the best video ads</h3><p class="wyg">How the best video ads in your market open, sorted by style, plus 5 openings written for your product.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me how the best video ads for <span class="ph">[your product in 3 or 4 words]</span> open.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>2. Opening lines of the best video ads</summary><div class="body"><p class="wyg">How the best video ads in your market open, sorted by style, plus 5 openings written for your product.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me how the best video ads for <span class="ph">[your product in 3 or 4 words]</span> open.
 
 <span class="lb">Find:</span> 5 video ads that already have a transcript that are 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) and still running, one per brand. If fewer than 5 come back, add video ads still running 60 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -185,7 +185,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> pick the winning style from the 5-star ads where someone speaks, using the 4-star ones if none of them has speech, write 5 opening lines for my product in that style, and tell me which to use first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>3. Words on the best image ads</h3><p class="wyg">The words competitors put on their best images, what repeats, and which image to copy with what to change.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me the words on the best image ads for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>3. Words on the best image ads</summary><div class="body"><p class="wyg">The words competitors put on their best images, what repeats, and which image to copy with what to change.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me the words on the best image ads for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 5 image ads that are 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) and still running, one per brand. If fewer than 5 come back, add image ads still running 60 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -195,7 +195,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me the 3 things that keep repeating, name the one image to copy first, and tell me what to change when I copy it.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>4. Customer quotes competitors put in their ads</h3><p class="wyg">Real buyer lines competitors use in their ads, sorted by the problem, the result and the doubt they get past.</p><pre><span class="lb">Goal:</span> Using GetHookd, pull the lines written in a customer&#x27;s voice from ads for <span class="ph">[your product in 3 or 4 words]</span>, like a quoted review, a testimonial or someone talking to camera about what they bought.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>4. Customer quotes competitors put in their ads</summary><div class="body"><p class="wyg">Real buyer lines competitors use in their ads, sorted by the problem, the result and the doubt they get past.</p><pre><span class="lb">Goal:</span> Using GetHookd, pull the lines written in a customer&#x27;s voice from ads for <span class="ph">[your product in 3 or 4 words]</span>, like a quoted review, a testimonial or someone talking to camera about what they bought.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running, one per brand, using video ads that already have a transcript where the line is spoken. If fewer than 5 real buyer lines turn up, widen to all ads still running for this product. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -205,7 +205,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the one real buyer line I should adapt for my ads.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>5. What my customers say that these ads do not</h3><p class="wyg">Which of your selling points are crowded, which are only said by brands, and which no ad you get back says, with an opening line for the open ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, compare what my customers praise and what my ad promises against the ads running for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>5. What my customers say that these ads do not</summary><div class="body"><p class="wyg">Which of your selling points are crowded, which are only said by brands, and which no ad you get back says, with an opening line for the open ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, compare what my customers praise and what my ad promises against the ads running for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> ads for this product that are still running, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -217,7 +217,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></section><section><h2>4. Who the ads talk to, and what they are missing<small>How much the buyer already knows, and the ad types nobody is making.</small></h2><div class="p"><h3>1. Borrow an ad type your market is missing</h3><p class="wyg">The best ads in your market sorted by kind of ad, the kinds none of them run, and one still-running example of the best missing kind from a nearby market.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the kinds of ad that are rare or missing for <span class="ph">[your product in 3 or 4 words]</span>, and show me one working example to borrow from a nearby market.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details></section><section><h2>4. Who the ads talk to, and what they are missing<small>How much the buyer already knows, and the ad types nobody is making.</small></h2><details class="p"><summary>1. Borrow an ad type your market is missing</summary><div class="body"><p class="wyg">The best ads in your market sorted by kind of ad, the kinds none of them run, and one still-running example of the best missing kind from a nearby market.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the kinds of ad that are rare or missing for <span class="ph">[your product in 3 or 4 words]</span>, and show me one working example to borrow from a nearby market.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running, one per brand. Then widen the pull: also bring back the still-running ads for this product whose button is Learn more, Watch more, Sign up or Get offer, one per brand, and add any you did not already have. If fewer than 5 come back in total, add ads still running 60 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -227,7 +227,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the one kind to bring into my market first and why, built only on ads still running today.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>2. How much the buyer already knows</h3><p class="wyg">The best ads in your market sorted by how much the buyer already knows, the words behind each call, and the level to talk to first.</p><pre><span class="lb">Goal:</span> Using GetHookd, sort the best ads for <span class="ph">[your product in 3 or 4 words]</span> by how much the buyer already knows.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>2. How much the buyer already knows</summary><div class="body"><p class="wyg">The best ads in your market sorted by how much the buyer already knows, the words behind each call, and the level to talk to first.</p><pre><span class="lb">Goal:</span> Using GetHookd, sort the best ads for <span class="ph">[your product in 3 or 4 words]</span> by how much the buyer already knows.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running, one per brand. If fewer than 5 come back, add ads still running 60 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -237,7 +237,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the level to talk to first and why, built only on ads still running today.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>3. Write ads for the buyer your market talks to least</h3><p class="wyg">Three ready ad ideas aimed at the buyer your market talks to least, each with its opening line and the proof that buyer needs, and one picked to make first.</p><pre><span class="lb">Goal:</span> Using GetHookd, write me 3 ad ideas for <span class="ph">[your product in 3 or 4 words]</span> aimed at the buyer my market talks to least.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>3. Write ads for the buyer your market talks to least</summary><div class="body"><p class="wyg">Three ready ad ideas aimed at the buyer your market talks to least, each with its opening line and the proof that buyer needs, and one picked to make first.</p><pre><span class="lb">Goal:</span> Using GetHookd, write me 3 ad ideas for <span class="ph">[your product in 3 or 4 words]</span> aimed at the buyer my market talks to least.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running, one per brand. If fewer than 5 come back, add ads still running 60 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -247,7 +247,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me which idea to make first and why, choosing the level only from ads still running today.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></section><section><h2>5. Make your ads<small>Angles, scripts and rewrites built on ads that already work. Paste your own where asked.</small></h2><div class="p"><h3>1. Five ways to sell your product</h3><p class="wyg">Five different reasons to buy that are already working in your market, each with a hook line written for your product and the ad behind it.</p><pre><span class="lb">Goal:</span> Using GetHookd, give me 5 different reasons to buy that already work for <span class="ph">[your product in 3 or 4 words]</span>, each with a hook line for my product.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details></section><section><h2>5. Make your ads<small>Angles, scripts and rewrites built on ads that already work. Paste your own where asked.</small></h2><details class="p"><summary>1. Five ways to sell your product</summary><div class="body"><p class="wyg">Five different reasons to buy that are already working in your market, each with a hook line written for your product and the ad behind it.</p><pre><span class="lb">Goal:</span> Using GetHookd, give me 5 different reasons to buy that already work for <span class="ph">[your product in 3 or 4 words]</span>, each with a hook line for my product.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running and have run 30 days or more, one per brand. If fewer than 5 come back, add ads still running 14 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -257,7 +257,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the one angle to test first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>2. Turn your customer reviews into ad angles</h3><p class="wyg">The five things your customers say most, each turned into an angle and a hook line, with the ad already running it or the word untested.</p><pre><span class="lb">Goal:</span> Using GetHookd, turn the reviews I paste below into ad angles for <span class="ph">[your product in 3 or 4 words]</span> and show me which ones the market is already running.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>2. Turn your customer reviews into ad angles</summary><div class="body"><p class="wyg">The five things your customers say most, each turned into an angle and a hook line, with the ad already running it or the word untested.</p><pre><span class="lb">Goal:</span> Using GetHookd, turn the reviews I paste below into ad angles for <span class="ph">[your product in 3 or 4 words]</span> and show me which ones the market is already running.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -269,7 +269,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>3. Rewrite your opening lines in 3 proven styles</h3><p class="wyg">Three styles the best video ads in your market open with, each with a real example, and your own opening lines rewritten in all three.</p><pre><span class="lb">Goal:</span> Using GetHookd, group how the best video ads for <span class="ph">[your product in 3 or 4 words]</span> open, then rewrite my own opening lines in those styles.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>3. Rewrite your opening lines in 3 proven styles</summary><div class="body"><p class="wyg">Three styles the best video ads in your market open with, each with a real example, and your own opening lines rewritten in all three.</p><pre><span class="lb">Goal:</span> Using GetHookd, group how the best video ads for <span class="ph">[your product in 3 or 4 words]</span> open, then rewrite my own opening lines in those styles.
 
 <span class="lb">Find:</span> video ads that already have a transcript, are 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings), still running and have run 30 days or more, one per brand. If fewer than 5 come back, add video ads still running 14 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -281,7 +281,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>4. Three ad scripts built on ads that already work</h3><p class="wyg">How five still-running video ads in your market run from opening to close, plus three 30 second scripts for your product built on them.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me how the best video ads for <span class="ph">[your product in 3 or 4 words]</span> are built, then write me 3 scripts on that shape.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>4. Three ad scripts built on ads that already work</summary><div class="body"><p class="wyg">How five still-running video ads in your market run from opening to close, plus three 30 second scripts for your product built on them.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me how the best video ads for <span class="ph">[your product in 3 or 4 words]</span> are built, then write me 3 scripts on that shape.
 
 <span class="lb">Find:</span> video ads that already have a transcript, are 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings), still running and have run 30 days or more, one per brand, closest to my product first. If fewer than 5 come back, add video ads still running 14 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -293,7 +293,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>5. Five new versions of your image ad</h3><p class="wyg">Which part of your image ad is doing the selling, plus five new versions, each changing one part and each built on a still-running ad.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me which part of the image ad I paste below is doing the selling, then write 5 new versions of it for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>5. Five new versions of your image ad</summary><div class="body"><p class="wyg">Which part of your image ad is doing the selling, plus five new versions, each changing one part and each built on a still-running ad.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me which part of the image ad I paste below is doing the selling, then write 5 new versions of it for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> image ads that are 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings), still running and have run 30 days or more, one per brand. If fewer than 5 come back, add image ads still running 14 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -305,7 +305,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>6. Rewrite your copy with phrases that already sell</h3><p class="wyg">The phrases the still-running ads in your market keep reusing, and your copy rewritten five ways around them.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the phrases the best ads for <span class="ph">[your product in 3 or 4 words]</span> keep using, then rewrite my copy with them.
+<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>6. Rewrite your copy with phrases that already sell</summary><div class="body"><p class="wyg">The phrases the still-running ads in your market keep reusing, and your copy rewritten five ways around them.</p><pre><span class="lb">Goal:</span> Using GetHookd, find the phrases the best ads for <span class="ph">[your product in 3 or 4 words]</span> keep using, then rewrite my copy with them.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running and have run 30 days or more, one per brand. If fewer than 5 come back, add ads still running 14 days or more. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -317,7 +317,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>7. Rewrite your closing line</h3><p class="wyg">How five long-running ads in your market close, the pattern they share, and your own close rewritten five ways on it.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me how the best ads for <span class="ph">[your product in 3 or 4 words]</span> close, then rewrite my close 5 ways.
+<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>7. Rewrite your closing line</summary><div class="body"><p class="wyg">How five long-running ads in your market close, the pattern they share, and your own close rewritten five ways on it.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me how the best ads for <span class="ph">[your product in 3 or 4 words]</span> close, then rewrite my close 5 ways.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running and have run 60 days or more, one per brand. If fewer than 5 come back, lower it to 30 days. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -329,7 +329,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>8. Your ad in four different tones</h3><p class="wyg">Your ad rewritten blunt, funny, expert and founder story, plus which of those tones the longest-running ads in your market actually use.</p><pre><span class="lb">Goal:</span> Using GetHookd, rewrite the ad I paste below in 4 tones and tell me which tone the market for <span class="ph">[your product in 3 or 4 words]</span> is already using.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>8. Your ad in four different tones</summary><div class="body"><p class="wyg">Your ad rewritten blunt, funny, expert and founder story, plus which of those tones the longest-running ads in your market actually use.</p><pre><span class="lb">Goal:</span> Using GetHookd, rewrite the ad I paste below in 4 tones and tell me which tone the market for <span class="ph">[your product in 3 or 4 words]</span> is already using.
 
 <span class="lb">Find:</span> the 5 longest-running 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still live, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -341,7 +341,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>9. Rewrite your ad for a new audience</h3><p class="wyg">The words and worries still-running ads use for the audience you name, and your own ad rewritten in their language with your offer kept.</p><pre><span class="lb">Goal:</span> Using GetHookd, rewrite the ad I paste below for <span class="ph">[your product in 3 or 4 words]</span> in the language of the new audience I name.
+<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>9. Rewrite your ad for a new audience</summary><div class="body"><p class="wyg">The words and worries still-running ads use for the audience you name, and your own ad rewritten in their language with your offer kept.</p><pre><span class="lb">Goal:</span> Using GetHookd, rewrite the ad I paste below for <span class="ph">[your product in 3 or 4 words]</span> in the language of the new audience I name.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) that are still running and speak to that audience, one per brand. If nothing fits, widen to any still-running ad for this product aimed at that audience. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -353,7 +353,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></section><section><h2>6. Your saved boards and swipe file<small>Rank, compare and plan from what you already saved.</small></h2><div class="p"><h3>1. Rank the ads I already saved</h3><p class="wyg">Your fullest board ranked from longest running to newest, so you can see which of your own saved ads has the most proof behind it and which to copy first.</p><pre><span class="lb">Goal:</span> Using GetHookd, rank the ads I have already saved on my fullest board.
+<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></details></section><section><h2>6. Your saved boards and swipe file<small>Rank, compare and plan from what you already saved.</small></h2><details class="p"><summary>1. Rank the ads I already saved</summary><div class="body"><p class="wyg">Your fullest board ranked from longest running to newest, so you can see which of your own saved ads has the most proof behind it and which to copy first.</p><pre><span class="lb">Goal:</span> Using GetHookd, rank the ads I have already saved on my fullest board.
 
 <span class="lb">Find:</span> my boards and how many ads each one holds, then the fullest board and its name. If that board holds fewer than 3 ads, use the next fullest. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -363,7 +363,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the strongest ad on the board, the one to copy first. Call the ratings 5-star and 4-star, not by any other name.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>2. What my saved ads have in common</h3><p class="wyg">The patterns hiding in your swipe file: the brands you save twice, whether you lean video or image, the angles that keep coming back, and the one pattern worth building your own ad from.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me what the ads in my swipe file have in common.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>2. What my saved ads have in common</summary><div class="body"><p class="wyg">The patterns hiding in your swipe file: the brands you save twice, whether you lean video or image, the angles that keep coming back, and the one pattern worth building your own ad from.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me what the ads in my swipe file have in common.
 
 <span class="lb">Find:</span> the ads in my swipe file. If it holds fewer than 5 ads, use my fullest board instead. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -373,7 +373,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me the one pattern worth building my own ad from first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>3. Which saved ad to clone first</h3><p class="wyg">Your swipe file with the dead ads dropped and the rest ranked, so the top of the list is the ad with the most proof behind it and you know which one to clone first.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me which ad in my swipe file to clone first.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>3. Which saved ad to clone first</summary><div class="body"><p class="wyg">Your swipe file with the dead ads dropped and the rest ranked, so the top of the list is the ad with the most proof behind it and you know which one to clone first.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me which ad in my swipe file to clone first.
 
 <span class="lb">Find:</span> the ads in my swipe file, dropping any that have stopped running, then rank the rest by how long they have been running, then by star rating, then by how many times the brand has launched the same ad again. If fewer than 5 are still running, add the best from my fullest board. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -383,7 +383,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me which one to clone first and what makes it the pick. Call the ratings 5-star and 4-star, not by any other name.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>4. What my board is missing</h3><p class="wyg">The groups your saved board has nothing in (angle, buyer, format), and the next ads to save to fill the biggest gap.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me what my fullest board is missing for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>4. What my board is missing</summary><div class="body"><p class="wyg">The groups your saved board has nothing in (angle, buyer, format), and the next ads to save to fill the biggest gap.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me what my fullest board is missing for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> my fullest board and its name, then 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) for <span class="ph">[your product in 3 or 4 words]</span> that are still running, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -393,7 +393,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> name the gap costing me most and the one ad to save next. Call the ratings 5-star and 4-star, not by any other name.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>5. Turn my saved ads into a 30 day plan</h3><p class="wyg">Your saved ads grouped into real ideas instead of one test per ad, laid out as a 30 day plan with the first batch to shoot this week.</p><pre><span class="lb">Goal:</span> Using GetHookd, turn the ads on my fullest board into a 30 day test plan for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>5. Turn my saved ads into a 30 day plan</summary><div class="body"><p class="wyg">Your saved ads grouped into real ideas instead of one test per ad, laid out as a 30 day plan with the first batch to shoot this week.</p><pre><span class="lb">Goal:</span> Using GetHookd, turn the ads on my fullest board into a 30 day test plan for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> my fullest board and its name, then group its ads into distinct ideas rather than treating every ad as its own test. If there are fewer than 3 ideas, add 5-star ads (GetHookd&#x27;s Winning performance rating) for <span class="ph">[your product in 3 or 4 words]</span> that are still running, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -403,7 +403,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me which idea to shoot first. Call the ratings 5-star and 4-star, not by any other name.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div><div class="p"><h3>6. Clean out my boards</h3><p class="wyg">Every board you own with its size, its dead ads and anything sitting on the wrong board, plus the one board to clean out first.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me which of my boards needs cleaning out.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details><details class="p"><summary>6. Clean out my boards</summary><div class="body"><p class="wyg">Every board you own with its size, its dead ads and anything sitting on the wrong board, plus the one board to clean out first.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me which of my boards needs cleaning out.
 
 <span class="lb">Find:</span> my boards and folders, how many ads each board holds, and which are empty, then open the 5 fullest. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -413,7 +413,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Then:</span> tell me which board to clean out first.
 
-<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></section><section><h2>7. Once you are running ads<small>Paste your numbers. No account connection needed.</small></h2><div class="p"><h3>1. Explain the numbers you paste in</h3><p class="wyg">Paste your ad name, spend, sales and cost per sale and get five plain lines on what is working and what is failing, then three moves, each tied to a real ad that is running now. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, explain the ad numbers I paste in and tell me what to do next for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.</pre></div></details></section><section><h2>7. Once you are running ads<small>Paste your numbers. No account connection needed.</small></h2><details class="p"><summary>1. Explain the numbers you paste in</summary><div class="body"><p class="wyg">Paste your ad name, spend, sales and cost per sale and get five plain lines on what is working and what is failing, then three moves, each tied to a real ad that is running now. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, explain the ad numbers I paste in and tell me what to do next for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) for <span class="ph">[your product in 3 or 4 words]</span> that are still running and have run 30 days or more, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -425,7 +425,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>2. Which ads to turn off and which to feed</h3><p class="wyg">Paste last month&#x27;s rows and every ad comes back marked turn off, spend more or leave alone against your own target, with a replacement idea from a real running ad for each one you kill. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me which of the ads I paste in to turn off and which to put more money behind, for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>2. Which ads to turn off and which to feed</summary><div class="body"><p class="wyg">Paste last month&#x27;s rows and every ad comes back marked turn off, spend more or leave alone against your own target, with a replacement idea from a real running ad for each one you kill. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me which of the ads I paste in to turn off and which to put more money behind, for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) for <span class="ph">[your product in 3 or 4 words]</span> that are still running and have run 30 days or more, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -437,7 +437,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>3. Put your weakest ads next to the best ones</h3><p class="wyg">Paste up to five weak ads and each one comes back next to the closest ad that is actually working, compared on opening, proof, offer and format, with your worst one rewritten. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, put the weak ads I paste in next to the best ads running for <span class="ph">[your product in 3 or 4 words]</span>.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>3. Put your weakest ads next to the best ones</summary><div class="body"><p class="wyg">Paste up to five weak ads and each one comes back next to the closest ad that is actually working, compared on opening, proof, offer and format, with your worst one rewritten. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, put the weak ads I paste in next to the best ads running for <span class="ph">[your product in 3 or 4 words]</span>.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) for <span class="ph">[your product in 3 or 4 words]</span> that are still running and have run 30 days or more, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -449,7 +449,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>4. What to test next</h3><p class="wyg">Five tests you are not already running, biggest impact first, each lifted from an ad that is live right now with the link and how long it has run. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, give me the next things to test for <span class="ph">[your product in 3 or 4 words]</span> that I am not already running.
+<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>4. What to test next</summary><div class="body"><p class="wyg">Five tests you are not already running, biggest impact first, each lifted from an ad that is live right now with the link and how long it has run. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, give me the next things to test for <span class="ph">[your product in 3 or 4 words]</span> that I am not already running.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) for <span class="ph">[your product in 3 or 4 words]</span> that are still running and have run 30 days or more, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -461,7 +461,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>5. What competitors launched in the last 2 weeks</h3><p class="wyg">Everything that started running in your market in the last fortnight, grouped by the reason it gives to buy, with the groups you are not running yet marked. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me what brands started running for <span class="ph">[your product in 3 or 4 words]</span> in the last 14 days.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>5. What competitors launched in the last 2 weeks</summary><div class="body"><p class="wyg">Everything that started running in your market in the last fortnight, grouped by the reason it gives to buy, with the groups you are not running yet marked. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me what brands started running for <span class="ph">[your product in 3 or 4 words]</span> in the last 14 days.
 
 <span class="lb">Find:</span> ads for <span class="ph">[your product in 3 or 4 words]</span> that started in the last 14 days and are still running, one per brand. If fewer than 5 come back, widen to the last 30 days. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -473,7 +473,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>6. Are the longest running ads going stale</h3><p class="wyg">What the three longest running brands in your market changed in the last month, and whether the ad you paste in is due the same refresh. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me whether the ad I paste in needs a refresh, by looking at what the longest running brands for <span class="ph">[your product in 3 or 4 words]</span> changed.
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>6. Are the longest running ads going stale</summary><div class="body"><p class="wyg">What the three longest running brands in your market changed in the last month, and whether the ad you paste in is due the same refresh. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, tell me whether the ad I paste in needs a refresh, by looking at what the longest running brands for <span class="ph">[your product in 3 or 4 words]</span> changed.
 
 <span class="lb">Find:</span> the 3 longest running 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) for <span class="ph">[your product in 3 or 4 words]</span> that are still running, one per brand, then what each of those 3 brands launched in the last 30 days. If a brand launched nothing new, use the next longest running brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -485,7 +485,7 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div><div class="p"><h3>7. What ad formats your market uses</h3><p class="wyg">The split of video against image and which buttons the working ads use, next to your own mix, with the three biggest gaps and the one format to make next. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me which ad formats and buttons the best ads for <span class="ph">[your product in 3 or 4 words]</span> use, next to my own mix.
+<span class="lb">My ad:</span> <span class="ph">[paste your ad here]</span></pre></div></details><details class="p"><summary>7. What ad formats your market uses</summary><div class="body"><p class="wyg">The split of video against image and which buttons the working ads use, next to your own mix, with the three biggest gaps and the one format to make next. Paste each ad with its spend, results, and its angle and format, so it can tell your running tests from new ones.</p><pre><span class="lb">Goal:</span> Using GetHookd, show me which ad formats and buttons the best ads for <span class="ph">[your product in 3 or 4 words]</span> use, next to my own mix.
 
 <span class="lb">Find:</span> 4-star and 5-star ads (GetHookd&#x27;s Optimized and Winning performance ratings) for <span class="ph">[your product in 3 or 4 words]</span> that are still running, one per brand. Use at most 4 searches and give me at most 5 ads. If you hit that cap, answer with what you have and say so.
 
@@ -497,6 +497,6 @@ pre{white-space:pre-wrap;font:13px/1.6 var(--mono);background:#0f1c27;color:#e6e
 
 <span class="lb">Always:</span> Use the ad&#x27;s main text, headline and link text as the search returns them. Do not open ads one at a time. Only quote what is really there.
 
-<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></section>
+<span class="lb">My text:</span> <span class="ph">[paste your ad here]</span></pre></div></details></section>
 <p class="foot">Sections 1 to 4 tested cold on live GetHookd data. One prompt each from sections 5, 6 and 7 verified on Claude Desktop on 23 September 2026 at 45 to 60 seconds; the rest of 5 to 7 are built to the same rules.</p>
 </div></body></html>

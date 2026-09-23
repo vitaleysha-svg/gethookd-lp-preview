@@ -8,6 +8,15 @@ section{margin-top:34px}h2{font-size:20px;letter-spacing:-.02em;margin:0 0 12px}
 .p{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 18px 16px;margin-bottom:10px}
 h3{margin:0 0 5px;font-size:16px;letter-spacing:-.01em}p{color:var(--sub);margin:0}
 .ph{display:flex;align-items:center;gap:10px;margin-bottom:5px}.ph h3{margin:0}
+details.p{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:0}
+details.p summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:15px 18px}
+details.p summary::-webkit-details-marker{display:none}
+details.p summary::marker{content:""}
+details.p summary:after{content:"+";margin-left:10px;color:var(--faint);font-weight:500;font-size:18px;line-height:1}
+details.p[open] summary:after{content:"\2212"}
+.stitle{font-weight:700;font-size:16px;letter-spacing:-.01em}
+.sbody{padding:0 18px 16px}
+.sbody .lead{margin:0 0 8px}
 .meta{margin-left:auto;font:600 11px var(--mono);color:var(--faint);white-space:nowrap}
 .lead{margin:0 0 8px}
 .p ul{margin:8px 0 0;padding-left:18px}

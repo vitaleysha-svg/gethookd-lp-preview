@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Service Playbook</title>
+<style>
+:root{--bg:#f7f7f5;--surface:#fff;--soft:#f0f1ef;--line:#e1e3e1;--ink:#202124;--sub:#62666b;--faint:#85898e;--blue:#326bdd;--blue-soft:#e7edf9;--green:#277b5e;--green-soft:#dcebe4;--amber:#945f11;--amber-soft:#f1e5cc;--red:#ad4c45;--red-soft:#f0ddda;
+--sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Inter,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.shell{width:min(1120px,calc(100% - 32px));margin:auto}
+.topbar{position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line);background:rgba(247,247,245,.94);backdrop-filter:blur(14px)}
+.topbar-in{height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.identity{display:flex;align-items:baseline;gap:12px}.identity strong{font-size:16px;letter-spacing:-.02em}.identity span{color:var(--sub);font-size:12px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--sub)}.dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+main{padding:24px 0 64px}
+.card{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:18px}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px 0}
+.head h2{margin:0;font-size:20px;letter-spacing:-.03em}.head .note{color:var(--sub);font-size:12px}
+.body{padding:16px 24px 22px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:22px 24px 18px}
+.kpi .l{font-size:12px;color:var(--sub)}.kpi .v{font:600 26px/1.2 var(--mono);letter-spacing:-.02em;margin:4px 0 2px}.kpi .s{font:11px var(--mono);color:var(--faint)}
+.v.blue{color:var(--blue)}.v.green{color:var(--green)}.v.amber{color:var(--amber)}
+.oneline{margin:0 24px 22px;padding:14px 16px;border-radius:9px;background:var(--soft);font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;font-size:11px;font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}tr:last-child td{border-bottom:0}
+td.n{font-family:var(--mono);white-space:nowrap}
+.step{display:grid;grid-template-columns:132px 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0;padding-top:4px}
+.step .when b{display:block;font-size:15px;letter-spacing:-.01em}
+.step .when span{font:11px var(--mono);color:var(--faint)}
+.step ul{margin:6px 0 0;padding-left:18px}.step li{margin:5px 0}
+.said{border-left:2px solid var(--blue);background:var(--blue-soft);border-radius:0 8px 8px 0;padding:10px 14px;margin:10px 0;font-size:13px;color:#24487f}
+.said b{color:#1b3766}
+.q{background:var(--soft);border-radius:8px;padding:12px 15px;margin:8px 0}
+.q b{display:block;margin-bottom:4px}
+.q ol{margin:0;padding-left:18px}.q li{margin:4px 0}
+.tag{display:inline-block;font:600 10.5px var(--mono);padding:2px 7px;border-radius:5px}
+.t-green{background:var(--green-soft);color:var(--green)}.t-amber{background:var(--amber-soft);color:var(--amber)}.t-red{background:var(--red-soft);color:var(--red)}.t-blue{background:var(--blue-soft);color:var(--blue)}
+details{border-top:1px solid var(--line)}details:first-of-type{border-top:0}
+summary{cursor:pointer;list-style:none;padding:13px 0;font-weight:600;display:flex;justify-content:space-between}
+summary::-webkit-details-marker{display:none}summary::after{content:"Show +";font:12px var(--sans);color:var(--sub);font-weight:400}details[open] summary::after{content:"Hide"}
+details>div{padding:0 0 14px;color:var(--sub)}
+.foot{color:var(--faint);font-size:11.5px;margin-top:10px}
+@media(max-width:860px){.kpis{grid-template-columns:1fr 1fr}.step{grid-template-columns:1fr}}
+@media print{.topbar{position:static}.card{break-inside:avoid}}
+</style></head><body>
+<header class="topbar"><div class="shell topbar-in">
+<div class="identity"><strong>The service, end to end</strong><span>September 22, 2026 · for the Alex and Mladen call</span></div>
+<span class="pill"><span class="dot"></span>Built from the Gabriel call</span>
+</div></header>
+
+<main class="shell">
+
+<section class="card">
+<div class="head"><h2>What we are selling, in one line</h2><span class="note">Internal</span></div>
+<div class="kpis">
+<div class="kpi"><div class="l">Price</div><div class="v mono">$499</div><div class="s">per month floor</div></div>
+<div class="kpi"><div class="l">First pilots</div><div class="v mono green">5</div><div class="s">free, for proof</div></div>
+<div class="kpi"><div class="l">Time per client</div><div class="v mono amber">5-6 hrs</div><div class="s">per month after onboarding</div></div>
+<div class="kpi"><div class="l">One strategist carries</div><div class="v mono blue">30-40</div><div class="s">clients</div></div>
+</div>
+<div class="oneline"><b>We answer the one question every advertiser is stuck on: what do I test next.</b> Answered from their own numbers plus the whole market, not from copying the one competitor they already watch. The software finds what is working. The service tells them which of it applies to them, and in what order.</div>
+</section>
+
+<section class="card">
+<div class="head"><h2>The six stages</h2><span class="note">Outreach to weekly delivery</span></div>
+<div class="body">
+
+<div class="step"><div class="when"><b>1. Outreach</b><span>Day 0</span></div><div>
+Email 10 agency-plan users with a low health score who have paid for months. Not a pitch, an invitation: we are building a creative strategy layer on top of GetHookd, you are one of five people getting it free, and I want your feedback more than your money. Ask for one hour.
+<div class="said"><b>Why these people:</b> they already pay, they already use it, and if it works on them it works on the ones we will charge. Alex approved free for the first five so the pressure comes off the first runs.</div>
+</div></div>
+
+<div class="step"><div class="when"><b>2. Onboarding call</b><span>60 minutes</span></div><div>
+Understand their business and find the bottleneck. The questions are below and the order matters. Do not diagnose on this call, gather. The one thing to leave them with: give me a day or two and you get a written game plan.
+</div></div>
+
+<div class="step"><div class="when"><b>3. They send data</b><span>Same day</span></div><div>
+Until the ad account connection ships, they export it themselves. Ask for:
+<ul>
+<li>Ads Manager report, last 30 days, at ad level: ad name, spend, results, CPA, ROAS, CTR all, CTR link, CPC, CPM, frequency, and for videos hook rate and hold rate</li>
+<li>The creative itself, or a link to it, for the top 10 by spend and the 5 worst</li>
+<li>Their target CPA and ROAS</li>
+<li>The 3 to 5 competitors they already watch</li>
+</ul>
+</div></div>
+
+<div class="step"><div class="when"><b>4. The analysis</b><span>2-3 hours</span></div><div>
+Their numbers tell us where the break is. The GetHookd library tells us what to do about it. In order:
+<ul>
+<li><b>Read the account</b> against the thresholds in the next section. Mark every ad: hook problem, body problem, offer or page problem, or fine.</li>
+<li><b>Check concept diversity.</b> Count how many genuinely different ideas they have tested, not how many ads. This is the most common finding.</li>
+<li><b>Check awareness coverage.</b> Which levels they run and which they never touch.</li>
+<li><b>Run the market side in GetHookd:</b> winners in their niche, what their competitors launched recently, which angles exist in the market that they have never run.</li>
+<li><b>Pick the five moves</b> and name the reference ad behind each one.</li>
+</ul>
+</div></div>
+
+<div class="step"><div class="when"><b>5. The game plan</b><span>Back in 1-2 days</span></div><div>
+One page plus a Loom. Structure: here is what your numbers say, here is the single biggest gap, here are five things to make next, each with the live ad that proves the angle works and what to keep from it. End with what we will measure next week.
+</div></div>
+
+<div class="step"><div class="when"><b>6. Weekly</b><span>1-1.5 hrs</span></div><div>
+They send the new export. We send the Monday note in Slack: what moved, what to kill, what the market did, one thing to make this week. Every two weeks that becomes the full "make these five" list. Calls twice a month, more by package.
+</div></div>
+
+</div>
+</section>
+
+<section class="card">
+<div class="head"><h2>The onboarding call, question by question</h2><span class="note">Gabriel's order: research first, production second</span></div>
+<div class="body">
+<div class="q"><b>Block 1: what they sell and to whom (10 min)</b>
+<ol>
+<li>Who is the customer you are targeting, and why that person?</li>
+<li>What is the promise you are making to them?</li>
+<li>When you decide what ad to make next, what are you actually looking at? Where does that information come from?</li>
+</ol></div>
+<div class="said"><b>Gabriel:</b> start with market research and the source of truth. What avatar, why that avatar, what hypothesis sits behind the selling point, and what information they use to decide what to create. Most people cannot answer the third one, and that alone is the finding.</div>
+
+<div class="q"><b>Block 2: volume and money (10 min)</b>
+<ol>
+<li>How much are you spending a month right now?</li>
+<li>How many creatives do you test a week, and how many of those are genuinely new concepts rather than variations?</li>
+<li>What is your target CPA and ROAS, and how far off are you?</li>
+</ol></div>
+<div class="said"><b>Gabriel:</b> ecom is a game of testing, so net new concepts per week is the number that matters. His own team tests 10 net new concepts a day. Then how far they are from their CPA and ROAS target, which is different for every brand.</div>
+
+<div class="q"><b>Block 3: what they have already tried (15 min)</b>
+<ol>
+<li>What has worked so far, and what is your best guess why?</li>
+<li>What have you tested that failed?</li>
+<li>What do you keep meaning to test and never get to?</li>
+</ol></div>
+<div class="said"><b>Gabriel, on established brands:</b> the biggest letdown from consultants was cookie-cutter advice, because 99% of it was something they had already tested. For bigger brands, understanding what they have tested over the last months is the whole job before you open your mouth.</div>
+
+<div class="q"><b>Block 4: the bottleneck, in their words (10 min)</b>
+<ol>
+<li>If you could fix one thing about your ads this month, what would it be?</li>
+<li>Who makes the creative, and how long does one new concept take you?</li>
+<li>Which competitors do you watch?</li>
+</ol></div>
+
+<div class="q"><b>Block 5: close (5 min)</b>
+<ol>
+<li>Here is exactly what I need you to send me today.</li>
+<li>You get the written game plan in one to two days.</li>
+<li>Then we do this every week, and here is the Slack channel.</li>
+</ol></div>
+</div>
+</section>
+
+<section class="card">
+<div class="head"><h2>Seven questions Gabriel's script does not cover</h2>
+<p>Four of these go on the intake form so they do not eat call time. Three belong in the call itself.</p>
+<table><tr><th>Question</th><th>What goes wrong without it</th><th>Where</th></tr>
+<tr><td><b>Contribution margin, or AOV and cost of goods</b></td><td>Target ROAS alone does not tell you what cost per purchase is profitable. You will recommend killing an ad they are happy with, or feeding one that loses money.</td><td>Intake</td></tr>
+<tr><td><b>Which numbers do you act on: Meta, Shopify, Triple Whale</b></td><td>If they run on Triple Whale and you read Meta, your best ad is their worst and you look wrong in week two.</td><td>Intake</td></tr>
+<tr><td><b>Anything unusual in the last 30 days</b></td><td>You diagnose a stockout as creative fatigue. One question, saves the whole first read.</td><td>Intake</td></tr>
+<tr><td><b>Logo, product photos, brand colours, and what they cannot claim</b></td><td>You promised three statics a week. You cannot make one without assets, and in health, supplements or finance a claim restriction makes the work unusable.</td><td>Intake</td></tr>
+<tr><td><b>How fast can you get a static live</b></td><td>Three a week is gold at 48 hours and a growing backlog at three weeks. Changes what you send, not just how you say it.</td><td>Call, block 4</td></tr>
+<tr><td><b>If you ran a test tomorrow, who says yes</b></td><td>If the person on the call cannot approve a test, nothing gets tested and the pilot produces no data.</td><td>Call, block 4</td></tr>
+<tr><td><b>Thirty days from now, what has to have happened for this to be worth it</b></td><td>In their words, with a number. In week four you either point at it or you find out early. Also the best churn question there is.</td><td>Call, block 5</td></tr>
+</table>
+<h2>Seeing the creative, without partner access</h2>
+<p>The CSV is numbers only. No images, no video, no copy. Partner access to their Business Manager would solve it but is too big an ask on day one for a pilot. The stack that works instead:</p>
+<table><tr><th>Source</th><th>Gives you</th><th>Limit</th></tr>
+<tr><td><b>Meta Ad Library</b>, before the call</td><td>Every ad they have live right now, the real creative. Free, instant, needs nothing from them. Do this on all five prospects before you speak to them.</td><td>Live ads only</td></tr>
+<tr><td><b>The CSV export</b></td><td>Every ad's numbers for 30 days, including the ones they killed</td><td>No creative</td></tr>
+<tr><td><b>Their screenshots</b>, top 10 by spend and worst 5</td><td>Creative for the ads that matter most</td><td>Manual, they may send the wrong thing</td></tr>
+<tr><td><b>Block 3 on the call</b></td><td>What they killed and why, in their words</td><td>Memory, not evidence</td></tr></table>
+<p><b>What this makes load-bearing:</b> the naming convention. The export gives you an ad name, Ad Library gives you an image with no numbers. If their naming is "Copy of Copy of Ad Set 3" you cannot connect the two. If naming is bad, ask for the screenshots labelled with spend.</p>
+<h2>Three different customers, three different calls</h2><span class="note">Spend decides what you look at</span></div>
+<div class="body">
+<table>
+<tr><th>Their stage</th><th>What you look at</th><th>What you give them</th></tr>
+<tr><td><b>No winner yet</b><br><span class="mono" style="color:var(--faint)">testing, under $10k/mo</span></td><td>What they have tested so far. Count the genuinely distinct concepts. Gabriel's most common finding: people test one big idea reworded twenty ways and call it twenty tests.</td><td>Quick wins from the soft metrics, plus 5 concepts that are actually different from each other. Budget discipline: about $300 per test, 3 real swings per product, so $900 to $1,000 decides a product.</td></tr>
+<tr><td><b>Has winners, stuck</b><br><span class="mono" style="color:var(--faint)">scaling, under $10k/day</span></td><td>Awareness coverage and creative type. Typical pattern: they cracked bottom and middle of funnel, never cracked top of funnel, and lean on offer-driven ads instead of emotional ones.</td><td>The missing awareness levels, with live market ads proving each one works, and the format mix they are not running.</td></tr>
+<tr><td><b>Established</b><br><span class="mono" style="color:var(--faint)">six to seven figures a month</span></td><td>Context before advice. What they tested in the last months, what worked, what failed. Then whitespace: what the market runs that they have never touched.</td><td>Work the next move out with them, do not lecture. Our edge here is the whole-market view, which is the one thing their in-house team does not have.</td></tr>
+</table>
+<div class="said"><b>Gabriel:</b> there is no one size fits all in creative strategy. The job is to know enough about creative strategy and copywriting to point out quick wins and name the gaps in strategy and execution.</div>
+</div>
+</section>
+
+<section class="card">
+<div class="head"><h2>The numbers cheat sheet</h2><span class="note">Gabriel's thresholds, US traffic</span></div>
+<div class="body">
+<table>
+<tr><th>Metric</th><th>Good</th><th>What it tells you</th></tr>
+<tr><td>Cost per click</td><td class="n">~$1, US $1.50-$2 ok</td><td>Cheap attention. High CPC with a decent CTR usually means audience or CPM, not creative.</td></tr>
+<tr><td>CTR all</td><td class="n">above 15%</td><td>People are clicking anywhere, usually "read more". The hook is working.</td></tr>
+<tr><td>CTR link</td><td class="n">3% floor, 4% good</td><td>The body copy or the video script is doing its job and moving them to the site.</td></tr>
+<tr><td>Hook rate (video)</td><td class="n">creative level</td><td>How many watched past 3 seconds. Judge per ad, never per account.</td></tr>
+<tr><td>Hold rate (video)</td><td class="n">creative level</td><td>How many stayed after the hook. Holds attention but no sale means the product or the value is missing, not the story.</td></tr>
+<tr><td>Net new concepts</td><td class="n">weekly count</td><td>The single best predictor of finding a winner. Gabriel's team: 10 a day.</td></tr>
+</table>
+
+<h3 style="margin:22px 0 8px;font-size:15px">The read, for static ads</h3>
+<table>
+<tr><th>Pattern</th><th>Diagnosis</th><th>The fix you recommend</th></tr>
+<tr><td><b>High CTR all, low CTR link</b></td><td>Image and hook are pulling people in. The rest of the copy loses them.</td><td>Keep the hook, rewrite the body. <span class="tag t-green">Easy win</span></td></tr>
+<tr><td><b>Low CTR all, CTR link at target</b></td><td>Either the hook has obvious upside, or the copy speaks to a higher awareness level: fewer people, but warmer and easier to convert.</td><td>New hooks on the same body, or deliberately widen to a lower awareness level. <span class="tag t-green">Easy win</span></td></tr>
+<tr><td><b>Both low</b></td><td>The concept is wrong, not the execution.</td><td>New concept, not another variation. <span class="tag t-amber">Real work</span></td></tr>
+<tr><td><b>Both fine, no sales</b></td><td>Offer or landing page, not the ad.</td><td>Stop editing creative. Look at the page and the offer. <span class="tag t-red">Not a creative problem</span></td></tr>
+</table>
+<p style="color:var(--sub);margin-top:10px">Video reads the same way with hook rate and hold rate standing in for CTR all and CTR link.</p>
+</div>
+</section>
+
+<section class="card">
+<div class="head"><h2>What I do, and what the software does</h2><span class="note">The honest split</span></div>
+<div class="body">
+<table>
+<tr><th>Step</th><th>Who</th><th>Today</th><th>After Meta connect</th></tr>
+<tr><td>Get their numbers</td><td>Customer</td><td>They export from Ads Manager and send it</td><td>Automatic, daily</td></tr>
+<tr><td>Read the account</td><td>Vitaley</td><td>By hand against the cheat sheet</td><td>Prompt does the first pass, I check it</td></tr>
+<tr><td>Find market winners and gaps</td><td>GetHookd</td><td>Prompt library plus the MCP, already works</td><td>Same, with their own results ranked in</td></tr>
+<tr><td>Write the game plan</td><td>Vitaley</td><td>By hand, one page plus a Loom</td><td>Draft generated, I edit</td></tr>
+<tr><td>Weekly report</td><td>Both</td><td>I write it, sent in Slack</td><td>Scheduled, sent automatically, I add the commentary</td></tr>
+</table>
+<div class="said"><b>This is the line to hold on the call tonight.</b> Every manual step above is a build request with a clear payoff. The ad-account connection is not a nice-to-have, it is what turns 5-6 hours a month per client into 2.</div>
+</div>
+</section>
+
+<section class="card">
+<div class="head"><h2>Where I am short, and the plan for it</h2></div>
+<div class="body">
+<table>
+<tr><th>Gap</th><th>Plan</th></tr>
+<tr><td>Copywriting depth, which Gabriel says creative strategy mostly comes down to</td><td>His AI ecommerce module, 2 to 3 hours, done this week</td></tr>
+<tr><td>Diagnosing an account from numbers</td><td>His new module "Your Next Move" (fix it or scale it), recorded last week, not published yet. Ask Alex to get it early</td></tr>
+<tr><td>First real calls</td><td>Alex sits in on the first two or three. Gabriel offered to take questions on Slack whenever</td></tr>
+<tr><td>Ecommerce benchmarks by vertical</td><td>Use the cheat sheet above as the starting point, record real numbers from the 5 pilots, build our own table</td></tr>
+</table>
+</div>
+</section>
+
+<section class="card">
+<div class="head"><h2>For tonight</h2><span class="note">What I need from Alex and Mladen</span></div>
+<div class="body">
+<table>
+<tr><th>Ask</th><th>Who</th><th>Why it matters</th></tr>
+<tr><td>A date for the Meta ad-account connection</td><td>Mladen</td><td>It is the difference between 6 hours a month per client and 2. Everything else is a workaround for not having it.</td></tr>
+<tr><td>Early access to Gabriel's "Your Next Move" module</td><td>Alex</td><td>It is the exact skill I need before the first pilot call, and it is already recorded.</td></tr>
+<tr><td>Sign-off on the free pilot list</td><td>Alex</td><td>10 emails go out, 5 calls booked, so the first game plans exist by next week.</td></tr>
+<tr><td>Tier bands above $499</td><td>Alex</td><td>The floor is agreed. What a six-figure-a-month brand pays is not.</td></tr>
+<tr><td>Where the prompt library lives</td><td>Alex and Mladen</td><td>Notion giveaway, the Academy, and in-app are three different builds.</td></tr>
+</table>
+</div>
+</section>
+
+<p class="foot">Sources: Gabriel Moldovan call 2026-09-21 (creative strategist, introduced by Alex), Alex sync 2026-09-18, Foresight and Parker teardowns. Companion: strategist offer game plan, Atria prompt library. Internal only.</p>
+</main></body></html>

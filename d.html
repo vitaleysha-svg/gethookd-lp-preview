@@ -484,6 +484,159 @@
     .icp{margin-top:30px;padding:20px 24px;border:1px dashed #ccd4ff;border-radius:13px;background:#f8f9ff;color:#3a4a7a;font-size:16px;font-weight:700;line-height:1.5}
     @media(max-width:820px){.ways{grid-template-columns:1fr}.band{padding:64px 0}.pitch p{font-size:18px}.pitch p.punch{font-size:22px}}
   </style>
+  <style>
+    /* Both routes at once (final draft, 2026-09-24). Routes area only. */
+    .sx{position:relative;display:grid;grid-template-columns:minmax(0,1fr);row-gap:16px;margin-top:40px}
+    .sx .way{cursor:default;border-color:#e0e5ea;box-shadow:0 12px 32px rgba(6,21,35,.06)}
+    .sx .way .wt{color:#3352ff}
+    .sx .plan{display:inline-block;align-self:flex-start;padding:6px 10px;border:1px solid #ccd4ff;border-radius:7px;background:#f2f4ff;color:#4057d6;font-size:10px;font-weight:850;letter-spacing:.05em;line-height:1.3;text-transform:uppercase}
+    .sx .plan.g{border-color:#bfe6cf;background:#eefaf3;color:#1a8f52}
+    .sx-or{position:relative;z-index:3;display:grid;place-items:center;width:44px;height:44px;border:1px solid #dfe4ea;border-radius:50%;background:#fff;color:#5f6d7a;font-size:11px;font-weight:850;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 8px 22px rgba(6,21,35,.1)}
+    .sx-set{display:flex;align-items:center;gap:18px;padding:18px 20px;border:1px solid #e3e8ec;border-radius:18px;background:#f7f9fa}
+    .sx-set p{margin:0;color:#52616e;font-size:15.5px;line-height:1.5}
+    .sx-set p b{color:#0b1a27;font-weight:800}
+    .sx-set h4{margin:8px 0 4px;font-size:18px;line-height:1.2;letter-spacing:-.025em}
+    .sx-set .sb-step{font-size:10.5px}
+    .sx-set .sb-step i{width:24px;height:24px;border-radius:8px;font-size:12px}
+    .sx-thumb{position:relative;flex:0 0 42%;max-width:240px;aspect-ratio:1856/1080;overflow:hidden;border:1px solid #dce2e7;border-radius:12px;background:#0f1c27}
+    .sx-thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+    .sx-set-copy{min-width:0}
+    .sx-card{position:relative;margin:0;background:#fff}
+    .sx-card .dm.r-app{aspect-ratio:1752/1080}
+    .sx-card .dc{padding:18px 20px 20px}
+    .sx-card .sb-step{font-size:10.5px}
+    .sx-card .sb-step i{width:24px;height:24px;border-radius:8px;font-size:12px}
+    .sx-card h4{margin:10px 0 6px;font-size:21px;line-height:1.18;letter-spacing:-.03em;text-wrap:balance}
+    .sx-card p{margin:0;color:#52616e;font-size:15.5px;line-height:1.5}
+    .sx-tag{position:absolute;top:10px;left:10px;z-index:2;display:none;padding:5px 8px;border-radius:7px;background:rgba(11,26,39,.84);color:#fff;font-size:9.5px;font-weight:850;letter-spacing:.07em;line-height:1.2;text-transform:uppercase;pointer-events:none}
+    .sx-tag.ag{background:rgba(51,82,255,.94)}
+    .sx-tag.inl{position:static;display:none;margin-bottom:8px}
+    .sx-set:not(.sx-connect){flex-direction:column;align-items:flex-start;justify-content:center;gap:0}
+    /* agent chat: the hero's "Turn this ad into 3 new statics" request, answered with three statics */
+    .sx-chat{container-type:inline-size;background-color:#fff!important;background-image:linear-gradient(rgba(51,82,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(51,82,255,.055) 1px,transparent 1px);background-size:36px 36px}
+    .sx-cards{position:absolute;left:0;right:0;top:5cqw;bottom:18cqw;display:flex;justify-content:center;align-items:flex-end;gap:3cqw}
+    .sx-cc{display:flex;flex-direction:column;width:22cqw;height:100%;overflow:hidden;border:1px solid #e3e7eb;border-radius:2.2cqw;background:#fff;box-shadow:0 2cqw 5cqw rgba(6,21,35,.13)}
+    .sx-cc-b{display:flex;align-items:center;gap:1.2cqw;padding:1.3cqw 1.5cqw}
+    .sx-cc-b img{width:3.2cqw;height:3.2cqw;border-radius:50%}
+    .sx-cc-b span{overflow:hidden;color:#101f2e;font-size:clamp(7px,1.75cqw,11px);font-weight:750;text-overflow:ellipsis;white-space:nowrap}
+    .sx-cc-img{display:block;flex:1;min-height:0;width:100%;object-fit:cover;background:#f2f4f6}
+    .sx-prompt{position:absolute;left:6cqw;right:6cqw;bottom:4.5cqw;display:flex;align-items:center;gap:2cqw;height:10.5cqw;padding:0 1.6cqw 0 2cqw;border:1px solid #dce2e7;border-radius:3cqw;background:#fff;box-shadow:0 2cqw 5cqw rgba(6,21,35,.1)}
+    .sx-chip{display:inline-flex;flex:0 0 auto;align-items:center;gap:1cqw;padding:1.2cqw 1.6cqw;border-radius:99px;background:#edf0ff;color:#2945e4;font-size:clamp(7px,1.8cqw,11px);font-weight:850}
+    .sx-chip svg{width:3cqw;height:3cqw;fill:#3352ff}
+    .sx-type{flex:1;min-width:0;overflow:hidden;color:#152534;font-size:clamp(9px,2.6cqw,16px);line-height:1.3;white-space:nowrap}
+    .sx-type span{display:inline-block;max-width:100%;overflow:hidden;vertical-align:bottom;border-right:2px solid transparent}
+    .sx-send{display:grid;flex:0 0 auto;place-items:center;width:7cqw;height:7cqw;border-radius:50%;background:#3352ff;color:#fff;font-size:clamp(10px,3.4cqw,20px);font-weight:800;line-height:1}
+    /* the loop starts and ends on the finished answer, so the card never shows empty: hold, clear, type, send, three statics land */
+    .sx-chat.anim .sx-type span{animation:sxType 9s linear infinite both}
+    .sx-chat.anim .sx-send{animation:sxSend 9s ease infinite both}
+    .sx-chat.anim .sx-cc{animation:sxCard 9s cubic-bezier(.2,.75,.2,1) infinite both;animation-delay:calc((var(--k) - 1) * .35s)}
+    @keyframes sxType{0%,30%{max-width:100%;opacity:1;border-right-color:transparent}34%{max-width:100%;opacity:0;border-right-color:transparent}35%{max-width:0;opacity:0;border-right-color:#3352ff}37%{max-width:0;opacity:1;border-right-color:#3352ff;animation-timing-function:steps(34,end)}62%{max-width:100%;opacity:1;border-right-color:#3352ff}66%,100%{max-width:100%;opacity:1;border-right-color:transparent}}
+    @keyframes sxSend{0%,63%{transform:none}65%{transform:scale(.84)}68%,100%{transform:none}}
+    @keyframes sxCard{0%,30%{opacity:1;transform:none}34%,68%{opacity:0;transform:translateY(4cqw) scale(.94)}76%,100%{opacity:1;transform:none}}
+    /* tap to play: shown when a phone refuses autoplay (Low Power Mode) or the viewer prefers reduced motion */
+    .sx-play{position:absolute;left:50%;top:50%;z-index:3;display:none;place-items:center;width:62px;height:62px;margin:-31px 0 0 -31px;padding:0;border:0;border-radius:50%;background:rgba(51,82,255,.94);cursor:pointer;box-shadow:0 10px 26px rgba(6,21,35,.3)}
+    .sx-play.show{display:grid}
+    .sx-play svg{width:22px;height:22px;margin-left:3px;fill:#fff}
+    .sx-play:focus-visible{outline:3px solid rgba(51,82,255,.4);outline-offset:3px}
+    .sx-thumb .sx-play{width:44px;height:44px;margin:-22px 0 0 -22px}
+    .sx-thumb .sx-play svg{width:16px;height:16px}
+    .sx-bar-track,.sx-spine{display:none}
+    .sx-finish{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:8px;padding:24px 26px;border:1px solid #ccd4ff;border-radius:18px;background:#f5f7ff}
+    .sx-finish p{margin:0;max-width:660px;color:#0b1a27;font-size:19px;font-weight:750;line-height:1.4;letter-spacing:-.02em}
+    .sx-finish .cta{flex:0 0 auto}
+    @media(min-width:861px){
+      .sx{grid-template-columns:minmax(0,1fr) 56px minmax(0,1fr);row-gap:24px;margin-top:44px}
+      .sx [data-col="app"]{grid-column:1}
+      .sx [data-col="agent"]{grid-column:3}
+      .sx .sx-hd{grid-row:1}
+      .sx-or{grid-column:2;grid-row:1;align-self:center;justify-self:center}
+      .sx .r2{grid-row:2}.sx .r3{grid-row:3}.sx .r4{grid-row:4}.sx .r5{grid-row:5}.sx .r6{grid-row:6}.sx .r7{grid-row:7}
+      .sx .sx-ask-track{grid-row:3/6}
+      .sx-ask{position:sticky;top:88px}
+      .sx .sx-bar-track{display:block;grid-row:2/7;position:relative;z-index:6;pointer-events:none}
+      .sx-bar{position:sticky;top:16px;display:flex;width:fit-content;max-width:100%;align-items:center;gap:12px;min-height:52px;padding:9px 12px 9px 16px;border:1px solid #dfe4ea;border-radius:14px;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(6,21,35,.12);opacity:0;transform:translateY(-10px);transition:opacity .28s ease,transform .28s ease}
+      .sx-bar.on{opacity:1;transform:none}
+      .sx-bar .wt{flex:0 0 auto;color:#3352ff;font-size:10px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+      .sx-bar b{flex:1;min-width:0;overflow:hidden;color:#0b1a27;font-size:16px;font-weight:750;letter-spacing:-.02em;text-overflow:ellipsis;white-space:nowrap}
+      .sx-bar .plan{flex:0 0 auto;padding:5px 8px;font-size:9.5px}
+      .sx .sx-spine{display:block;grid-column:2;grid-row:2/7;justify-self:center;width:0;border-left:2px dashed #d3daf7}
+      .sx .sx-finish{grid-column:1/-1;grid-row:7;margin-top:20px}
+      .sx-set:not(.sx-connect) p{font-size:18px;line-height:1.45}
+      .sx-finish:before,.sx-finish:after{content:"";position:absolute;top:-45px;width:2px;height:44px;margin-left:-1px;background:linear-gradient(rgba(51,82,255,0),#3352ff)}
+      .sx-finish:before{left:calc((100% - 56px)/4)}
+      .sx-finish:after{left:calc(100% - (100% - 56px)/4)}
+    }
+    @media(min-width:861px) and (max-width:1199px){.sx-bar .plan{display:none}}
+    @media(max-width:860px){
+      .sx{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:10px}
+      .sx>*{grid-column:1/-1}
+      .sx [data-hd="app"]{grid-column:1;grid-row:1}
+      .sx [data-hd="agent"]{grid-column:2;grid-row:1}
+      .sx .sx-or{grid-column:1/-1;grid-row:1;align-self:center;justify-self:center;width:34px;height:34px;font-size:9.5px}
+      .sx .way{padding:18px 16px}
+      .sx .way ul{display:none}
+      .sx .way h3{margin:10px 0 8px;font-size:18px;line-height:1.15}
+      .sx .way>p{margin:0 0 14px;font-size:13.5px;line-height:1.45;flex:1}
+      .sx .way .wt{font-size:9px;letter-spacing:.1em}
+      .sx .plan{padding:5px 7px;font-size:8.5px;letter-spacing:.04em}
+      .sx-tag{display:block}
+      .sx-tag.inl{display:table}
+      .sx-set{padding:14px 16px;gap:14px}
+      .sx-set p{font-size:14.5px}
+      .sx-set h4{font-size:16px}
+      .sx-thumb{flex:0 0 40%}
+      .sx-connect{align-items:flex-start}
+      .sx-cards{top:12cqw}
+      .sx-card .dc{padding:14px 16px 16px}
+      .sx-card h4{font-size:19px}
+      .sx-card p{font-size:15px}
+      .sx-finish{flex-direction:column;align-items:stretch;padding:22px 20px}
+      .sx-finish p{font-size:17px}
+    }
+    @media(max-width:359px){.sx{column-gap:8px}.sx .way{padding:16px 12px}.sx .way h3{font-size:16px}.sx-connect{flex-direction:column;align-items:flex-start}.sx-thumb{flex:none;width:100%}}
+    @media(prefers-reduced-motion:reduce){.sx-bar{transition:none}.sx-chat *{animation:none!important}}
+  </style>
+
+<style id="logos-footer-css">
+.hero .logos{background:transparent;border-bottom:0;padding:46px 0 46px}@media (max-width:640px){.hero .logos{padding:34px 0 34px}}
+.logos{background:#fff;padding:30px 0 34px;border-bottom:1px solid var(--line)}
+.logos-kicker{margin:0 0 20px;text-align:center;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.logos-track{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.logos-lane{display:flex;width:max-content;animation:logolane 48s linear infinite}
+.logos-track:hover .logos-lane{animation-play-state:paused}
+.logos-set{display:flex;align-items:center;gap:60px;padding-right:60px}
+.lg{white-space:nowrap;color:#8b97a4;font-size:25px;line-height:1;font-weight:700;letter-spacing:-.025em}
+.lg.w-low{text-transform:lowercase;font-weight:800;letter-spacing:-.045em}
+.lg.w-semi{font-weight:650}
+.lg.w-caps{font-size:19px;font-weight:700;letter-spacing:.14em}
+.lg.w-heavy{font-size:22px;font-weight:900;letter-spacing:.06em}
+.lg.w-serif{font-family:Georgia,"Times New Roman",serif;font-size:20px;font-weight:700;letter-spacing:.16em}
+.logos-set img{display:block;height:var(--h);width:auto;opacity:.5}@media (max-width:640px){.logos-set img{height:calc(var(--h)*.78)}}
+@keyframes logolane{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.logos-lane{animation:none}}
+@media (max-width:640px){.logos{padding:24px 0 26px}.logos-set{gap:40px;padding-right:40px}.lg{font-size:21px}.lg.w-caps,.lg.w-serif{font-size:16px}.lg.w-heavy{font-size:18px}}
+.closer .fine{margin:18px auto 0;color:#aab6c2;text-shadow:0 1px 10px rgba(11,26,39,.9)}
+.closer{padding-bottom:196px}
+.site-foot{background:#fff;color:var(--ink);padding:56px 0 34px;border-top:1px solid var(--line)}
+.site-foot a{color:var(--ink);text-decoration:none}
+.site-foot a:hover{color:var(--blue)}
+.site-foot h4{margin:0 0 22px;font-size:14px;font-weight:500;color:#8a96a3}
+.sf-top{display:grid;grid-template-columns:1.55fr .8fr .8fr;gap:40px}
+.sf-brand svg{width:150px;height:auto;display:block}
+.sf-brand p{margin:26px 0 0;max-width:460px;font-size:19px;line-height:1.5;font-weight:500}
+.sf-col a{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-size:18px;font-weight:500}
+.sf-new{display:inline-block;background:#ef4b3f;color:#fff;font-size:9px;font-weight:700;letter-spacing:.04em;padding:3px 6px;border-radius:999px}
+.sf-arrow{width:16px;height:16px;fill:none;stroke:#8a96a3;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sf-mid{display:grid;grid-template-columns:1.55fr .8fr .8fr;gap:40px;margin-top:64px}.sf-more{grid-column:1/3}.sf-ext{grid-column:3}
+.sf-more a{display:block;margin:0 0 14px;font-size:18px;font-weight:500}
+.sf-chrome{display:inline-flex;align-items:center;gap:12px;background:#0b1a27;color:#fff!important;padding:12px 18px;border-radius:8px}
+.sf-chrome .sf-g{width:28px;height:28px;padding-right:12px;border-right:1px solid rgba(255,255,255,.25)}
+.sf-chrome b{display:block;font-size:16px;font-weight:600}
+.sf-chrome small{display:block;font-size:12px;color:#b7c3ce}
+.sf-bot{display:flex;gap:18px;margin-top:44px;padding-top:26px;border-top:1px solid var(--line)}
+.sf-bot a{font-size:15px;font-weight:500}
+@media (max-width:860px){.sf-top,.sf-mid{grid-template-columns:1fr;gap:34px}.sf-more,.sf-ext{grid-column:auto}.sf-mid{margin-top:40px}.sf-brand p{font-size:17px}.sf-col a,.sf-more a{font-size:17px}}
+</style>
 </head>
 <body>
   <nav class="vswitch" aria-label="Variation switcher"><a href="index.html">A</a><a href="b.html">B</a><a href="c.html">C</a><a class="on" href="d.html">D</a></nav>
@@ -514,6 +667,11 @@
           <span class="hero-stat"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5.5-5.5 3.5 3.5L21 6"/><path d="M15 6h6v6"/></svg></i><span>New winning ads <b>every day</b></span></span>
         </div>
       </div>
+
+      <section class="logos" id="logos-row" aria-label="Companies whose teams use GetHookd">
+      <p class="logos-kicker">Trusted by teams at</p>
+      <div class="logos-track"><div class="logos-lane"><div class="logos-set"><img src="assets/logos/whop.png" alt="Whop" style="--h:32px" decoding="async"><img src="assets/logos/digistore24.png" alt="Digistore24" style="--h:29px" decoding="async"><img src="assets/logos/gempages.png" alt="GemPages" style="--h:29px" decoding="async"><img src="assets/logos/replo.png" alt="Replo" style="--h:32px" decoding="async"><img src="assets/logos/trafilea.png" alt="Trafilea" style="--h:32px" decoding="async"><img src="assets/logos/guardio.png" alt="Guardio" style="--h:32px" decoding="async"><img src="assets/logos/reface.png" alt="Reface" style="--h:27px" decoding="async"><img src="assets/logos/newmark.png" alt="Newmark" style="--h:26px" decoding="async"><img src="assets/logos/pulsetto.png" alt="Pulsetto" style="--h:21px" decoding="async"><img src="assets/logos/truemed.png" alt="Truemed" style="--h:28px" decoding="async"><img src="assets/logos/skelar.png" alt="SKELAR" style="--h:25px" decoding="async"><img src="assets/logos/axioshq.png" alt="Axios HQ" style="--h:27px" decoding="async"><img src="assets/logos/growthday.png" alt="GrowthDay" style="--h:29px" decoding="async"><img src="assets/logos/alttext.png" alt="AltText.ai" style="--h:32px" decoding="async"><img src="assets/logos/zalify.png" alt="Zalify" style="--h:32px" decoding="async"></div><div class="logos-set" aria-hidden="true"><img src="assets/logos/whop.png" alt="" style="--h:32px" decoding="async"><img src="assets/logos/digistore24.png" alt="" style="--h:29px" decoding="async"><img src="assets/logos/gempages.png" alt="" style="--h:29px" decoding="async"><img src="assets/logos/replo.png" alt="" style="--h:32px" decoding="async"><img src="assets/logos/trafilea.png" alt="" style="--h:32px" decoding="async"><img src="assets/logos/guardio.png" alt="" style="--h:32px" decoding="async"><img src="assets/logos/reface.png" alt="" style="--h:27px" decoding="async"><img src="assets/logos/newmark.png" alt="" style="--h:26px" decoding="async"><img src="assets/logos/pulsetto.png" alt="" style="--h:21px" decoding="async"><img src="assets/logos/truemed.png" alt="" style="--h:28px" decoding="async"><img src="assets/logos/skelar.png" alt="" style="--h:25px" decoding="async"><img src="assets/logos/axioshq.png" alt="" style="--h:27px" decoding="async"><img src="assets/logos/growthday.png" alt="" style="--h:29px" decoding="async"><img src="assets/logos/alttext.png" alt="" style="--h:32px" decoding="async"><img src="assets/logos/zalify.png" alt="" style="--h:32px" decoding="async"></div></div></div>
+    </section>
 
       <section class="agent-showcase" aria-labelledby="agent-showcase-title">
         <div class="agent-showcase-head">
@@ -657,13 +815,16 @@
       </section>
     </section>
 
+
     <section class="band" aria-labelledby="ways-title">
       <div class="wrap">
         <div class="band-kicker rv">Two ways to run it</div>
         <h2 id="ways-title" class="rv d1">Do it yourself, or hand it to your AI.</h2>
-        <p class="band-lede rv d2">Same live ad data either way. Pick whichever one fits how you already work.</p>
-        <div class="ways">
-          <div class="way rv d1" data-pick="app" role="button" tabindex="0">
+        <p class="band-lede rv d2">Same live ad data either way.</p>
+        <!-- Both routes at once (final draft, 2026-09-24). Desktop: in the app on the left, the AI agent on the right, rows paired by job.
+             Phone: the same order, in the app first in every pair. Clips play only while on screen. -->
+        <div class="sx">
+          <header class="way sx-hd rv d1" data-hd="app" data-col="app">
             <span class="wt">In the app</span>
             <h3>Click through it yourself.</h3>
             <p>A full interface, built for people who like to look at the ads themselves.</p>
@@ -674,9 +835,10 @@
               <li>Save what you like to boards and swipe files</li>
               <li>Turn any winner into new statics with Clone Ads</li>
             </ul>
-            <span class="same">Every plan</span><span class="pick">Show me this route</span>
-          </div>
-          <div class="way agent rv d2 sel" data-pick="agent" role="button" tabindex="0">
+            <span class="plan g">Every plan</span>
+          </header>
+          <span class="sx-or rv d2" aria-hidden="true">or</span>
+          <header class="way sx-hd rv d2" data-hd="agent" data-col="agent">
             <span class="wt">With your AI agent</span>
             <h3>Ask, and skip the clicking.</h3>
             <p>Same data, reached from the chat you already have open.</p>
@@ -687,82 +849,64 @@
               <li>Every answer comes back with the source ad attached</li>
               <li>Send any winner straight into Clone Ads</li>
             </ul>
-            <span class="gate">Team and Agency plans</span><span class="pick">Show me this route</span>
+            <span class="plan">Team and Agency plans</span>
+          </header>
+          <div class="demo sx-card r2 rv" data-col="app">
+            <div class="dm r-app"><video muted loop playsinline preload="none" poster="assets/APP-01-SEARCH-POSTER.jpg" aria-label="Search and filter the library."><source src="assets/v2/APP-01-SEARCH-720.mp4" type="video/mp4" media="(max-width: 600px)"><source src="assets/v2/APP-01-SEARCH-1280.mp4" type="video/mp4"></video><span class="sx-tag">In the app</span></div>
+            <div class="dc"><span class="sb-step">Explore</span><h4>Search and filter the library.</h4><p>Type a niche and cut 13 million live ads down to the ones that matter.</p></div>
+          </div>
+          <div class="demo sx-card sx-connect-card r2 rv d1" data-col="agent">
+            <div class="dm r-app"><video muted loop playsinline preload="none" poster="assets/STEP1-POSTER.jpg" aria-label="Connecting GetHookd to an AI agent"><source src="assets/v2/STEP1-CONNECT-720.mp4" type="video/mp4"></video><span class="sx-tag ag">With your AI agent</span></div>
+            <div class="dc"><span class="sb-step"><i>1</i> Connect</span><h4>One line into the AI you already have open.</h4><p>Paste it into Claude, ChatGPT, Gemini, Cursor or Perplexity. That is the entire setup.</p></div>
+          </div>
+          <div class="sx-ask-track" data-col="agent">
+            <div class="demo sx-card sx-ask rv d1">
+              <div class="dm r-app"><video muted loop playsinline preload="none" poster="assets/v2/STEP2-ASK-CROP-POSTER.jpg" aria-label="Prompting GetHookd inside Claude"><source src="assets/v2/STEP2-ASK-CROP-720.mp4" type="video/mp4" media="(max-width: 600px)"><source src="assets/v2/STEP2-ASK-CROP-820.mp4" type="video/mp4"></video><span class="sx-tag ag">With your AI agent</span></div>
+              <div class="dc"><span class="sb-step"><i>2</i> Ask</span><h4>Type it the way you would say it out loud.</h4><p>GetHookd does the searching, the filtering and the reading, and hands the answer back inside the same chat.</p></div>
+            </div>
+          </div>
+          <div class="demo sx-card r3 rv" data-col="app">
+            <div class="dm r-app"><video muted loop playsinline preload="none" poster="assets/APP-02-BRANDSPY-POSTER.jpg" aria-label="Put a competitor under Brand Spy."><source src="assets/v2/APP-02-BRANDSPY-720.mp4" type="video/mp4" media="(max-width: 600px)"><source src="assets/v2/APP-02-BRANDSPY-1280.mp4" type="video/mp4"></video><span class="sx-tag">In the app</span></div>
+            <div class="dc"><span class="sb-step">Brand Spy</span><h4>Put a competitor under Brand Spy.</h4><p>Add any brand and every ad they launch lands in your feed, with the launch date and how many they have live.</p></div>
+          </div>
+          <div class="demo sx-card r4 rv" data-col="app">
+            <div class="dm r-app"><video muted loop playsinline preload="none" poster="assets/APP-03-SHOPS-POSTER.jpg" aria-label="Dig through Shops to see whose traffic is climbing."><source src="assets/v2/APP-03-SHOPS-720.mp4" type="video/mp4" media="(max-width: 600px)"><source src="assets/v2/APP-03-SHOPS-1280.mp4" type="video/mp4"></video><span class="sx-tag">In the app</span></div>
+            <div class="dc"><span class="sb-step">Shops</span><h4>Start from the store, not the ad.</h4><p>Monthly visitors and whether they are growing. Similar stores one click away, so one find leads to the next.</p></div>
+          </div>
+          <div class="demo sx-card r5 rv" data-col="app">
+            <div class="dm r-app"><video muted loop playsinline preload="none" poster="assets/APP-04-BOARDS-POSTER.jpg" aria-label="Save what you like."><source src="assets/v2/APP-04-BOARDS-720.mp4" type="video/mp4" media="(max-width: 600px)"><source src="assets/v2/APP-04-BOARDS-1280.mp4" type="video/mp4"></video><span class="sx-tag">In the app</span></div>
+            <div class="dc"><span class="sb-step">Boards</span><h4>Save it once, the whole team sees it.</h4><p>One click puts an ad on a board.</p></div>
+          </div>
+          <div class="demo sx-card r6 rv" data-col="app">
+            <div class="dm r-app"><video muted loop playsinline preload="none" poster="assets/APP-05-CLONE-POSTER.jpg" aria-label="Turn any winner into new statics."><source src="assets/v2/APP-05-CLONE-720.mp4" type="video/mp4" media="(max-width: 600px)"><source src="assets/v2/APP-05-CLONE-1280.mp4" type="video/mp4"></video><span class="sx-tag">In the app</span></div>
+            <div class="dc"><span class="sb-step">Clone Ads</span><h4>Turn any winner into your next static.</h4><p>Pick a winning ad, hit Clone, and get variations built off a creative already running in your market.</p></div>
+          </div>
+          <div class="demo sx-card sx-ready r6 rv d1" data-col="agent">
+            <div class="dm r-app sx-chat" role="img" aria-label="Your AI agent turning one ad into three new statics">
+              <div class="sx-cards" aria-hidden="true">
+                <div class="sx-cc" style="--k:1"><div class="sx-cc-b"><img src="assets/ad-cards/lc1.png" alt="" loading="lazy"><span>Avera Hair Care</span></div><img class="sx-cc-img" src="assets/ad-cards/c1.jpg" alt="" loading="lazy"></div>
+                <div class="sx-cc" style="--k:2"><div class="sx-cc-b"><img src="assets/ad-cards/lc1.png" alt="" loading="lazy"><span>Avera Hair Care</span></div><img class="sx-cc-img" src="assets/ad-cards/c2.jpg" alt="" loading="lazy"></div>
+                <div class="sx-cc" style="--k:3"><div class="sx-cc-b"><img src="assets/ad-cards/lc1.png" alt="" loading="lazy"><span>Avera Hair Care</span></div><img class="sx-cc-img" src="assets/ad-cards/c3.jpg" alt="" loading="lazy"></div>
+              </div>
+              <div class="sx-prompt" aria-hidden="true">
+                <span class="sx-chip"><svg viewBox="0 0 40 37" aria-hidden="true"><path d="M36.1956 18.5C36.1956 21.3995 33.8446 23.75 30.9444 23.75H13.8777L19.293 16.5312H9.93913C8.12649 16.5312 6.65706 18.0003 6.65706 19.8125V27.6875C6.65706 29.4997 8.12649 30.9687 9.93913 30.9687H17.8161C19.6288 30.9687 21.0981 29.4997 21.0981 27.6875V25.3906H24.3802V29C24.3802 31.8995 22.0291 34.25 19.1289 34.25H8.62631C5.72609 34.25 3.375 31.8995 3.375 29V18.5C3.375 15.6005 5.72609 13.25 8.62631 13.25H25.6931L20.2777 20.4688H29.6315C31.4442 20.4688 32.9136 18.9997 32.9136 17.1875V9.3125C32.9136 7.50031 31.4442 6.03125 29.6315 6.03125H21.7546C19.942 6.03125 18.4725 7.50031 18.4725 9.3125V11.6094H15.1904V8C15.1904 5.10051 17.5416 2.75 20.4417 2.75H30.9444C33.8446 2.75 36.1956 5.10051 36.1956 8V18.5Z"/></svg><span>GetHookd</span></span>
+                <span class="sx-type"><span>Turn this ad into 3 new statics</span></span>
+                <span class="sx-send">&uarr;</span>
+              </div>
+              <span class="sx-tag ag">With your AI agent</span>
+            </div>
+            <div class="dc"><span class="sb-step"><i>3</i> Your ads are ready</span><h4>Three new statics out, not a summary.</h4><p>Turn any winner into three new statics built off a creative that is already running in your market.</p></div>
+          </div>
+          <div class="sx-bar-track" data-col="app" aria-hidden="true"><div class="sx-bar" data-bar="app"><span class="wt">In the app</span><b>Click through it yourself.</b><span class="plan g">Every plan</span></div></div>
+          <div class="sx-bar-track" data-col="agent" aria-hidden="true"><div class="sx-bar" data-bar="agent"><span class="wt">With your AI agent</span><b>Ask, and skip the clicking.</b><span class="plan">Team and Agency plans</span></div></div>
+          <div class="sx-spine" aria-hidden="true"></div>
+          <div class="sx-finish rv">
+            <p>Both routes end in the same place: new statics built off an ad already running in your market, ready to test.</p>
+            <a class="cta" href="#trial">Start a 7-Day Trial for $0 <span class="arrow">&rarr;</span></a>
           </div>
         </div>
       </div>
     </section>
-
-<!-- Route switch: the two cards above pick which walkthrough shows. Agent is the default. -->
-<div data-route="agent">
-    <section class="band alt" aria-labelledby="steps3-title" style="padding-bottom:0;border-bottom:0">
-      <div class="wrap">
-        <div class="band-kicker rv">How it works</div>
-        <h2 id="steps3-title" class="rv d1">The agent route, start to finish.</h2>
-        <p class="band-lede rv d2">About thirty seconds to set up. No developer, no onboarding call, no API keys to babysit.</p>
-      </div>
-    </section>
-
-    <section class="stepband" aria-label="Step one, connect">
-      <div class="wrap inner">
-        <div class="sb-copy">
-          <span class="sb-step rv"><i>1</i> Connect</span>
-          <h3 class="rv d1">One line into the AI you already have open.</h3>
-          <p class="rv d2">Paste it into Claude, ChatGPT, Gemini, Cursor or Perplexity. That is the entire setup. No code, no developer, no API key to manage, and nothing to install.</p>
-          <span class="sb-note rv d3">Team and Agency plans</span>
-        </div>
-        <div class="sb-media rv d1">
-          <video class="demo-video" autoplay muted loop playsinline preload="metadata" poster="assets/STEP1-POSTER.jpg" aria-label="Connecting GetHookd to an AI agent">
-            <source src="assets/STEP1-CONNECT.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </section>
-
-    <section class="stepband" aria-label="Step two, ask">
-      <div class="wrap inner">
-        <div class="sb-copy">
-          <span class="sb-step rv"><i>2</i> Ask</span>
-          <h3 class="rv d1">Type it the way you would say it out loud.</h3>
-          <p class="rv d2">What is my market running that I am not? Which of these has been live the longest? Show me the hooks. GetHookd does the searching, the filtering and the reading, and hands the answer back inside the same chat.</p>
-          <span class="sb-note rv d3">Answers in seconds</span>
-        </div>
-        <div class="sb-media rv d1">
-          <video class="demo-video" autoplay muted loop playsinline preload="metadata" poster="assets/STEP2-POSTER.jpg" aria-label="Prompting GetHookd inside Claude">
-            <source src="assets/STEP2-ASK.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </section>
-
-    <section class="stepband" aria-label="Step three, outputs">
-      <div class="wrap inner">
-        <div class="sb-copy">
-          <span class="sb-step rv"><i>3</i> Your ads are ready</span>
-          <h3 class="rv d1">Three new statics out, not a summary.</h3>
-          <p class="rv d2">Open every source ad. Take the hooks and the angles. Turn any winner into three new statics built off a creative that is already running in your market.</p>
-          <span class="sb-note rv d3">Open every source ad</span>
-        </div>
-        <div class="sb-media rv d1">
-          <video class="demo-video" autoplay muted loop playsinline preload="none" poster="assets/STEP3-POSTER.jpg" aria-label="Inside GetHookd: ad detail, transcript and AI script">
-            <source src="assets/GH-SITE-SHOWCASE.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </section>
-
-</div>
-<div data-route="app" hidden>
-    <section class="band alt" aria-labelledby="inapp-title" id="inapp">
-      <div class="wrap">
-        <div class="band-kicker rv">The click-through route</div>
-        <h2 id="inapp-title" class="rv d1">Find the winner. Watch the competitor. Copy the play.</h2>
-        <p class="band-lede rv d2">No prompts, no setup. Open the app and the library is in front of you: what is running, what has run the longest, what is being copied, who is spending. Every clip below is the real app in one take.</p>
-      </div>
-    </section>
-    <div><section class="stepband" aria-label="Search and filter the library."><div class="wrap inner"><div class="sb-copy"><span class="sb-step rv">Explore</span><h3 class="rv d1">Search and filter the library.</h3><p class="rv d2">Type a niche and cut 13 million live ads down to the ones that matter: video only, running 30 days or more, 5-star performance. Sort by impressions, ad rank or run time. Whatever survives that filter is what your market is paying to keep alive.</p></div><div class="sb-media rv d1"><div class="demo"><div class="dm"><video class="demo-video" autoplay muted loop playsinline preload="metadata" poster="assets/APP-01-SEARCH-POSTER.jpg" aria-label="Search and filter the library."><source src="assets/APP-01-SEARCH.mp4" type="video/mp4"></video><div class="ph"><b>Clip: Search and filter the library.</b>Explore: type a niche, set Video, 30 days plus, 5 star. Results update.<code>assets/APP-01-SEARCH.mp4</code></div></div></div></div></div></section><section class="stepband" aria-label="Put a competitor under Brand Spy."><div class="wrap inner"><div class="sb-copy"><span class="sb-step rv">Brand Spy</span><h3 class="rv d1">Put a competitor under Brand Spy.</h3><p class="rv d2">Add any brand and every ad they launch lands in your feed, with the launch date and how many they have live. Check it in the morning instead of digging through the ad library, and you know what they started yesterday before your own team does.</p></div><div class="sb-media rv d1"><div class="demo"><div class="dm"><video class="demo-video" autoplay muted loop playsinline preload="metadata" poster="assets/APP-02-BRANDSPY-POSTER.jpg" aria-label="Put a competitor under Brand Spy."><source src="assets/APP-02-BRANDSPY.mp4" type="video/mp4"></video><div class="ph"><b>Clip: Put a competitor under Brand Spy.</b>Open a competitor, hit the bell, show their new-ads feed.<code>assets/APP-02-BRANDSPY.mp4</code></div></div></div></div></div></section><section class="stepband" aria-label="Dig through Shops to see whose traffic is climbing."><div class="wrap inner"><div class="sb-copy"><span class="sb-step rv">Shops</span><h3 class="rv d1">Start from the store, not the ad.</h3><p class="rv d2">Monthly visitors and whether they are growing. The products it pushes hardest. Every ad pointing at it, longest running first. Similar stores one click away, so one find leads to the next.</p></div><div class="sb-media rv d1"><div class="demo"><div class="dm"><video class="demo-video" autoplay muted loop playsinline preload="metadata" poster="assets/APP-03-SHOPS-POSTER.jpg" aria-label="Dig through Shops to see whose traffic is climbing."><source src="assets/APP-03-SHOPS.mp4" type="video/mp4"></video><div class="ph"><b>Clip: Dig through Shops to see whose traffic is climbing.</b>Search a store, open it, pause on the traffic chart, products, then its live ads.<code>assets/APP-03-SHOPS.mp4</code></div></div></div></div></div></section><section class="stepband" aria-label="Save what you like."><div class="wrap inner"><div class="sb-copy"><span class="sb-step rv">Boards</span><h3 class="rv d1">Save it once, the whole team sees it.</h3><p class="rv d2">One click puts an ad on a board. Boards are shared across your workspace and sorted into the folders you set, so what one person finds, everyone works from.</p></div><div class="sb-media rv d1"><div class="demo"><div class="dm"><video class="demo-video" autoplay muted loop playsinline preload="metadata" poster="assets/APP-04-BOARDS-POSTER.jpg" aria-label="Save what you like."><source src="assets/APP-04-BOARDS.mp4" type="video/mp4"></video><div class="ph"><b>Clip: Save what you like.</b>Save an ad to a board, open the board, show the team view.<code>assets/APP-04-BOARDS.mp4</code></div></div></div></div></div></section><section class="stepband" aria-label="Turn any winner into new statics."><div class="wrap inner"><div class="sb-copy"><span class="sb-step rv">Clone Ads</span><h3 class="rv d1">Turn any winner into your next static.</h3><p class="rv d2">Pick a winning ad, hit Clone, and get variations built off a creative already running in your market. You start from proof, not a blank canvas.</p></div><div class="sb-media rv d1"><div class="demo"><div class="dm"><video class="demo-video" autoplay muted loop playsinline preload="metadata" poster="assets/APP-05-CLONE-POSTER.jpg" aria-label="Turn any winner into new statics."><source src="assets/APP-05-CLONE.mp4" type="video/mp4"></video><div class="ph"><b>Clip: Turn any winner into new statics.</b>Open a winner, hit Clone, let the three statics come back.<code>assets/APP-05-CLONE.mp4</code></div></div></div></div></div></section></div>
-
-</div>
 
     <!-- NEW 2026-09-23: Shops section v2 (Alex 42:43). Designed components; every number is from the recorded Gymshark store page. -->
     <section class="band shp" aria-labelledby="shops-title" id="shops">
@@ -969,6 +1113,33 @@
     </section>
 
   </main>
+
+    <footer class="site-foot" id="site-foot">
+      <div class="wrap">
+        <div class="sf-top">
+          <div class="sf-brand"><a href="https://www.gethookd.ai/" aria-label="GetHookd home"><svg width="144" height="37" viewBox="0 0 144 37" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M36.1956 18.5C36.1956 21.3995 33.8446 23.75 30.9444 23.75H13.8777L19.293 16.5312H9.93913C8.12649 16.5312 6.65706 18.0003 6.65706 19.8125V27.6875C6.65706 29.4997 8.12649 30.9687 9.93913 30.9687H17.8161C19.6288 30.9687 21.0981 29.4997 21.0981 27.6875V25.3906H24.3802V29C24.3802 31.8995 22.0291 34.25 19.1289 34.25H8.62631C5.72609 34.25 3.375 31.8995 3.375 29V18.5C3.375 15.6005 5.72609 13.25 8.62631 13.25H25.6931L20.2777 20.4688H29.6315C31.4442 20.4688 32.9136 18.9997 32.9136 17.1875V9.3125C32.9136 7.50031 31.4442 6.03125 29.6315 6.03125H21.7546C19.942 6.03125 18.4725 7.50031 18.4725 9.3125V11.6094H15.1904V8C15.1904 5.10051 17.5416 2.75 20.4417 2.75H30.9444C33.8446 2.75 36.1956 5.10051 36.1956 8V18.5Z" fill="#3352FF"/><path d="M54.7776 13.1962H57.9486V23.4764C57.9486 26.5103 55.4298 28.3438 52.2361 28.3438C50.1895 28.3438 46.6811 27.6235 46.4787 24.3496H49.6497C49.7397 25.3099 50.8643 25.79 52.1237 25.79C53.4957 25.79 54.7776 24.917 54.7776 23.6074V22.0577C54.0129 23.1491 52.8209 23.7383 51.2691 23.7383C48.4128 23.7383 46.1413 21.3157 46.1413 18.3691C46.1413 15.4006 48.4128 12.9998 51.2691 12.9998C52.8209 12.9998 54.0129 13.589 54.7776 14.6804V13.1962ZM52.0112 20.9009C53.5631 20.9009 54.7776 19.8096 54.7776 18.3691C54.7776 16.9285 53.5631 15.8153 52.0112 15.8153C50.4819 15.8153 49.245 16.9503 49.245 18.3691C49.245 19.7878 50.4819 20.9009 52.0112 20.9009Z" fill="#051524"/><path d="M70.6453 18.2163C70.6453 18.4564 70.6228 18.9583 70.5779 19.3075H62.3689C62.5938 20.7044 63.6958 21.5994 65.1801 21.5994C66.4172 21.5994 67.2044 21.0756 67.3842 20.3334H70.4879C70.128 22.6471 68.0364 24.153 65.2701 24.153C62.0091 24.153 59.4676 21.6867 59.4676 18.5218C59.4676 15.4006 61.9866 12.9998 65.2026 12.9998C68.1939 12.9998 70.6453 15.2697 70.6453 18.2163ZM62.5264 17.3432H67.3392C67.2492 16.2519 66.2372 15.4879 65.0678 15.4879C63.8533 15.4879 62.9087 16.0773 62.5264 17.3432Z" fill="#051524"/><path d="M78.9879 16.1428H76.2667V19.5259C76.2667 20.6826 77.0763 21.1847 78.1783 21.1847C78.4482 21.1847 78.7405 21.1629 78.9879 21.0974V23.9348C78.5607 24.0439 77.9085 24.1094 77.4586 24.1094C74.8497 24.1094 73.0955 22.4506 73.0955 19.5695V16.1428H71.0489V13.218H73.0955V10.4024H76.2667V13.218H78.9879V16.1428Z" fill="#051524"/><path d="M86.6712 12.9998C89.505 12.9998 91.2142 14.8332 91.2142 17.8671V23.9348H88.0431V18.2599C88.0431 16.863 87.166 15.9462 85.8616 15.9462C84.5346 15.9462 83.68 16.863 83.68 18.2599V23.9348H80.5088V8.65625H83.68V14.6149C84.3772 13.589 85.4118 12.9998 86.6712 12.9998Z" fill="#051524"/><path d="M98.483 12.9998C101.722 12.9998 104.218 15.4006 104.218 18.5873C104.218 21.774 101.722 24.153 98.483 24.153C95.2219 24.153 92.7479 21.774 92.7479 18.5873C92.7479 15.4006 95.2219 12.9998 98.483 12.9998ZM98.483 15.9463C96.9761 15.9463 95.8516 17.0594 95.8516 18.5873C95.8516 20.0715 96.9761 21.2065 98.483 21.2065C99.9674 21.2065 101.114 20.0715 101.114 18.5873C101.114 17.0594 99.9674 15.9463 98.483 15.9463Z" fill="#051524"/><path d="M110.909 12.9998C114.147 12.9998 116.643 15.4006 116.643 18.5873C116.643 21.774 114.147 24.153 110.909 24.153C107.648 24.153 105.174 21.774 105.174 18.5873C105.174 15.4006 107.648 12.9998 110.909 12.9998ZM110.909 15.9463C109.402 15.9463 108.278 17.0594 108.278 18.5873C108.278 20.0715 109.402 21.2065 110.909 21.2065C112.393 21.2065 113.541 20.0715 113.541 18.5873C113.541 17.0594 112.393 15.9463 110.909 15.9463Z" fill="#051524"/><path d="M129.274 23.9348H125.202L121.2 19.1329V23.9348H118.028V8.65625H121.2V17.6487L125.022 13.218H128.914L124.325 18.3909L129.274 23.9348Z" fill="#051524"/><path d="M137.454 8.65625H140.625V23.9348H137.454V22.4069C136.69 23.5201 135.497 24.153 133.946 24.153C131.089 24.153 128.818 21.643 128.818 18.5655C128.818 15.4879 131.089 12.9998 133.946 12.9998C135.497 12.9998 136.69 13.6327 137.454 14.7459V8.65625ZM134.687 21.2065C136.24 21.2065 137.454 20.0715 137.454 18.5655C137.454 17.0813 136.24 15.9244 134.687 15.9244C133.158 15.9244 131.921 17.1031 131.921 18.5655C131.921 20.0497 133.158 21.2065 134.687 21.2065Z" fill="#051524"/></svg></a>
+            <p>All-in-one platform that centralizes research, planning, production, and analysis of your ad creatives.</p></div>
+          <div class="sf-col"><h4>Sitemap</h4>
+            <a href="https://www.gethookd.ai/affiliate">Affiliate <span class="sf-new">NEW</span></a>
+            <a href="https://www.gethookd.ai/learn/">Blog</a>
+            <a href="https://www.gethookd.ai/whats-new">What&#8217;s New <span class="sf-new">NEW</span></a></div>
+          <div class="sf-col"><h4>Connect</h4>
+            <a href="mailto:support@gethookd.ai">support@gethookd.ai</a>
+            <a href="https://www.linkedin.com/company/gethookdai/" target="_blank" rel="noopener">LinkedIn <svg class="sf-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a href="https://www.youtube.com/@gethookd-app" target="_blank" rel="noopener">YouTube <svg class="sf-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+            <a href="https://www.instagram.com/gethookd.ai/" target="_blank" rel="noopener">Instagram <svg class="sf-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+        </div>
+        <div class="sf-mid">
+          <div class="sf-more"><h4>More from GetHookd</h4>
+            <a href="https://www.gethookd.ai/learn/5-best-ai-ad-generators-to-create-winning-ads-in-2026/">The AI Ad Generator Built to Create Winning Ads 3X Faster</a>
+            <a href="https://www.gethookd.ai/learn/ai-creative-analytics-how-it-works-and-best-tools/">AI Creative Analytics: Unlock Creative Performance With Advanced Analytics</a></div>
+          <div class="sf-ext"><h4>Chrome Extension</h4>
+            <a class="sf-chrome" href="https://chromewebstore.google.com/detail/GetHookd.AI%20Extension/amilibamfijadockdpehhkhkfmeeckdd" target="_blank" rel="noopener"><svg class="sf-g" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span><b>Download</b><small>Chrome Extension</small></span></a></div>
+        </div>
+        <div class="sf-bot"><a href="https://www.gethookd.ai/refund-policy">Refund Policy</a><a href="https://www.gethookd.ai/privacy-policy">Privacy Policy</a></div>
+      </div>
+    </footer>
+
   <script>
     (() => {
       const root = document.querySelector('[data-agent-interface]');
@@ -1174,15 +1345,80 @@ document.querySelectorAll('.demo .dm').forEach(function(dm){var v=dm.querySelect
 </script>
 <script>
 (function(){
-  var cards=document.querySelectorAll('.way[data-pick]');
-  function pick(r){cards.forEach(function(c){c.classList.toggle('sel',c.dataset.pick===r)});
-    document.querySelectorAll('[data-route]').forEach(function(el){el.hidden=el.dataset.route!==r;});
-    var tgt=document.querySelector('[data-route="'+r+'"]');if(tgt&&window.__userPicked){tgt.scrollIntoView({behavior:'smooth',block:'start'})}}
-  cards.forEach(function(c){c.addEventListener('click',function(){window.__userPicked=true;pick(c.dataset.pick)});c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();window.__userPicked=true;pick(c.dataset.pick)}})});
-  pick('agent');
   var bt=document.querySelector('.bt');if(bt){bt.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var m=b.dataset.bill;bt.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b)});
     document.querySelectorAll('[data-y]').forEach(function(el){el.hidden=m!=='y'});document.querySelectorAll('[data-m]').forEach(function(el){el.hidden=m!=='m'});
     document.querySelectorAll('li[data-apirow]').forEach(function(li){li.classList.toggle('off-m',m==='m')});});}
+})();
+</script>
+<script>
+/* Both routes at once (final draft). (1) Desktop column bars fade in once the header cards scroll away.
+   (2) Route clips load nothing up front (preload="none"), fetch their first frame about 600px before they scroll in,
+   and play only while at least 35% in view: one per column on desktop, one at a time on a phone. Everything else pauses.
+   (3) A refused play() (iOS Low Power Mode) shows a tap-to-play button. With reduced motion nothing autoplays and
+   every clip shows the button over its poster. Clips pause when the tab is hidden.
+   (4) The agent chat animation only runs while it is on screen. */
+(function(){
+  var sx=document.querySelector('.sx');if(!sx)return;
+  var hasIO='IntersectionObserver' in window;
+  var desk=window.matchMedia?window.matchMedia('(min-width: 861px)'):{matches:true};
+  var reduce=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  /* column bars: read the header positions on scroll (an observer misses a jump straight past the header, e.g. Home key) */
+  var bars=[].slice.call(sx.querySelectorAll('[data-hd]')).map(function(hd){return {hd:hd,bar:sx.querySelector('[data-bar="'+hd.getAttribute('data-hd')+'"]')}}).filter(function(x){return x.bar});
+  var barQ=false;
+  function barSync(){barQ=false;if(!desk.matches)return;bars.forEach(function(x){x.bar.classList.toggle('on',x.hd.getBoundingClientRect().bottom<0)})}
+  function barQueue(){if(!barQ){barQ=true;requestAnimationFrame(barSync)}}
+  window.addEventListener('scroll',barQueue,{passive:true});window.addEventListener('resize',barQueue);barSync();
+
+  /* agent chat: animates only while at least 35% on screen; otherwise it rests on the finished answer */
+  var chat=sx.querySelector('.sx-chat'),chatOn=false;
+  function chatSync(){if(chat)chat.classList.toggle('anim',chatOn&&!document.hidden)}
+  if(chat&&hasIO&&!reduce){new IntersectionObserver(function(es){es.forEach(function(e){
+    chatOn=e.isIntersecting&&e.intersectionRatio>=.35;chatSync();})},{threshold:[0,.35,.6,1]}).observe(chat);}
+
+  var vids=[].slice.call(sx.querySelectorAll('video'));
+  function group(v){if(!desk.matches)return 'all';var c=v.closest('[data-col]');return c?c.getAttribute('data-col'):'all'}
+  function btn(v){
+    if(v._pb)return v._pb;
+    var b=document.createElement('button');b.type='button';b.className='sx-play';b.setAttribute('aria-label','Play video');
+    b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>';
+    b.addEventListener('click',function(){v._ok=true;var g=group(v);vids.forEach(function(o){if(o!==v&&group(o)===g&&!o.paused)o.pause()});play(v);});
+    v.addEventListener('playing',function(){b.classList.remove('show')});
+    v.parentNode.appendChild(b);v._pb=b;return b;
+  }
+  function warm(v){if(reduce&&!v._ok)return;if(v.preload==='none'){v.preload='metadata';if(v.readyState===0&&v.paused){try{v.load()}catch(e){}}}}
+  function play(v){
+    if(reduce&&!v._ok){btn(v).classList.add('show');return;}
+    var p;try{p=v.play()}catch(e){btn(v).classList.add('show');return;}
+    if(p&&typeof p.then==='function'){p.then(function(){if(v._pb)v._pb.classList.remove('show')},function(err){
+      /* AbortError only means this script paused the clip on purpose; anything else (NotAllowedError) is a refusal */
+      if(err&&err.name==='AbortError')return;if(v.paused)btn(v).classList.add('show');});}
+  }
+  vids.forEach(function(v){v.muted=true;btn(v);if(reduce)v._pb.classList.add('show');});
+  if(!hasIO){vids.forEach(function(v){warm(v);v._pb.classList.add('show')});return;}
+
+  var wio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){warm(e.target);wio.unobserve(e.target);}})},{rootMargin:'600px 0px'});
+  vids.forEach(function(v){wio.observe(v)});
+
+  var ratio=new Map();
+  function choose(){
+    var best={},vh=window.innerHeight||document.documentElement.clientHeight;
+    vids.forEach(function(v){
+      var r=ratio.get(v)||0;if(r<.35)return;
+      var b=v.getBoundingClientRect(),g=group(v);
+      var s=r*1000-Math.abs((b.top+b.bottom)/2-vh/2)/10+(v._ok?5000:0);
+      if(!best[g]||s>best[g].s)best[g]={v:v,s:s};
+    });
+    vids.forEach(function(v){
+      var g=group(v),on=best[g]&&best[g].v===v;
+      if(!on){if(!v.paused)v.pause();if(!reduce&&v._pb)v._pb.classList.remove('show');return;}
+      if(v.paused&&!document.hidden)play(v);
+    });
+  }
+  var vio=new IntersectionObserver(function(es){es.forEach(function(e){ratio.set(e.target,e.intersectionRatio)});choose();},{threshold:[0,.2,.35,.5,.65,.8,1]});
+  vids.forEach(function(v){vio.observe(v)});
+  document.addEventListener('visibilitychange',function(){if(document.hidden){vids.forEach(function(v){if(!v.paused)v.pause()})}else{choose();}chatSync();});
+  if(desk.addEventListener)desk.addEventListener('change',choose);else if(desk.addListener)desk.addListener(choose);
 })();
 </script>
 </body>

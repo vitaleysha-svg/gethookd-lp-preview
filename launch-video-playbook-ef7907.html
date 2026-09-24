@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GetHookd 4.0 Video Playbook</title>
+<style>
+:root{--bg:#f7f7f5;--surface:#fff;--soft:#f0f1ef;--line:#e1e3e1;--ink:#202124;--sub:#5d6166;--faint:#85898e;--blue:#326bdd;--blue-soft:#e8eef9;--green:#277b5e;--green-soft:#dcebe4;--amber:#8d5a0e;--amber-soft:#f3e7cf;--red:#b3261e;--red-soft:#f8e2df;--violet:#5b3fb0;--violet-soft:#ece6fa;--sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Inter,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.62 var(--sans);-webkit-font-smoothing:antialiased}
+.shell{width:min(980px,calc(100% - 32px));margin:auto;padding:30px 0 80px}
+h1{font-size:28px;letter-spacing:-.03em;margin:0 0 8px}.sub{color:var(--sub);font-size:14.5px;margin:0 0 22px;max-width:78ch}
+section{margin-top:38px}h2{font-size:20px;letter-spacing:-.02em;margin:0 0 4px}h2 small{display:block;font-size:13.5px;font-weight:500;color:var(--sub);margin:2px 0 14px}
+h3{font-size:16px;margin:18px 0 6px}p{color:var(--sub);margin:8px 0}p b,li b{color:var(--ink)}
+.hero{background:#0f1c27;color:#e6edf3;border-radius:14px;padding:24px 26px}
+.hero h2{color:#fff;font-size:22px;margin:0 0 10px}.hero p{color:#b7c3ce;margin:6px 0}.hero b{color:#fff}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 19px;margin-bottom:10px}
+.card h3{margin:0 0 6px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.card h3 .tc{font:600 12.5px var(--mono);color:var(--faint)}
+table{width:100%;border-collapse:collapse;font-size:14.3px;margin-top:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{text-align:left;font-size:11px;font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--soft)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--sub)}tr:last-child td{border-bottom:0}td b{color:var(--ink)}
+.pill{display:inline-block;font:600 10.5px var(--mono);padding:3px 8px;border-radius:999px;white-space:nowrap}
+.ok{background:var(--green-soft);color:var(--green)}.mid{background:var(--amber-soft);color:var(--amber)}.bad{background:var(--red-soft);color:var(--red)}
+.hy{background:var(--blue-soft);color:var(--blue)}.hf{background:var(--violet-soft);color:var(--violet)}
+.amber{background:var(--amber-soft);color:#5e3c0c;border-radius:12px;padding:15px 19px;margin:12px 0}.amber b{color:#3d2707}
+.tip{background:var(--blue-soft);color:#22447a;border-radius:12px;padding:15px 19px;margin:12px 0}.tip b{color:#15305a}
+ol,ul{padding-left:20px}li{color:var(--sub);margin:6px 0}
+.fold{display:grid;gap:8px}
+.fold .row{display:grid;grid-template-columns:34px 1fr auto;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.fold .n{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font:600 12px var(--sans);display:flex;align-items:center;justify-content:center}
+.fold .t b{display:block;color:var(--ink);font-size:15px}
+.fold .t .do{display:block;color:var(--ink);font-size:14.3px;margin-top:2px}
+.fold .t .why{display:block;color:var(--sub);font-size:14px;margin-top:4px}
+.fold .t .why i{font-style:normal;font-weight:700;color:var(--faint);text-transform:uppercase;font-size:11px;letter-spacing:.06em;margin-right:4px}
+.cmd{display:block;font:12.5px var(--mono);background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:8px 10px;margin:6px 0 2px;white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+.vo{font-size:18px;line-height:1.45;font-weight:650;color:var(--ink);margin:4px 0 10px}
+.line{margin:6px 0;color:var(--sub);font-size:14.3px}.line .pill{margin-right:6px}
+.os{font-size:13.5px;color:var(--faint);margin-top:8px}.os b{color:var(--ink)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin:10px 0}
+summary{cursor:pointer;padding:14px 18px;font-weight:700;list-style:none}summary::-webkit-details-marker{display:none}
+summary:after{content:"+";float:right;color:var(--faint)}details[open] summary:after{content:"\2212"}
+details .in{padding:0 18px 16px}
+.k{font:13px var(--mono);background:var(--soft);padding:1px 6px;border-radius:5px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
+button{background:var(--ink);color:#fff;border:0;border-radius:8px;padding:9px 14px;font:600 13px var(--sans);cursor:pointer}
+button.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.toast{color:var(--green);font-size:13px;min-height:18px}
+.foot{color:var(--faint);font-size:12.5px;margin-top:28px}
+@media (max-width:640px){.fold .row{grid-template-columns:30px 1fr}.fold .row .pill{grid-column:2}table{display:block;overflow-x:auto}}
+
+.fold details.step{margin:0;border-radius:10px}
+details.step summary{display:grid;grid-template-columns:26px 1fr auto 14px;gap:12px;align-items:center;padding:12px 14px;font-weight:600}
+details.step summary .st{color:var(--ink);font-size:15px;line-height:1.35}
+details.step summary .pill{grid-column:auto;margin:0}
+details.step summary:after{float:none;text-align:right}
+details.step .sb{padding:0 14px 14px 52px}
+details.beat{margin:0 0 10px}
+details.beat summary{display:flex;align-items:center;gap:10px;padding:14px 18px}
+details.beat summary .bt{font-size:16px;color:var(--ink)}
+details.beat summary .tc{margin-left:auto}
+details.beat summary:after{float:none;margin-left:8px}
+details.beat .in{padding:0 18px 16px}
+@media(max-width:600px){details.step .sb{padding:0 14px 14px 14px}details.step summary{grid-template-columns:24px 1fr auto 12px;gap:9px}}
+</style>
+</head>
+<body><div class="shell">
+
+<h1>The GetHookd 4.0 launch video, start to finish</h1>
+<p class="sub">24 September 2026. How we made the 4.0 video with Claude Code, HyperFrames and Higgsfield, written so anyone can repeat it. The script is in the middle of this page. <b>Private until launch: these features aren't announced yet.</b></p>
+
+<div class="btns">
+  <button onclick="copyText('buildmsg')">Copy the message for the build terminal</button>
+  <button class="ghost" onclick="copyText('plain')">Copy the script (plain text)</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<section style="margin-top:14px"><div class="hero">
+<h2>You approve, Claude builds. A 60-second video takes an afternoon.</h2>
+<p><b>How it works:</b> Claude writes the script. A second Claude terminal builds it. Higgsfield makes the filmed-looking shots, HyperFrames edits and renders. Our first cut rendered in 2 min 38 s and used 336 Higgsfield credits.</p>
+<p><b>Mladen changed the script:</b> the video introduces what's new in 4.0, not GetHookd. That's version 2, below.</p>
+<p><b>The better way to get app footage:</b> Claude opens its own browser window and captures GetHookd itself. You log in once. Step 5.</p>
+</div></section>
+
+<section><h2>Set up once<small>You already have Claude Code, Higgsfield, Node and ffmpeg, so HyperFrames is the only install.</small></h2>
+<div class="fold">
+
+
+<details class="step"><summary><span class="n">1</span><span class="st">Add the HyperFrames skills</span><span class="pill mid">You</span></summary><div class="t sb"><span class="cmd">npx skills add heygen-com/hyperframes</span><span class="why"><i>Why</i>This teaches Claude to edit and render video. HyperFrames is HeyGen's free "After Effects, written as code".</span></div></details>
+
+</div>
+<p class="cap" style="font-size:13px;color:var(--faint)">Optional for unannounced launches: <span class="k">npx hyperframes telemetry disable</span> turns off HyperFrames' anonymous usage stats. The skill sources are recorded in <span class="k">~/.agents/.skill-lock.json</span> on this Mac.</p>
+</section>
+
+<section><h2>Make the video<small>Steps 2 to 10. Pills show who does it.</small></h2>
+<div class="fold">
+<details class="step"><summary><span class="n">2</span><span class="st">Give Claude the brief</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">Say what's launching, who it's for, where it posts (X) and how long (60 seconds). Share old cuts as reference only.</span><span class="why"><i>Why</i>The brief decides the story. A vague brief gets a generic video.</span></div></details>
+<details class="step"><summary><span class="n">3</span><span class="st">Approve the script</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">Read it (below). Each beat is one voiceover line plus one visual, tagged Higgsfield or HyperFrames.</span><span class="why"><i>Why</i>The build follows the script word for word, so this is the cheapest place to change anything.</span></div></details>
+<details class="step"><summary><span class="n">4</span><span class="st">Start the build in a new terminal</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">Cmd+N for a new window, paste the one-line build command once, press Enter.</span><span class="why"><i>Why</i>The build makes lots of files and runs for a while, so your planning terminal stays clean. Pasting the command twice starts two builds.</span></div></details>
+<details class="step"><summary><span class="n">5</span><span class="st">Let Claude capture the app footage</span><span class="pill hy">Claude</span></summary><div class="t sb"><span class="do">Paste the build-terminal message (button at the top). A separate Chrome window opens on GetHookd. Log in once and say "logged in".</span><span class="why"><i>Why</i>You get twice-as-sharp captures, close-ups of just the part that matters, and real typing on screen, without taking a single screenshot. Details at the bottom.</span></div></details>
+<details class="step"><summary><span class="n">6</span><span class="st">Approve each still before it moves</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">Look at every Higgsfield still. Say "redo" if anything's off.</span><span class="why"><i>Why</i>Fixing a still is cheap and a bad clip wastes credits. One of ours had an Apple logo in it.</span></div></details>
+<details class="step"><summary><span class="n">7</span><span class="st">Review in the live preview</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">Watch the preview it opens in your browser. Give notes in plain words ("hook faster", "swap the Slack shot").</span><span class="why"><i>Why</i>The preview is instant. A render takes minutes, so save renders for the end.</span></div></details>
+<details class="step"><summary><span class="n">8</span><span class="st">Render once, under the caps</span><span class="pill hy">Claude</span></summary><div class="t sb"><span class="do">Final render at 1080p, 30fps, 4 workers. If it's on pace for more than 10 minutes, stop it and ask what's slow.</span><span class="why"><i>Why</i>60fps and 4K upscaling multiply render time. Ours took 2 min 38 s at these settings.</span></div></details>
+<details class="step"><summary><span class="n">9</span><span class="st">Record the real voice</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">iPhone Voice Memos, quiet room, one take of the script's lines. Put vo.m4a in <span class="k">~/Desktop/gethookd-4.0-footage</span>.</span><span class="why"><i>Why</i>A human voice lands better on X than the temp AI voice. Claude re-times the whole cut to it.</span></div></details>
+<details class="step"><summary><span class="n">10</span><span class="st">Post on launch day</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">Only when every feature in the video is live. Put the gethookd.ai link in the first reply, not the post.</span><span class="why"><i>Why</i>"Just dropped" has to be true, and X shows posts with outside links to fewer people.</span></div></details>
+</div>
+</section>
+
+<section id="script"><h2>The script (v2)<small>60 seconds for X, 16:9. A feature launch, not a GetHookd intro. 115 spoken words, about 44 seconds of talk; the timecodes are targets.</small></h2>
+
+<div class="tip"><b>What changed from v1 (Mladen's note):</b> we cut the 17 seconds that sold GetHookd itself (the 2 a.m. founder, "you scroll, screenshot, guess", the split screen). It now opens on 4.0 and Angle, then "the other seven" at about 4.5 seconds each. It reuses 3 approved Higgsfield clips (H2, H3, H4b), so it costs no new credits. Every app screen is full-bleed, because in v1 they were too small to read on a phone.</div>
+
+<details class="beat"><summary><span class="bt">1 · Open</span><span class="tc">0:00-0:05</span></summary><div class="in">
+<div class="vo">"GetHookd 4.0 just dropped. And it comes with its own AI ad strategist."</div>
+<div class="line"><span class="pill hy">Higgsfield</span>Reuse H2: the woman, tiny, in front of the endless wall of glowing ads, camera pulling back.</div>
+<div class="line"><span class="pill hf">HyperFrames</span>A giant see-through 4.0 slams in on the first drum hit, "Just dropped." snaps in under it, then the wall blurs out and the Chat screen rises into frame.</div>
+<div class="os">On screen: <b>GetHookd 4.0</b> / <b>Just dropped.</b></div></div></details>
+
+<details class="beat"><summary><span class="bt">2 · Headliner: Angle</span><span class="tc">0:05-0:17</span></summary><div class="in">
+<div class="vo">"Meet Angle. Ask it what's winning in your niche, and it finds the real ads, spots the pattern, and hands you your next test."</div>
+<div class="line"><span class="pill hf">HyperFrames</span>Full-bleed Chat. The question types into the real input box, the lookup chips pop, the real answer streams in. Punch in on Glow Skincare at "469 days", then on a "Use it when" line. The three verbs stamp in as they're said.</div>
+<div class="os">On screen: <b>NEW · ANGLE · YOUR AI AD STRATEGIST</b> / <b>FINDS THE ADS · SPOTS THE PATTERN · HANDS YOU THE TEST</b>. Real answer only, no "could not be verified" banner.</div></div></details>
+
+<details class="beat"><summary><span class="bt">3 · Turn</span><span class="tc">0:17-0:19</span></summary><div class="in">
+<div class="vo">"That's one. Here are the other seven."</div>
+<div class="line"><span class="pill hf">HyperFrames</span>Angle shrinks into 1 of 8 cards; the other 7 flip face up on the beat.</div>
+<div class="os">On screen: <b>That's one.</b> / <b>7 more.</b></div></div></details>
+
+<details class="beat"><summary><span class="bt">4 · The other seven</span><span class="tc">0:19-0:51</span></summary><div class="in">
+<div class="line"><span class="pill hf">HyperFrames</span>About 4.5 seconds each. NEW / FEATURE label, 01/07 counter, a hit on each cut, a different layout every time, real app screens full-bleed.</div>
+<table>
+<tr><th>#</th><th>Feature</th><th>Voiceover</th><th>Picture</th></tr>
+<tr><td>01</td><td><b>Semantic search</b></td><td><b>"Smart search. Describe the ad you're picturing, and there it is."</b></td><td>"woman applying serum to her neck" types in, the matching ad slams in on "there it is".</td></tr>
+<tr><td>02</td><td><b>Ad classification</b></td><td><b>"Every ad, broken down by hook and format."</b></td><td>Labels snap onto a real ad. Use the app's real label names (waiting on Mladen).</td></tr>
+<tr><td>03</td><td><b>Shops</b></td><td><b>"Shops. Peek inside your competitors' stores."</b></td><td>gymshark.com: traffic and active ads count up, best sellers slide in.</td></tr>
+<tr><td>04</td><td><b>Personalized explore</b></td><td><b>"Your Explore feed now learns from everything you save."</b></td><td>The Personalized feed toggle flips on, the grid reshuffles.</td></tr>
+<tr><td>05</td><td><b>Tagging</b></td><td><b>"Tag your saves. Find them in one click."</b></td><td>Tag an ad UGC, the saved list snaps down to it.</td></tr>
+<tr><td>06</td><td><b>Slack</b></td><td><b>"Competitor alerts and team saves, straight to Slack."</b></td><td><span class="pill hy">Higgsfield H3</span> the team at a laptop, then the real Slack card.</td></tr>
+<tr><td>07</td><td><b>Academy</b></td><td><b>"And the new Academy, where the pros show you how."</b></td><td>Category menu, then lesson cards. No "f*ck it" titles on screen.</td></tr>
+</table></div></details>
+
+<details class="beat"><summary><span class="bt">5 · Payoff</span><span class="tc">0:51-0:56</span></summary><div class="in">
+<div class="vo">"That's GetHookd 4.0. Go ask Angle something."</div>
+<div class="line"><span class="pill hy">Higgsfield</span>Reuse H4b: the woman at her desk in morning light presses one key and smiles.</div>
+<div class="line"><span class="pill hf">HyperFrames</span>A small chat bubble floats up beside her laptop.</div></div></details>
+
+<details class="beat"><summary><span class="bt">6 · CTA</span><span class="tc">0:56-1:00</span></summary><div class="in">
+<div class="vo">"Know what to test."</div>
+<div class="line"><span class="pill hf">HyperFrames</span>Logo and 4.0, "Know what to test." types in, a "Try it free for 7 days" button gets clicked, gethookd.ai underneath.</div></div></details>
+
+<div class="amber"><b>Before it posts:</b> "Just dropped" must be true that day (Mladen called these features "coming"). Classification isn't on Vitaley's account yet, and tagging and Slack haven't been checked. The name Angle waits on Mladen confirming "Angle" isn't also a classification label (backup: Hookd AI). Confirm "Try it free for 7 days" is live.</div>
+</section>
+
+<section id="capture"><h2>How Claude captures the app footage<small>The detail behind step 5. You only do the first part.</small></h2>
+<div class="fold">
+<details class="step"><summary><span class="n">1</span><span class="st">Get the features switched on</span><span class="pill bad">Mladen</span></summary><div class="t sb"><span class="do">Ask Mladen to switch on classification, tagging and Slack for your account, or send a staging login.</span><span class="why"><i>Why</i>No tool can film a feature your account doesn't have.</span></div></details>
+<details class="step"><summary><span class="n">2</span><span class="st">Log in once</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">When the separate Chrome window opens on GetHookd, log in there and tell the build terminal "logged in".</span><span class="why"><i>Why</i>Claude saves that login and reuses it in its own hidden browser, so nothing happens on your screen after this.</span></div></details>
+<details class="step"><summary><span class="n">3</span><span class="st">Check the contact sheet</span><span class="pill mid">You</span></summary><div class="t sb"><span class="do">It shows you everything it captured on one page. Say go, or say what's missing.</span><span class="why"><i>Why</i>Nothing goes into the video until you've seen it.</span></div></details>
+</div>
+
+<details><summary>Why not "computer use"?</summary><div class="in">
+<p>On this Mac, Claude's computer use can see Chrome but isn't allowed to click or type in it, and the Claude Chrome extension failed to connect three times before. So we use our browser rig: a separate Chrome that Claude controls (Playwright), built for the TrendTrack crawl (469 pages, zero errors).</p>
+</div></details>
+
+<details><summary>Technical steps for the build terminal</summary><div class="in">
+<ol>
+<li>Close leftovers: <span class="k">pkill -f "remote-debugging-port=9222"</span></li>
+<li>Launch the rig Chrome with its own profile (Chrome ignores the debug port on the default profile):<span class="cmd">"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --remote-debugging-port=9222 --user-data-dir="$HOME/.lifeos-browser/profile" "https://app.gethookd.ai" &gt;/dev/null 2&gt;&amp;1 &amp;</span></li>
+<li>After "logged in": <span class="k">cd ~/.lifeos-browser &amp;&amp; node save-state.mjs</span>, and check that app.gethookd.ai appears.</li>
+<li>Write <span class="k">~/.lifeos-browser/gethookd-capture.mjs</span> on the pattern of <span class="k">agent-lib.mjs</span> (its constants are TrendTrack's, so don't import them): headless Chrome, <span class="k">storageState</span>, viewport 1920x1080, <span class="k">deviceScaleFactor: 2</span>, <span class="k">recordVideo</span> for the Chat and search shots.</li>
+<li>Run the shot list. Save to <span class="k">~/Desktop/gethookd-4.0-footage/auto/</span>: full frames, close-ups and short clips, named by shot number.</li>
+<li>If a page redirects to login, stop and ask for a new login.</li>
+<li>Make one contact sheet and show it before using anything.</li>
+<li>Clean up: <span class="k">pkill -f "remote-debugging-port=9222"</span>. While the rig runs, <span class="k">open</span> and AppleScript can hit it instead of Vitaley's own Chrome.</li>
+</ol>
+</div></details>
+
+<details><summary>The shot list</summary><div class="in">
+<table>
+<tr><th>#</th><th>Feature</th><th>Do</th><th>Capture</th></tr>
+<tr><td>1</td><td><b>Angle (Chat)</b></td><td>Chat › New chat. Ask "What hooks are winning in skincare right now?" and wait for the answer.</td><td>Typing and streaming video, final frame, close-ups of the question, the lookup chips and the first 3 pattern blocks. Verified answers only. Max 3 tries.</td></tr>
+<tr><td>2</td><td><b>Smart search</b></td><td>Explore Ads, Smart on, "woman applying serum to her neck", Enter.</td><td>Typing and results video, full frame, close-ups of the search bar and the top result.</td></tr>
+<tr><td>3</td><td><b>Ad classification</b></td><td>Wherever 4.0 shows the labels (ask Mladen). Open one ad.</td><td>Full frame and label close-ups. Skip and report if it's not on the account.</td></tr>
+<tr><td>4</td><td><b>Shops</b></td><td>Shops › gymshark.com.</td><td>Full frame and close-ups of traffic, active ads, the chart, best sellers, landing pages.</td></tr>
+<tr><td>5</td><td><b>Personalized explore</b></td><td>Explore Ads, toggle Personalized feed off then on.</td><td>Both states and the toggle row.</td></tr>
+<tr><td>6</td><td><b>Tagging</b></td><td>Swipe File, tag one ad UGC, filter by it.</td><td>Tag menu and filtered list. Skip and report if not on the account.</td></tr>
+<tr><td>7</td><td><b>Slack</b></td><td>The Slack integration screen. View only.</td><td>Full frame and the card. Skip and report if not on the account.</td></tr>
+<tr><td>8</td><td><b>Academy</b></td><td>Academy in the left rail, scroll slowly.</td><td>Header, category menu, lesson rows, no "f*ck it" titles.</td></tr>
+</table>
+</div></details>
+
+<details><summary>Guardrails</summary><div class="in">
+<ul>
+<li><b>Allowed to change anything:</b> up to 3 Chat questions (5.40 to 7.98 credits each), and saving plus tagging one ad for shot 6. Nothing else.</li>
+<li><b>Never click:</b> Spy brand (2 credits), Clone, Generate, Save filters, Delete, any settings toggle including Slack, upgrade or checkout.</li>
+<li><b>Always crop out:</b> the credits counter, the token and credit line in Chat, and personal folder names.</li>
+<li>Stop and ask on anything unexpected.</li>
+</ul>
+</div></details>
+</section>
+
+<section><h2>What we learned the hard way<small>So the next video skips these.</small></h2>
+<table>
+<tr><th>What happened</th><th>What to do</th></tr>
+<tr><td>The first script sold GetHookd itself.</td><td><b>A release video introduces what's new.</b> Open on the release and its headline feature.</td></tr>
+<tr><td>Screenshots dragged into the chat never saved to disk.</td><td><b>Let the corner preview disappear on its own.</b> Screenshots save to <span class="k">~/Screenshots</span> on this Mac.</td></tr>
+<tr><td>4.0 classification wasn't on our account (not in the 22 Explore filters or an ad's Details).</td><td><b>Get every launch feature switched on</b> before filming, or use a staging login.</td></tr>
+<tr><td>Chat's first answer came back "could not be verified", with its links turned off (1 of 2 tries).</td><td><b>Only use verified answers.</b> Launch traffic will ask exactly this question.</td></tr>
+<tr><td>Chat costs 5.40 to 7.98 credits a question.</td><td><b>Budget it.</b> Starter gets 50 credits a month (landing page draft).</td></tr>
+<tr><td>Academy titles include "f*ck it".</td><td><b>Crop them out</b> unless Alex signs off.</td></tr>
+<tr><td>Our no-em-dash rule vs the app's own text.</td><td><b>The rule is for our overlay text only.</b> Real UI stays as it is.</td></tr>
+<tr><td>App screens small inside cards were unreadable on a phone.</td><td><b>Full-bleed, with a punch-in</b> on the one thing that matters.</td></tr>
+</table>
+</section>
+
+<section><h2>Where everything lives</h2>
+<table>
+<tr><th>What</th><th>Where</th></tr>
+<tr><td><b>This page</b> (playbook and script)</td><td><span class="k">LifeOS/data/research/gethookd-launch-video-playbook-2026-09-24.html</span></td></tr>
+<tr><td><b>Build prompt</b> (the one-line command reads it)</td><td><span class="k">LifeOS/data/research/gethookd-4.0-launch-video-build-prompt-2026-09-24.txt</span></td></tr>
+<tr><td><b>Build project</b></td><td><span class="k">~/gethookd-4.0-launch/</span> (BRIEF, STORYBOARD and SCRIPT in videos/gethookd-4-0)</td></tr>
+<tr><td><b>Generated media</b></td><td><span class="k">~/gethookd-4.0-launch/assets/</span></td></tr>
+<tr><td><b>Renders and status</b></td><td><span class="k">~/gethookd-4.0-launch/renders/</span> and <span class="k">STATUS.md</span></td></tr>
+<tr><td><b>App footage</b></td><td><span class="k">~/Desktop/gethookd-4.0-footage/</span></td></tr>
+</table>
+<p class="foot">Numbers here are checked: render time from the render log, credits from the build's STATUS.md, Chat cost from the app screen, 13M+ ads from the app and landing page. The install commands match the skill sources recorded on this Mac.</p>
+</section>
+
+<textarea id="buildmsg" hidden>New direction from Mladen: the video introduces the NEW 4.0 features, not GetHookd itself. Everything is in one page now: /Users/vitaleyshaulov/LifeOS/data/research/gethookd-launch-video-playbook-2026-09-24.html. Two jobs, in this order.
+
+1. Automated capture. Follow the section "How Claude captures the app footage" exactly, including its technical steps, shot list and guardrails: launch the rig Chrome, wait for me to log into GetHookd once, save the login, then capture every shot at 2x into ~/Desktop/gethookd-4.0-footage/auto/. Show me a contact sheet before you use anything.
+
+2. Rebuild with the section "The script (v2)". Voiceover verbatim. Reuse H2, H3 and H4b; drop H1 and H4a; no new Higgsfield generations. Every UI beat full-bleed and readable on a phone. Same render rules as before: draft until I approve, final 1080p/30fps/looks/4 workers, stop and report if a render is on pace past 10 minutes, no HyperFrames feedback or publishing. Keep the temp voice until I send vo.m4a.</textarea>
+
+<textarea id="plain" hidden>*GETHOOKD 4.0 LAUNCH · 60 SEC · X · v2 (features, not a GetHookd intro)*
+
+*1. OPEN (0:00-0:05)*
+"GetHookd 4.0 just dropped. And it comes with its own AI ad strategist."
+🎬 Higgsfield: H2, the endless wall of glowing ads, camera pulling back.
+🎞 HyperFrames: Giant 4.0 slams in, "Just dropped." under it, then the Chat screen rises into frame.
+
+*2. HEADLINER: ANGLE (0:05-0:17)*
+"Meet Angle. Ask it what's winning in your niche, and it finds the real ads, spots the pattern, and hands you your next test."
+🎞 HyperFrames: Full-bleed real Chat. The question types in, lookup chips pop, the real answer streams, punch in on Glow Skincare at 469 days and a "Use it when" line.
+
+*3. TURN (0:17-0:19)*
+"That's one. Here are the other seven."
+🎞 HyperFrames: Angle shrinks into 1 of 8 cards, the other 7 flip face up on the beat.
+
+*4. THE OTHER SEVEN (0:19-0:51)*
+01 Semantic search: "Smart search. Describe the ad you're picturing, and there it is."
+02 Ad classification: "Every ad, broken down by hook and format."
+03 Shops: "Shops. Peek inside your competitors' stores."
+04 Personalized explore: "Your Explore feed now learns from everything you save."
+05 Tagging: "Tag your saves. Find them in one click."
+06 Slack: "Competitor alerts and team saves, straight to Slack." (🎬 Higgsfield H3: the team at the laptop)
+07 Academy: "And the new Academy, where the pros show you how."
+🎞 HyperFrames: full-bleed real UI, punch-in on the one thing that matters, a new layout every cut.
+
+*5. PAYOFF (0:51-0:56)*
+"That's GetHookd 4.0. Go ask Angle something."
+🎬 Higgsfield: H4b, the woman at her desk in morning light, one key press, small smile.
+
+*6. CTA (0:56-1:00)*
+"Know what to test."
+🎞 HyperFrames: Logo and 4.0, "Know what to test.", "Try it free for 7 days" button click, gethookd.ai.</textarea>
+
+</div>
+<script>
+function copyText(id){
+  var t=document.getElementById(id).value;
+  function ok(){var el=document.getElementById('toast');el.textContent='Copied.';setTimeout(function(){el.textContent='';},1800);}
+  function fallback(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){}document.body.removeChild(ta);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback);}else{fallback();}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>$299 Pilot: Stripe and Invoice</title><style>
+:root{--bg:#f7f7f5;--surface:#fff;--soft:#f0f1ef;--line:#e1e3e1;--ink:#202124;--sub:#5d6166;--faint:#85898e;--blue:#326bdd;--blue-soft:#e8eef9;--green:#277b5e;--green-soft:#dcebe4;--amber:#8d5a0e;--amber-soft:#f3e7cf;--sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Inter,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.62 var(--sans);-webkit-font-smoothing:antialiased}
+.shell{width:min(920px,calc(100% - 32px));margin:auto;padding:30px 0 80px}
+h1{font-size:28px;letter-spacing:-.03em;margin:0 0 8px}.sub{color:var(--sub);font-size:14.5px;margin:0 0 26px;max-width:76ch}
+section{margin-top:36px}h2{font-size:20px;letter-spacing:-.02em;margin:0 0 4px}h2 small{display:block;font-size:13.5px;font-weight:500;color:var(--sub);margin:2px 0 12px}
+details.p{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin-bottom:10px}
+details.p summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:15px 18px}
+details.p summary::-webkit-details-marker{display:none}details.p summary::marker{content:""}
+details.p summary:after{content:"+";margin-left:10px;color:var(--faint);font-size:18px;line-height:1}
+details.p[open] summary:after{content:"\2212"}
+.num{flex:0 0 24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font:600 12px var(--sans);display:flex;align-items:center;justify-content:center}
+.stitle{font-weight:700;font-size:16px;letter-spacing:-.01em}
+.meta{margin-left:auto;font:600 11px var(--mono);color:var(--faint);white-space:nowrap}
+.sbody{padding:0 18px 16px}.lead{margin:0 0 8px;color:var(--sub)}
+ul{margin:8px 0 0;padding-left:18px}li{color:var(--sub);margin:6px 0}li b{color:var(--ink)}li i{color:var(--faint)}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+th{text-align:left;font-size:11px;font-weight:600;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;padding:10px 12px;border-bottom:1px solid var(--line);background:var(--soft)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--sub)}tr:last-child td{border-bottom:0}td b{color:var(--ink)}
+.warn{background:var(--amber-soft);color:#5e3c0c;border-radius:12px;padding:15px 19px;margin:12px 0}
+.tip{background:var(--blue-soft);color:#22447a;border-radius:12px;padding:15px 19px;margin:12px 0}
+.p2{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 19px;margin-bottom:10px}
+.p2 h3{margin:0 0 6px;font-size:16px}.p2 p{margin:0;color:var(--sub)}
+.foot{color:var(--faint);font-size:12.5px;margin-top:28px}
+.paste{background:var(--surface);border:1px dashed #b9bdc2;border-radius:12px;padding:16px 19px;margin:10px 0;color:var(--ink)}</style></head><body><div class="shell">
+<h1>Mladen, here's everything for the $299 product</h1>
+<p class="sub">This is what you need to set it up in Stripe, send the invoice and write the contract: the product, what the $299 includes, what it doesn't, and what the client sends us. It all comes from the offer Alex approved and our calls on 22 and 23 Sep.</p>
+
+<section><h2>What to create in Stripe<small>A new product, separate from the normal GetHookd plans</small></h2>
+<table><tr><th>Field</th><th>Value</th></tr>
+<tr><td><b>Product name</b></td><td>Alex floated three: <b>Creative Intelligence</b>, <b>GetHookd Premium</b> or <b>GetHookd Platinum</b>. Pick whichever fits how you name plans.</td></tr>
+<tr><td><b>Price</b></td><td>$299.00 USD per month, recurring. Same price every month.</td></tr>
+<tr><td><b>Software</b></td><td>Included. Attach GetHookd access with API and MCP turned on, so they don't need a separate subscription.</td></tr>
+<tr><td><b>Refunds</b></td><td>None.</td></tr>
+<tr><td><b>Contract</b></td><td>Yours to write. The scope for it is below.</td></tr>
+<tr><td><b>First client</b></td><td>The underwear brand from Affiliate World (about $20-30k a month on Meta). I'll send you the company name and billing email.</td></tr>
+<tr><td><b>Don't reuse</b></td><td>The old $299 one-time "find a product" package from 18 Sep. That one is parked and is a different thing.</td></tr>
+</table></section>
+
+<section><h2>What the $299 includes<small>Tap any item for the detail. This is the scope for the contract.</small></h2>
+<details class="p"><summary><span class="num">1</span><span class="stitle">Onboarding call</span><span class="meta">60 min</span></summary><div class="sbody"><p class="lead">60 minutes, once. They walk us through what they sell, who buys it and what they have tried. We look at their last 30 days together, name the one thing holding the account back, and agree the number the pilot is judged on and what good looks like in 30 days. They leave with the export instructions and the Slack invite.</p></div></details><details class="p"><summary><span class="num">2</span><span class="stitle">First analysis, the written game plan</span><span class="meta">once</span></summary><div class="sbody"><p class="lead">Back 1 to 2 business days after they send their numbers. Every ad is marked as a hook problem, a body problem, an offer or page problem, or fine. We count how many genuinely different concepts they have tested, check which buyer awareness levels they reach and miss, and add the market side: winners in their niche, what competitors launched recently, angles nobody in their market runs. Every recommended move names the live ad behind it.</p></div></details><details class="p"><summary><span class="num">3</span><span class="stitle">Weekly read</span><span class="meta">weekly</span></summary><div class="sbody"><p class="lead">They send one export a week and get the read back in 1 to 2 business days, one page, in their Slack channel. It covers the one thing to do this week, what to kill (with the number), what to feed (with the spend), what to test next (the angle, the live ad that proves it, its link, how long it has run), where their creative sits against the market, and what changed on the agreed number.</p></div></details><details class="p"><summary><span class="num">4</span><span class="stitle">Three static ad concepts a week, built off a proven winner</span><span class="meta">3 a week</span></summary><div class="sbody"><p class="lead">With each weekly read. We take a winning ad from their market and build three static versions for their product with Clone Ads, using their logo, product photos and brand colours. Each comes with the source ad. Static only.</p></div></details><details class="p"><summary><span class="num">5</span><span class="stitle">Two strategy calls a month</span><span class="meta">2 x 30 min</span></summary><div class="sbody"><p class="lead">30 minutes each, with the strategist who wrote the read. Go through the read, look at anything launched since the last call, decide what gets tested next.</p></div></details><details class="p"><summary><span class="num">6</span><span class="stitle">Private Slack channel</span><span class="meta">same day</span></summary><div class="sbody"><p class="lead">Same-day answers between calls: send a creative before launch for a straight read, ask for a competitor or market pull, flag a number that moved.</p></div></details><details class="p"><summary><span class="num">7</span><span class="stitle">Monthly open webinar</span><span class="meta">monthly</span></summary><div class="sbody"><p class="lead">Once a month a creative strategist takes live questions from the whole group.</p></div></details><details class="p"><summary><span class="num">8</span><span class="stitle">GetHookd software, included</span><span class="meta">included</span></summary><div class="sbody"><p class="lead">GetHookd comes with the $299, with API and MCP access turned on so they can connect Claude, ChatGPT, Gemini, Cursor or Perplexity. No separate subscription. The prompt library comes with it.</p></div></details><details class="p"><summary><span class="num">9</span><span class="stitle">Intake form and export instructions</span><span class="meta">setup</span></summary><div class="sbody"><p class="lead">About ten minutes for the form. The Ads Manager export takes about five minutes the first time and under a minute after that with a saved preset.</p></div></details>
+</section>
+
+<section><h2>Not included</h2><div class="p2"><ul style="margin:0">
+<li>Video ads and UGC, and anything that needs a shoot. Static concepts only.</li>
+<li>Access to their ad account. For now they send an export. (The Facebook connection is in the other doc; leave it out of the contract until it works.)</li>
+<li>More than two 30-minute calls a month.</li>
+<li>Refunds.</li>
+</ul></div></section>
+
+<section><h2>What the client sends us</h2><div class="p2"><ul style="margin:0">
+<li>The signed contract and the paid invoice.</li>
+<li>The 60-minute onboarding call, then they join their private Slack channel.</li>
+<li>The intake form: what they sell and at what margin, target cost per purchase and ROAS, what happened in the last 30 days, logo, product photos, brand colours, anything they can't claim, who approves tests, and what has to happen in 30 days for this to be worth it.</li>
+<li>3 to 5 competitors they watch.</li>
+<li>An Ads Manager export every week, plus the creative for their top 10 ads by spend and their 5 worst.</li>
+</ul></div></section>
+
+<section><h2>Two things worth a line in the contract</h2><div class="p2"><ul style="margin:0">
+<li><b>Calls.</b> The offer promises two 30-minute calls a month. Alex wants calls to drop over time as more of this gets automated, so you may want the contract to say "up to two".</li>
+<li><b>Webinar.</b> It's promised monthly, but nobody has been named to run it yet.</li>
+</ul></div></section>
+
+<section><h2>Scope you can paste into the invoice memo</h2>
+<div class="paste">GetHookd pilot, $299 per month.<br><br>
+Includes: GetHookd software with API and MCP access; a 60-minute onboarding call; a written first analysis within 1 to 2 business days of receiving your numbers; a one-page weekly read in your private Slack channel within 1 to 2 business days of each weekly export; three static ad concepts a week built off a proven winner in your market; two 30-minute strategy calls a month; same-day answers in Slack; a monthly open webinar; the GetHookd prompt library.<br><br>
+Not included: video or UGC production, anything that needs a shoot, and access to your ad account.<br><br>
+Billed monthly. No refunds.</div></section>
+
+<p class="foot">Sources: the approved offer (What they get, How it runs), the intake form, the operations doc, and the Alex calls on 18, 22 and 23 Sep. Price, refunds, software and contract confirmed by Vitaley on 24 Sep.</p>
+</div></body></html>
